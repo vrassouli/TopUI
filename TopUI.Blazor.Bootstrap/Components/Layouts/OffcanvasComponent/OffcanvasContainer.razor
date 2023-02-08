@@ -1,0 +1,15 @@
+﻿@namespace TopUI.Blazor.Bootstrap.Components
+@inherits UiComponentBase
+
+@if (_componentType != null && _options != null)
+{
+    <div class="offcanvas @GetOffcanvasClasses()" tabindex="-1" id="bootstrapOffcanvas" aria-labelledby="bootstrapOffcanvasLabel" @attributes=GetOffcanvasAttributes()>
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="bootstrapOffcanvasLabel">@_options.Title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <DynamicComponent Type="_componentType" Parameters="_options.Parameters" />
+        </div>
+    </div>
+}

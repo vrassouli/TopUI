@@ -1,0 +1,6 @@
+﻿@namespace TopUI.Blazor.Bootstrap.Components
+
+@typeparam TValue
+@inherits BootstrapFormControlComponent<TValue>
+
+<input @attributes=AdditionalAttributes @bind-value="CurrentValueAsString" type="range" />

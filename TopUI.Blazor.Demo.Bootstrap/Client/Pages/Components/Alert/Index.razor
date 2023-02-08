@@ -1,0 +1,40 @@
+﻿@page "/components/alert"
+
+<div class="row gap-2 gap-md-0 flex-nowrap">
+    <div class="col-md order-1 order-md-0">
+        <Alert @ref=_elRef @attributes=_parameters>
+            A simple success alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+        </Alert>
+
+        <h3 class="mt-5">Usage:</h3>
+<pre class="bg-body-tertiary p-2 rounded border">
+    <code class="razor">
+                @TopUI.Blazor.Core.Generators.CodeGenerator.GenerateComponentInitializer(typeof(Alert), _parameters)
+    </code>
+</pre>
+    </div>
+    <div class="col-md-auto order-0 order-md-1">
+        <PropertyGrid ValueSource="_elRef" PropertyValuesChanged="OnParametersChanged">
+        </PropertyGrid>
+    </div>
+</div>
+
+@code {
+    private Alert? _elRef;
+    private Dictionary<string, object?>? _parameters;
+
+    private void OnParametersChanged(Dictionary<string, object?> parameters)
+    {
+        _parameters = parameters;
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        // Element references are captured after render.
+        // So in order to pass the element reference to the PropertyGrid, we need to re-render after first render.
+        if (firstRender)
+            StateHasChanged();
+
+        base.OnAfterRender(firstRender);
+    }
+}

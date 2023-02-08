@@ -1,0 +1,17 @@
+﻿@namespace TopUI.Blazor.Bootstrap.Components
+@inherits UiComponentBase
+
+<div class="card-body">
+    @if (!string.IsNullOrEmpty(Title) || !string.IsNullOrEmpty(SubTitle))
+    {
+        <h5 class="card-title">@Title</h5>
+        <h6 class="card-subtitle mb-2 text-muted">@SubTitle</h6>
+        <p class="card-text">
+            @ChildContent
+        </p>
+    }
+    else
+    {
+        @ChildContent
+    }
+</div>

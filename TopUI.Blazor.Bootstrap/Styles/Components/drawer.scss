@@ -1,0 +1,36 @@
+﻿@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins";
+
+.tui-drawer {
+    + .tui-drawer-container {
+    }
+}
+
+@each $name, $width in $grid-breakpoints {
+    @include media-breakpoint-up($name) {
+        .tui-drawer-#{$name} {
+            + .tui-drawer-container {
+                display: grid;
+                grid-template-areas: "sidebar main";
+                grid-template-columns: 1fr 5fr;
+                gap: 1.5rem;
+
+                > aside {
+                    grid-area: sidebar;
+                    position: sticky;
+                    top: 4rem;
+                    display: block !important;
+                    height: calc(100vh - 5rem);
+                    padding-left: .25rem;
+                    margin-left: -.25rem;
+                    overflow-y: auto;
+                }
+
+                > main {
+                    grid-area: main;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,21 @@
+﻿@namespace TopUI.Blazor.Bootstrap.Components
+@inherits BootstrapComponent
+
+<div @attributes=AdditionalAttributes role="alert">
+    @if(!string.IsNullOrEmpty(Icon))
+    {
+        <i class="@Icon"></i>
+    }
+    <div>
+        @if (!string.IsNullOrEmpty(Header))
+        {
+            <h4 class="alert-heading">@Header</h4>
+        }
+        @ChildContent
+
+        @if(Dismissable)
+        {
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        }
+    </div>
+</div>

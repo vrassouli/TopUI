@@ -1,0 +1,34 @@
+﻿@namespace TopUI.Blazor.Bootstrap.Components
+@inherits UiComponent
+@using Microsoft.AspNetCore.Components.Routing
+
+@if (ChildContent == null)
+{
+    <li class="nav-item">
+        <NavLink class="nav-link" href="@Url" target="@LinkTarget" ActiveClass="active" Match="NavLinkMatch.All">@Title</NavLink>
+    </li>
+}
+else if (Nav.Vertical || ParentItem != null)
+{
+    <li class="nav-item">
+        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#@(Id)_subitems" aria-controls="@(Id)_subitems">
+            <span class="flex-fill">@Title</span>
+        </a>
+        <ul class="nav flex-column collapse ms-3" id="@(Id)_subitems">
+            <CascadingValue Value="this" IsFixed>
+                @ChildContent
+            </CascadingValue>
+        </ul>
+    </li>
+}
+else
+{
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" role="button" aria-expanded="false" data-bs-auto-close="outside">@Title</a>
+        <ul class="dropdown-menu">
+            <CascadingValue Value="this" IsFixed>
+                @ChildContent
+            </CascadingValue>
+        </ul>
+    </li>
+}

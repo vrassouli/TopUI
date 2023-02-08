@@ -1,0 +1,14 @@
+﻿@namespace TopUI.Blazor.Bootstrap.Components
+
+@typeparam TValue
+@inherits BootstrapFormControlComponent<TValue>
+
+@if (EditorDataType == typeof(string) && Lines != null)
+{
+    <textarea @attributes=AdditionalAttributes value="@CurrentValue" @onchange="@((a)=>CurrentValueAsString=a.Value?.ToString())">
+            </textarea>
+}
+else
+{
+    <input @attributes=AdditionalAttributes @bind-value="CurrentValueAsString" />
+}

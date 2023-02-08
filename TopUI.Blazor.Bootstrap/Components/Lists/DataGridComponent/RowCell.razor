@@ -1,0 +1,8 @@
+﻿@typeparam TItem
+
+<div class="cell" style="width: @(Column.GetWidth())px;">
+    @if (Column.ChildContent != null)
+        @Column.ChildContent.Invoke(Item)
+    else
+        @Column.GetData(Item)
+</div>

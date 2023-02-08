@@ -1,0 +1,49 @@
+﻿@page "/components/combobox"
+@using TopUI.Blazor.Core;
+
+<div class="row">
+    <div class="col">
+        <h4>Combobox</h4>
+        <ComboBox @bind-Value=_selectedValue @bind-SelectedIndex="_selectedIndex">
+            <ComboBoxItem Text="Item 1" Value="1" />
+            <ComboBoxItem Text="Item 2" Value="2" />
+            <ComboBoxItem Text="Item 3" Value="3" />
+            <ComboBoxItem Text="Item 4" Value="4" />
+        </ComboBox>
+        <div class="p-2">
+            Selected Value: @_selectedValue
+        </div>
+        <div class="p-2">
+            Selected Index: @_selectedIndex
+        </div>
+
+        <h4>Data Combobox</h4>
+        <DataComboBox Items="_list"
+                      ItemText="x => x.Name"
+                      ItemValue="x => x.Population"
+                      @bind-Value="_selectedItemValue"
+                      @bind-SelectedItem="_selectedItem">
+        </DataComboBox>
+        <div class="p-2">
+            Selected Value: @_selectedItemValue
+        </div>
+        <div class="p-2">
+            Selected Item: @_selectedItem?.Name
+        </div>
+    </div>
+    <div class="col-auto">
+    </div>
+</div>
+
+@code {
+    int _selectedValue = 2;
+    int _selectedIndex;
+    int? _selectedItemValue;
+    CountryDto? _selectedItem;
+    List<CountryDto> _list;
+
+    public Index()
+    {
+        _list = CountryDto.GetList().ToList();
+    }
+}

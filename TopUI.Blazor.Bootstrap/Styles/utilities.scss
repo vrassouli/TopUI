@@ -1,0 +1,23 @@
+﻿@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+$enable-negative-margins: true;
+@import "../node_modules/bootstrap/scss/mixins";
+@import "../node_modules/bootstrap/scss/maps";
+@import "../node_modules/bootstrap/scss/utilities";
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    &.no-focus {
+        box-shadow: none;
+    }
+}
+$utilities: (
+    "negative-margin": ( responsive: true, property: margin, class: mn, values: $negative-spacers ), 
+    "negative-margin-x": ( responsive: true, property: margin-right margin-left, class: mx, values: $negative-spacers ), 
+    "negative-margin-y": ( responsive: true, property: margin-top margin-bottom, class: my, values: $negative-spacers ), 
+    "negative-margin-top": ( responsive: true, property: margin-top, class: mt, values: $negative-spacers ), 
+    "negative-margin-end": ( responsive: true, property: margin-right, class: me, values: $negative-spacers ), 
+    "negative-margin-bottom": ( responsive: true, property: margin-bottom, class: mb, values: $negative-spacers ), 
+    "negative-margin-start": ( responsive: true, property: margin-left, class: ms, values: $negative-spacers ) 
+);
+
+@import "../node_modules/bootstrap/scss/utilities/api";

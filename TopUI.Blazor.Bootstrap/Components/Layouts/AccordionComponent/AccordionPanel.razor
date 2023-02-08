@@ -1,0 +1,26 @@
+﻿@namespace TopUI.Blazor.Bootstrap.Components
+@inherits BootstrapComponent
+
+<div @attributes="AdditionalAttributes">
+    <h2 class="accordion-header" id="@(Id)_heading">
+        <button class="accordion-button @(Parent.Children.IndexOf(this) == 0 ? "" : "collapsed")" type="button" data-bs-toggle="collapse" data-bs-target="#@(Id)_collapse" aria-expanded="@(Parent.Children.IndexOf(this) == 0 ? "true" : "false")" aria-controls="@(Id)_collapse">
+            @Title
+        </button>
+    </h2>
+    @if (Parent.AlwaysOpen)
+    {
+        <div id="@(Id)_collapse" class="accordion-collapse collapse @(Parent.Children.IndexOf(this) == 0 ? "show" : "")" aria-labelledby="@(Id)_heading">
+            <div class="accordion-body">
+                @ChildContent
+            </div>
+        </div>
+    }
+    else
+    {
+        <div id="@(Id)_collapse" class="accordion-collapse collapse @(Parent.Children.IndexOf(this) == 0 ? "show" : "")" aria-labelledby="@(Id)_heading" data-bs-parent="#@Parent.Id">
+            <div class="accordion-body">
+                @ChildContent
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,72 @@
+﻿@page "/components/layout/grid"
+@using TopUI.Blazor.Core;
+
+<div class="row gap-2 gap-md-0 flex-nowrap">
+    <div class="col-md order-1 order-md-0">
+        <h4>Container</h4>
+        <Container @ref=_containerRef @attributes=_containerParameters>
+            <Row @ref=_rowRef @attributes=_rowParameters>
+                <Col @ref=_colRef @attributes=_colParameters> Col 1 </Col>
+                <Col> Col 2 </Col>
+                <Col> Col 3 </Col>
+                <Col> Col 4 </Col>
+            </Row>
+        </Container>
+
+        <h3 class="mt-5">Usage:</h3>
+        <h5 class="mt-5">Container:</h5>
+<pre class="bg-body-tertiary p-2 rounded border">
+    <code class="razor">
+@TopUI.Blazor.Core.Generators.CodeGenerator.GenerateComponentInitializer(typeof(Container), _containerParameters)
+    </code>
+</pre>
+        <h5 class="mt-5">Row:</h5>
+<pre class="bg-body-tertiary p-2 rounded border">
+    <code class="razor">
+@TopUI.Blazor.Core.Generators.CodeGenerator.GenerateComponentInitializer(typeof(Row), _rowParameters)
+    </code>
+</pre>
+        <h5 class="mt-5">Col:</h5>
+<pre class="bg-body-tertiary p-2 rounded border">
+    <code class="razor">
+@TopUI.Blazor.Core.Generators.CodeGenerator.GenerateComponentInitializer(typeof(Col), _colParameters)
+    </code>
+</pre>
+
+    </div>
+    <div class="col-md-auto order-0 order-md-1">
+        <Tab>
+            <TabPanel Title="Container">
+                <PropertyGrid ValueSource="_containerRef" PropertyValuesChanged="p => _containerParameters = p" class="mt-1">
+                </PropertyGrid>
+            </TabPanel>
+            <TabPanel Title="Row">
+                <PropertyGrid ValueSource="_rowRef" PropertyValuesChanged="p => _rowParameters = p" class="mt-1">
+                </PropertyGrid>
+            </TabPanel>
+            <TabPanel Title="Col">
+                <PropertyGrid ValueSource="_colRef" PropertyValuesChanged="p => _colParameters = p" class="mt-1">
+                </PropertyGrid>
+            </TabPanel>
+        </Tab>
+    </div>
+</div>
+
+@code {
+    private Container? _containerRef;
+    private Dictionary<string, object?>? _containerParameters;
+    private Row? _rowRef;
+    private Dictionary<string, object?>? _rowParameters;
+    private Col? _colRef;
+    private Dictionary<string, object?>? _colParameters;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        // Element references are captured after render.
+        // So in order to pass the element reference to the PropertyGrid, we need to re-render after first render.
+        if (firstRender)
+            StateHasChanged();
+
+        base.OnAfterRender(firstRender);
+    }
+}

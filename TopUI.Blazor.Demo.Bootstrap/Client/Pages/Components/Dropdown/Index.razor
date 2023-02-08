@@ -1,0 +1,141 @@
+﻿@page "/components/dropdown"
+
+<div class="row gap-2 gap-md-0 flex-nowrap">
+    <div class="col-md order-1 order-md-0">
+        <h4>Dropdown</h4>
+        <div class="mb-5">
+            <Dropdown @ref=_elRef @attributes=_parameters
+                      SelectedIndexChanged="(index => _index = index)">
+                <DropdownContent>
+                    <DropdownItem Title="Item 1" IsActive="@(_index == 0)" />
+                    <DropdownItem Title="Item 2" IsActive="@(_index == 1)" />
+                    <DropdownItem Title="Item 3" IsActive="@(_index == 2)" />
+                </DropdownContent>
+            </Dropdown>
+            <div>
+        <h3 class="mt-5">Usage:</h3>
+<pre class="bg-body-tertiary p-2 rounded border">
+    <code class="razor">
+@TopUI.Blazor.Core.Generators.CodeGenerator.GenerateComponentInitializer(typeof(Dropdown), _parameters)
+    </code>
+</pre>
+            </div>
+        </div>
+
+        <h4>Data Dropdown</h4>
+        <div class="d-flex gap-1 mb-5 align-items-center">
+            <DataDropdown Text="@(_selectedItem == null ? "Databound Dropdown" : _selectedItem.Name)"
+                          Mode="ButtonMode.Primary"
+                          Items="_list"
+                          @bind-SelectedItem="_selectedItem"
+                          ItemTitle="GetTitle"
+                          ItemIcon="GetIcon" />
+            <DataDropdown Text="@(_selectedItem == null ? "Databound Dropdown" : _selectedItem.Name)"
+                          Mode="ButtonMode.Primary"
+                          Items="_list"
+                          @onclick="DataDropdownClicked"
+                          @bind-SelectedItem="_selectedItem"
+                          ItemTitle="GetTitle"
+                          ItemIcon="GetIcon"
+                          SplitButton/>
+
+            <span>Click counter: @_counter</span>
+        </div>
+        <h4>Size and mode</h4>
+        <div class="d-flex gap-1 mb-5 align-items-center">
+            <DataDropdown Text="@(_selectedItem == null ? "Databound Dropdown" : _selectedItem.Name)"
+                          Mode="ButtonMode.Secondary"
+                          Size="ButtonSizes.Small"
+                          SplitButton
+                          Items="_list"
+                          @bind-SelectedItem="_selectedItem"
+                          ItemTitle="GetTitle"
+                          ItemIcon="GetIcon" />
+
+            <span>Click counter: @_counter</span>
+        </div>
+        <h4>Forms</h4>
+        <div class="d-flex gap-1 mb-5 align-items-center">
+            <Dropdown Text="Dropdown Forms"
+                      Mode="ButtonMode.Primary">
+                <DropdownContent>
+                    <form class="p-4">
+                        <div class="mb-3">
+                            <label for="exampleDropdownFormEmail2" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="exampleDropdownFormEmail2" placeholder="email@example.com">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleDropdownFormPassword2" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="exampleDropdownFormPassword2" placeholder="Password">
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="dropdownCheck2">
+                                <label class="form-check-label" for="dropdownCheck2">
+                                    Remember me
+                                </label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Sign in</button>
+                    </form>
+                </DropdownContent>
+            </Dropdown>
+        </div>
+    </div>
+    <div class="col-md-auto order-0 order-md-1">
+        <PropertyGrid ValueSource="_elRef" PropertyValuesChanged="p => _parameters = p" class="mt-1">
+        </PropertyGrid>
+    </div>
+</div>
+
+@code {
+    int _index = -1;
+    int _counter = 0;
+    List<DropdownItemDto?> _list;
+    DropdownItemDto? _selectedItem;
+    private Dropdown? _elRef;
+    private Dictionary<string, object?>? _parameters;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        // Element references are captured after render.
+        // So in order to pass the element reference to the PropertyGrid, we need to re-render after first render.
+        if (firstRender)
+            StateHasChanged();
+
+        base.OnAfterRender(firstRender);
+    }
+
+    public Index()
+    {
+        _list = new List<DropdownItemDto?>
+        {
+            new DropdownItemDto("Dto Item 1"),
+            new DropdownItemDto("Dto Item 2"),
+            new DropdownItemDto("Dto Item 3"),
+            new DropdownItemDto("Dto Item 4"),
+        };
+    }
+
+    private void SetIndex(int index)
+    {
+        _index = index;
+    }
+
+    private string GetTitle(DropdownItemDto? item)
+    {
+        return item?.Name ?? string.Empty;
+    }
+    private string? GetIcon(DropdownItemDto? item)
+    {
+        if (item != null && item == _selectedItem)
+            return "bi bi-check";
+
+        return null;
+    }
+
+    private void DataDropdownClicked()
+    {
+        _counter++;
+    }
+}

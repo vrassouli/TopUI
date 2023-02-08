@@ -1,0 +1,119 @@
+﻿@page "/components/modal"
+
+<div class="row">
+    <div class="col">
+        <h4>Modal</h4>
+
+        <div class="d-flex flex-column gap-3 align-items-start">
+            <Button Text="Open Modal" @onclick="OpenModal" />
+
+            <Alert Mode="AlertModes.Info">
+                @_message
+            </Alert>
+        </div>
+        <h4>MessageBox</h4>
+
+        <div class="d-flex flex-column gap-3 align-items-start">
+            <Button Text="Show MessageBox" @onclick="ShowMessageBox" />
+
+            <Alert Mode="AlertModes.Info">
+                Result: @_messageBoxResult
+            </Alert>
+        </div>
+    </div>
+    <div class="col-auto">
+        <Card Header="Config">
+            <CardBody>
+                <div class="row mb-3">
+                    <label for="alert_header" class="col-sm-3 col-form-label">Title</label>
+                    <div class="col-sm">
+                        <input type="text" class="form-control" id="alert_header" @bind-value="@_options.Title">
+                    </div>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="StaticBackdrop" checked="@_options.StaticBackdrop" @onchange="(e)=>{_options.StaticBackdrop = !_options.StaticBackdrop;}">
+                    <label class="form-check-label" for="StaticBackdrop">Static backdrop</label>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="Keyboard" checked="@_options.Keyboard" @onchange="(e)=>{_options.Keyboard = !_options.Keyboard;}">
+                    <label class="form-check-label" for="Keyboard">Keyboard</label>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="Scrollable" checked="@_options.Scrollable" @onchange="(e)=>{_options.Scrollable = !_options.Scrollable;}">
+                    <label class="form-check-label" for="Scrollable">Scrollable content</label>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="Centered" checked="@_options.Centered" @onchange="(e)=>{_options.Centered = !_options.Centered;}">
+                    <label class="form-check-label" for="Centered">Centered</label>
+                </div>
+                <div class="mb-3">
+                    <label for="DialogSize" class="form-label">Size</label>
+                    <select id="DialogSize" class="form-select" @onchange="DialogSizeChanged">
+                        @foreach (var value in Enum.GetValues(typeof(DialogSize)))
+                        {
+                            <option value="@value" selected="@((DialogSize)value == _options.Size)">@value.ToString()</option>
+                        }
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="FullScreen" class="form-label">Full Screen</label>
+                    <select id="FullScreen" class="form-select" @onchange="DialogFullScreenBreakpointChanged">
+                        @foreach (var value in Enum.GetValues(typeof(DialogFullScreenBreakpoint)))
+                        {
+                            <option value="@value" selected="@((DialogFullScreenBreakpoint)value == _options.FullScreen)">@value.ToString()</option>
+                        }
+                    </select>
+                </div>
+            </CardBody>
+        </Card>
+    </div>
+</div>
+
+@code {
+    [Inject] public IBootstrapJs BootstrapJs { get; set; } = default!;
+
+    private string _message = "Not opened yet!";
+    private MessageBoxButton? _messageBoxResult;
+    private DialogOptions _options = new DialogOptions("Dialog Title");
+
+    private async Task OpenModal()
+    {
+        _message = "Dialog opened!";
+
+        var result = await BootstrapJs.OpenDialog<SampleModalContent>(opt =>
+        {
+            opt.Title = _options.Title;
+            opt.StaticBackdrop = _options.StaticBackdrop;
+            opt.Keyboard = _options.Keyboard;
+            opt.Scrollable = _options.Scrollable;
+            opt.Centered = _options.Centered;
+            opt.Size = _options.Size;
+            opt.FullScreen = _options.FullScreen;
+        });
+
+        _message = $"Dialog closed. (result: {(result == null ? "null" : result.ToString())})";
+    }
+
+    private void DialogSizeChanged(ChangeEventArgs args)
+    {
+        var str = args.Value?.ToString();
+        if (!string.IsNullOrEmpty(str))
+            _options.Size = Enum.Parse<DialogSize>(str);
+    }
+
+    private void DialogFullScreenBreakpointChanged(ChangeEventArgs args)
+    {
+        var str = args.Value?.ToString();
+        if (!string.IsNullOrEmpty(str))
+            _options.FullScreen = Enum.Parse<DialogFullScreenBreakpoint>(str);
+    }
+
+    private async Task ShowMessageBox()
+    {
+        _messageBoxResult = await BootstrapJs.ShowMessageBox("MessageBox Title", "MessageBox message.", opt =>
+        {
+            opt.Buttons = MessageBoxButton.Ok|MessageBoxButton.Cancel;
+            opt.Icon = MessageBoxIcon.Warning;
+        });
+    }
+}

@@ -1,0 +1,9 @@
+﻿@namespace TopUI.Blazor.Bootstrap.Components
+@inherits Label
+
+<div @attributes=AdditionalAttributes>
+    @ChildContent
+    @{
+        base.BuildRenderTree(__builder);
+    }
+</div>

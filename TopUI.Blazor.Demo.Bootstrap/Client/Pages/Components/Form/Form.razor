@@ -1,0 +1,144 @@
+﻿@page "/components/forms/form"
+@using System.Linq.Expressions;
+@using System.Text.Json;
+
+<EditForm Model="_model">
+    <FloatingLabel For="()=>_model.FirstName" class="mb-2">
+        <TextBox @bind-Value="_model.FirstName" DisableAutoComplete />
+    </FloatingLabel>
+    <FloatingLabel For="()=>_model.LastName" class="mb-2">
+        <TextBox @bind-Value="_model.LastName" DisableAutoComplete />
+    </FloatingLabel>
+
+    <div class="row mb-2">
+        <Label For="()=>_model.EMail" class="col-sm-2 col-form-label"></Label>
+        <div class="col-sm-10">
+            <InputGroup>
+                <Addon Text="@("@")"></Addon>
+                <TextBox @bind-Value="_model.EMail" type="email" DisableAutoComplete />
+            </InputGroup>
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <Label For="()=>_model.PhoneNumber" class="col-sm-2 col-form-label"></Label>
+        <div class="col-sm-10">
+            <InputGroup>
+                <Addon><i class="bi bi-phone"></i></Addon>
+                <TextBox @bind-Value="_model.PhoneNumber" DisableAutoComplete />
+            </InputGroup>
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <Label For="()=>_model.Age" class="col-sm-2 col-form-label"></Label>
+        <div class="col-sm-10">
+            <InputGroup>
+                <Addon><i class="bi bi-calendar"></i></Addon>
+                <TextBox @bind-Value="_model.Age" DisableAutoComplete />
+            </InputGroup>
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <Label For="()=>_model.Birthdate" class="col-sm-2 col-form-label"></Label>
+        <div class="col-sm-10">
+            <InputGroup>
+                <Addon><i class="bi bi-calendar"></i></Addon>
+                <TextBox @bind-Value="_model.Birthdate" DisableAutoComplete />
+            </InputGroup>
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <Label For="()=>_model.Address" class="col-sm-2 col-form-label"></Label>
+        <div class="col-sm-10">
+            <TextBox @bind-Value="_model.Address" Lines="4" DisableAutoComplete />
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <Label For="()=>_model.Country" class="col-sm-2 col-form-label"></Label>
+        <div class="col-sm-10">
+            <DataComboBox Items="_countries"
+                          ItemText="x => x.Name"
+                          ItemValue="x => x.CountryCode"
+                          AutoComplete
+                          @bind-InputText="_searchedCountry"
+                          @bind-InputText:after="OnSearchedCountry"
+                          @bind-Value="_model.Country" />
+        </div>
+    </div>
+    <div class="row mb-2">
+        <Label For="()=>_model.Gender" class="col-sm-2 col-form-label"></Label>
+        <div class="col-sm-10">
+            <RadioBox Label="Male" @bind-Value="_model.Gender" SelectionValue="true" Inline />
+            <RadioBox Label="Female" @bind-Value="_model.Gender" SelectionValue="false" Inline />
+            <RadioBox Label="Not specified" @bind-Value="_model.Gender" SelectionValue="null" Inline />
+        </div>
+    </div>
+    <div class="row mb-2">
+        <Label For="()=>_model.HairColor" class="col-sm-2 col-form-label"></Label>
+        <div class="col-sm-10">
+            <TextBox @bind-Value="_model.HairColor" />
+        </div>
+    </div>
+    <div class="row mb-2">
+        <Label For="()=>_model.Hired" class="col-sm-2 col-form-label"></Label>
+        <div class="col-sm-10">
+            <SwitchButton Label="Yes" OffLabel="No" @bind-Value="_model.Hired" />
+        </div>
+    </div>
+    <div class="mb-2">
+        <Label For="()=>_model.Revenue" class="form-label"></Label>
+        <div class="col-sm-10">
+            <RangeComponent @bind-Value="_model.Revenue" Min="1000" Max="200000" Step="1000" />
+        </div>
+    </div>
+
+    <Button Mode="ButtonMode.Primary" Text="Submit" Type="ButtonType.Submit" />
+</EditForm>
+
+<div class="bg-body-tertiary p-2 mt-2 rounded border">
+    <pre>
+    <code>
+            @GetModelJson()
+        </code>
+    </pre>
+</div>
+
+@code {
+    List<CountryDto> _countries;
+    private SampleModel _model;
+    private string? _searchedCountry;
+
+    public Form()
+    {
+        _countries = CountryDto.GetList().ToList();
+        _model = new SampleModel
+            {
+                Address = "your address",
+                Country = "DE"
+            };
+    }
+
+    private string GetModelJson()
+    {
+        var options = new JsonSerializerOptions()
+            {
+                WriteIndented = true
+            };
+        return JsonSerializer.Serialize<SampleModel>(_model, options);
+    }
+
+    private void OnSearchedCountry()
+    {
+        if (!string.IsNullOrEmpty(_searchedCountry))
+            _countries = CountryDto.GetList()
+            .Where(c => c.Name.Contains(_searchedCountry, StringComparison.InvariantCultureIgnoreCase) ||
+                c.CountryCode?.Contains(_searchedCountry, StringComparison.InvariantCultureIgnoreCase) == true)
+            .ToList();
+        else
+            _countries = new List<CountryDto>();
+    }
+}

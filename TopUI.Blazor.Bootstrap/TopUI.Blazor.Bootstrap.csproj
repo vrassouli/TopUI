@@ -1,0 +1,67 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.1" />
+		<PackageReference Include="LibSassBuilder" Version="3.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Localization" Version="7.0.2" />
+		<PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="7.0.2" />
+	</ItemGroup>
+	<ItemGroup>
+		<Sass Include="$(MSBuildProjectDirectory)/Styles/**/*.scss" Exclude="$(MSBuildProjectDirectory)/Styles/**/_*.scss" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Sass Remove="Styles\Components\data-grid.scss" />
+	  <Sass Remove="Styles\Components\property-grid.scss" />
+	  <Sass Remove="Styles\Components\tab.scss" />
+	</ItemGroup>
+
+	<ItemGroup>
+    <Folder Include="Components\Abstraction\" />
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\TopUI.Blazor.Core\TopUI.Blazor.Core.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Update="Components\Lists\PagerComponent\Resources\Pager.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Pager.resx</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Update="Components\Lists\PagerComponent\Resources\Pager.fa-IR.resx">
+			<Generator>PublicResXFileCodeGenerator</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Components\Lists\PagerComponent\Resources\Pager.resx">
+			<Generator>PublicResXFileCodeGenerator</Generator>
+			<LastGenOutput>Pager.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
+	<Target Name="Sass" BeforeTargets="BeforeBuild">
+		<PropertyGroup>
+			<!-- outputstyle option -->
+			<LibSassOutputStyle>compressed</LibSassOutputStyle>
+			<LibSassOutputStyle Condition="'$(Configuration)' == 'Debug'">expanded</LibSassOutputStyle>
+			<!-- level option -->
+			<LibSassOutputLevel>verbose</LibSassOutputLevel>
+			<!-- msbuild output level -->
+			<LibSassMessageLevel>High</LibSassMessageLevel>
+		</PropertyGroup>
+	</Target>
+
+</Project>

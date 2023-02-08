@@ -1,0 +1,35 @@
+﻿<div class="toast @(GetToastClasses())" role="alert" aria-live="assertive" aria-atomic="true" @attributes=GetToastAttributes()>
+    @if (string.IsNullOrEmpty(Config.Options.Title))
+    {
+        <div class="d-flex">
+            <div class="toast-body">
+                @Config.Message
+            </div>
+            @if (Config.Options.CloseButton)
+            {
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="toast-header">
+            @if (!string.IsNullOrEmpty(Config.Options.Icon))
+            {
+                <i class="rounded me-2 @Config.Options.Icon"></i>
+            }
+            <strong class="me-auto">@Config.Options.Title</strong>
+            @if (!string.IsNullOrEmpty(Config.Options.SubTitle))
+            {
+                <small>@Config.Options.SubTitle</small>
+            }
+            @if (Config.Options.CloseButton)
+            {
+                <button type="button" class="btn-close btn-close-white me-2" data-bs-dismiss="toast" aria-label="Close"></button>
+            }
+        </div>
+        <div class="toast-body">
+            @Config.Message
+        </div>
+    }
+</div>

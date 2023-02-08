@@ -1,0 +1,34 @@
+﻿@namespace TopUI.Blazor.Bootstrap.Components
+@inherits BootstrapComponent
+
+<div @attributes=AdditionalAttributes>
+    @if (HeaderContent != null)
+    {
+        <div class="card-header">
+            @HeaderContent
+        </div>
+    }
+    else if (!string.IsNullOrEmpty(Header))
+    {
+        <div class="card-header">
+            @Header
+        </div>
+    }
+    @if (!string.IsNullOrEmpty(ImageSource))
+    {
+        <img src="@ImageSource" class="c ard-img-top" />
+    }
+    @ChildContent
+    @if (FooterContent != null)
+    {
+        <div class="card-footer text-muted">
+            @FooterContent
+        </div>
+    }
+    else if (!string.IsNullOrEmpty(Footer))
+    {
+        <div class="card-footer text-muted">
+            @Footer
+        </div>
+    }
+</div>

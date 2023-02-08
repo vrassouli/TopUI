@@ -1,0 +1,19 @@
+﻿@namespace TopUI.Blazor.Bootstrap.Components
+@inherits UiComponentBase
+
+@if (_componentType != null && _options != null)
+{
+    <div class="modal fade @GetModalClasses()" id="bootstrapModal" tabindex="-1" aria-labelledby="bootstrapModalLabel" aria-hidden="true" @attributes="GetModalAttributes()">
+        <div class="modal-dialog @GetDialogClasses()">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="bootstrapModalLabel">@_options.Title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <DynamicComponent Type="_componentType" Parameters="_options.Parameters" />
+                </div>
+            </div>
+        </div>
+    </div>
+}

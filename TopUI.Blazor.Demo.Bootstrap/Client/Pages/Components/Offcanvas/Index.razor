@@ -1,0 +1,79 @@
+﻿@page "/components/offcanvas"
+
+<div class="row">
+    <div class="col">
+        <h4>Offcanvas</h4>
+
+        <div class="d-flex flex-column gap-3 align-items-start">
+            <Button Text="Open Offcanvas" @onclick="OpenOffcanvas" />
+
+            <Alert Mode="AlertModes.Info">
+                @_message
+            </Alert>
+        </div>
+    </div>
+    <div class="col-auto">
+        <Card Header="Config">
+            <CardBody>
+                <div class="row mb-3">
+                    <label for="alert_header" class="col-sm-3 col-form-label">Title</label>
+                    <div class="col-sm">
+                        <input type="text" class="form-control" id="alert_header" @bind-value="@_options.Title">
+                    </div>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="StaticBackdrop" checked="@_options.StaticBackdrop" @onchange="(e)=>{_options.StaticBackdrop = !_options.StaticBackdrop;}">
+                    <label class="form-check-label" for="StaticBackdrop">Static backdrop</label>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="Keyboard" checked="@_options.Keyboard" @onchange="(e)=>{_options.Keyboard = !_options.Keyboard;}">
+                    <label class="form-check-label" for="Keyboard">Keyboard</label>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="Scrollable" checked="@_options.Scrollable" @onchange="(e)=>{_options.Scrollable = !_options.Scrollable;}">
+                    <label class="form-check-label" for="Scrollable">Scrollable content</label>
+                </div>
+                <div class="mb-3">
+                    <label for="FullScreen" class="form-label">Placement</label>
+                    <select id="FullScreen" class="form-select" @onchange="OffcanvasPlacementChanged">
+                        @foreach (var value in Enum.GetValues(typeof(OffcanvasPlacement)))
+                        {
+                            <option value="@value" selected="@((OffcanvasPlacement)value == _options.Placement)">@value.ToString()</option>
+                        }
+                    </select>
+                </div>
+            </CardBody>
+        </Card>
+    </div>
+</div>
+
+@code {
+    [Inject] public IBootstrapJs BootstrapJs { get; set; } = default!;
+
+    private string _message = "Not opened yet!";
+    private OffcanvasOptions _options = new OffcanvasOptions("Offcanvas Title");
+
+    private async Task OpenOffcanvas()
+    {
+        _message = "Offcanvas opened!";
+
+        var result = await BootstrapJs.OpenOffcanvas<SampleOffcanvasContent>(opt =>
+        {
+            opt.Title = _options.Title;
+            opt.StaticBackdrop = _options.StaticBackdrop;
+            opt.Keyboard = _options.Keyboard;
+            opt.Scrollable = _options.Scrollable;
+            opt.Placement = _options.Placement;
+        });
+
+        _message = $"Offcanvas closed. (result: {(result == null ? "null" : result.ToString())})";
+    }
+
+    private void OffcanvasPlacementChanged(ChangeEventArgs args)
+    {
+        var str = args.Value?.ToString();
+        if (!string.IsNullOrEmpty(str))
+            _options.Placement = Enum.Parse<OffcanvasPlacement>(str);
+    }
+
+}

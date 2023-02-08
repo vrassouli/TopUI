@@ -1,0 +1,90 @@
+﻿:root, :root[data-bs-theme="light"] {
+    --tui-data-grid-hover-color: #000;
+    --tui-data-grid-hover-bg: #f8f9fa;
+    --tui-data-grid-active-color: #fff;
+    --tui-data-grid-active-bg: #0d6efd;
+}
+
+:root[data-bs-theme="dark"] {
+    --tui-data-grid-hover-color: #fff;
+    --tui-data-grid-hover-bg: #2b3035;
+    --tui-data-grid-active-color: #fff;
+    --tui-data-grid-active-bg: #0d6efd;
+}
+.tui-data-grid {
+    display: flex;
+    flex-direction: column;
+
+    > .data-grid-header {
+        display: flex;
+        border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color);
+        background-color: var(--bs-tertiary-bg);
+        overflow: hidden;
+
+        > .cell {
+            border-inline-end: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color);
+            display: flex;
+            align-items: center;
+            flex-grow: 0;
+            flex-shrink: 0;
+
+            > .header {
+                padding: .625rem .25rem;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                flex: 1;
+                flex-shrink: 0;
+            }
+
+            > .resizer {
+                width: 5px;
+                height: 100%;
+                background: transparent;
+                cursor: ew-resize;
+
+                &:hover {
+                    background: var(--bs-tertiary-color);
+                }
+            }
+        }
+    }
+
+    > .data-grid-content {
+        flex: 1;
+        overflow: auto;
+
+        > .data-grid-row {
+            display: flex;
+
+            > .cell {
+                flex-grow: 0;
+                flex-shrink: 0;
+                padding: .625rem .25rem;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                border-inline-end: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color);
+            }
+
+            &:hover {
+                color: var(--tui-data-grid-hover-color);
+                background-color: var(--tui-data-grid-hover-bg);
+            }
+
+            &.active {
+                color: var(--tui-data-grid-active-color);
+                background-color: var(--tui-data-grid-active-bg);
+            }
+        }
+
+        > .data-grid-row:not(:last-child) {
+            border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color);
+
+            > .cell {
+                border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color);
+                margin-bottom: -1px;
+            }
+        }
+    }
+}

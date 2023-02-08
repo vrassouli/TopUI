@@ -1,0 +1,125 @@
+﻿@page "/components/toast"
+
+<div class="row">
+    <div class="col">
+        <Button Text="Display toast"
+            @onclick="OnDisplayToast"/>
+    </div>
+    <div class="col-auto">
+        <Card Header="Config">
+            <CardBody>
+                <div class="row mb-3">
+                    <label for="_message" class="col-sm-4 col-form-label">Message</label>
+                    <div class="col-sm">
+                        <input type="text" class="form-control" id="_message" @bind-value="@_message">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="_title" class="col-sm-4 col-form-label">Title</label>
+                    <div class="col-sm">
+                        <input type="text" class="form-control" id="_title" @bind-value="@_title">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="_subTitle" class="col-sm-4 col-form-label">Sub Title</label>
+                    <div class="col-sm">
+                        <input type="text" class="form-control" id="_subTitle" @bind-value="@_subTitle">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="_icon" class="col-sm-4 col-form-label">Icon</label>
+                    <div class="col-sm">
+                        <input type="text" class="form-control" id="_icon" @bind-value="@_icon">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="_bgColors" class="col-sm-4 col-form-label">Bg</label>
+                    <div class="col-sm">
+                        <select id="_bgColors" class="form-select" @onchange="BgColorChanged">
+                            <option selected="@_bgColor == null)">None</option>
+                            @foreach (var value in Enum.GetValues(typeof(BackgroundColor)))
+                            {
+                                <option value="@value" selected="@((BackgroundColor)value == _bgColor)">@value.ToString()</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="_textColor" class="col-sm-4 col-form-label">Text</label>
+                    <div class="col-sm">
+                        <select id="_textColor" class="form-select" @onchange="TextColorChanged">
+                            <option selected="@_bgColor == null)">None</option>
+                            @foreach (var value in Enum.GetValues(typeof(TextColor)))
+                            {
+                                <option value="@value" selected="@((TextColor)value == _textColor)">@value.ToString()</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="_closeButton" checked="@_closeButton" @onchange="@(()=>{ _closeButton = !_closeButton; })">
+                    <label class="form-check-label" for="_closeButton">Close button</label>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="_autoHide" checked="@_autoHide" @onchange="@(()=>{ _autoHide = !_autoHide; })">
+                    <label class="form-check-label" for="_autoHide">Auto hide</label>
+                </div>
+                <div class="row mb-3">
+                    <label for="_delay" class="col-sm-4 col-form-label">Delay</label>
+                    <div class="col-sm">
+                        <input type="number" class="form-control" id="_delay" @bind-value="@_delay" disabled="@(!_autoHide)">
+                    </div>
+                </div>
+
+            </CardBody>
+        </Card>
+    </div>
+</div>
+
+@code {
+    private string _message = "Message ...";
+    private string? _title;
+    private string? _subTitle;
+    private string? _icon = "bi bi-check";
+    private bool _closeButton = true;
+    private bool _autoHide = true;
+    private int _delay = 5000;
+    private BackgroundColor? _bgColor = null;
+    private TextColor? _textColor = null;
+
+    [Inject] private IBootstrapJs BootstrapJs { get; set; } = default!;
+
+    private async Task OnDisplayToast()
+    {
+        await BootstrapJs.AddToast(_message, opt =>
+        {
+            opt.Title = _title;
+            opt.SubTitle = _subTitle;
+            opt.Icon = _icon;
+            opt.CloseButton = _closeButton;
+            opt.Background = _bgColor;
+            opt.Color = _textColor;
+            opt.AutoHide = _autoHide;
+            opt.Delay = _delay;
+        });
+    }
+
+    private void BgColorChanged(ChangeEventArgs args)
+    {
+        var str = args.Value?.ToString();
+        if (!string.IsNullOrEmpty(str))
+            _bgColor = Enum.Parse<BackgroundColor>(str);
+        else
+            _bgColor = null;
+    }
+
+    private void TextColorChanged(ChangeEventArgs args)
+    {
+        var str = args.Value?.ToString();
+        if (!string.IsNullOrEmpty(str))
+            _textColor = Enum.Parse<TextColor>(str);
+        else
+            _textColor = null;
+    }
+
+}

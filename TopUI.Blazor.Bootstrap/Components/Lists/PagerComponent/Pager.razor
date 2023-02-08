@@ -1,0 +1,52 @@
+﻿@namespace TopUI.Blazor.Bootstrap.Components
+@inherits BootstrapComponent
+
+<ul @attributes=AdditionalAttributes>
+    @if (DisplayFirst)
+    {
+        <li class="page-item @(Page <= 1 ? "disabled" : "")">
+            <a class="page-link" href="#" aria-label="Previous"
+                @onclick="async ()=>{ await SetPage(1); }" @onclick:stopPropagation="true" @onclick:preventDefault="true">
+                <i class="@Localizer[FirstIcon]"></i>
+            </a>
+        </li>
+    }
+    @if (DisplayPrevius)
+    {
+        <li class="page-item @(Page <= 1 ? "disabled" : "")">
+            <a class="page-link" href="#" aria-label="Previous"
+           @onclick="async ()=>{ await SetPage(Page - 1); }" @onclick:stopPropagation="true" @onclick:preventDefault="true">
+                <i class="@Localizer[PreviusIcon]"></i>
+            </a>
+        </li>
+    }
+    @if (DisplayPageButtons)
+    {
+        for (int i = From; i < To; i++)
+        {
+            var page = i;
+
+            <li @key=page class="page-item @((page == Page) ? "active" : "")">
+                <a class="page-link" href="#" @onclick="async ()=>{ await SetPage(page); }" @onclick:stopPropagation="true" @onclick:preventDefault="true">@(page)</a>
+            </li>
+        }
+    }
+    @if (DisplayNext)
+    {
+        <li class="page-item @(Page >= TotalPages ? "disabled" : "")">
+            <a class="page-link" href="#" aria-label="Next"
+                @onclick="async ()=>{ await SetPage(Page + 1); }" @onclick:stopPropagation="true" @onclick:preventDefault="true">
+                <i class="@Localizer[NextIcon]"></i>
+            </a>
+        </li>
+    }
+    @if (DisplayLast)
+    {
+        <li class="page-item @(Page >= TotalPages ? "disabled" : "")">
+            <a class="page-link" href="#" aria-label="Next"
+                @onclick="async ()=>{ await SetPage(TotalPages); }" @onclick:stopPropagation="true" @onclick:preventDefault="true">
+                <i class="@Localizer[LastIcon]"></i>
+            </a>
+        </li>
+    }
+</ul>

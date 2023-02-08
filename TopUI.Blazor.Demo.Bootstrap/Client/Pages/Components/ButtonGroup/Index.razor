@@ -1,0 +1,69 @@
+﻿@page "/components/button-group"
+
+<div class="row">
+    <div class="col">
+        <h4>Button group</h4>
+        <ButtonGroup @ref=_buttonGroup @attributes=_buttonGroupParameters class="mb-5">
+            <Button Text="Left" Mode="ButtonMode.Primary" />
+            <Button Text="Middle" Mode="ButtonMode.Primary" />
+            <Button Text="Right" Mode="ButtonMode.Primary" />
+        </ButtonGroup>
+        <h4>Toolbar</h4>
+        <Toolbar @ref=_toolBar @attributes=_toolBarParameters class="mb-5 gap-2">
+            <ButtonGroup>
+                <Button Text="Left" Mode="ButtonMode.Primary" Icon="bi bi-justify-left" />
+                <Button Text="Middle" Mode="ButtonMode.Primary" Icon="bi bi-justify" />
+                <Button Text="Right" Mode="ButtonMode.Primary" Icon="bi bi-justify-right" />
+            </ButtonGroup>
+            <ButtonGroup>
+                <Button Text="Cut" Mode="ButtonMode.Primary" Icon="bi bi-scissors" />
+                <Button Text="Copy" Mode="ButtonMode.Primary" Icon="bi bi-files-alt" />
+                <Button Text="Paste" Mode="ButtonMode.Primary" Icon="bi bi-clipboard" />
+            </ButtonGroup>
+        </Toolbar>
+
+        <h3 class="mt-5">Usage:</h3>
+        <h5>ButtonGroup:</h5>
+<pre class="bg-body-tertiary p-2 rounded border">
+    <code class="razor">
+@TopUI.Blazor.Core.Generators.CodeGenerator.GenerateComponentInitializer(typeof(ButtonGroup), _buttonGroupParameters)
+    </code>
+</pre>
+        <h5>Toolbar:</h5>
+<pre class="bg-body-tertiary p-2 rounded border">
+    <code class="razor">
+@TopUI.Blazor.Core.Generators.CodeGenerator.GenerateComponentInitializer(typeof(Toolbar), _toolBarParameters)
+    </code>
+</pre>
+    </div>
+    <div class="col-auto">
+        <Tab>
+            <TabPanel Title="ButtonGroup">
+                <PropertyGrid ValueSource="_buttonGroup" PropertyValuesChanged="p => _buttonGroupParameters = p" class="mt-1">
+                </PropertyGrid>
+            </TabPanel>
+            <TabPanel Title="Toolbar">
+                <PropertyGrid ValueSource="_toolBar" PropertyValuesChanged="p => _toolBarParameters = p" class="mt-1">
+                </PropertyGrid>
+            </TabPanel>
+        </Tab>
+    </div>
+</div>
+
+
+@code {
+    private ButtonGroup? _buttonGroup;
+    private Toolbar? _toolBar;
+    private Dictionary<string, object?>? _buttonGroupParameters;
+    private Dictionary<string, object?>? _toolBarParameters;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        // Element references are captured after render.
+        // So in order to pass the element reference to the PropertyGrid, we need to re-render after first render.
+        if (firstRender)
+            StateHasChanged();
+
+        base.OnAfterRender(firstRender);
+    }
+}

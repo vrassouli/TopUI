@@ -1,0 +1,25 @@
+﻿@namespace TopUI.Blazor.Bootstrap.Components
+@using Microsoft.AspNetCore.Components.Forms;
+@using System.Globalization;
+
+@typeparam TValue
+@inherits UiInputBase<TValue>
+
+@if (EditorDataType.IsEnum)
+{
+    <TopUI.Blazor.Bootstrap.Components.Editors.ComboBoxComponent.EnumComboBox 
+        DefaultItem="@(IsNullable ? "Default" : null)"
+        @bind-Value="CurrentValue"/>
+}
+else if (EditorDataType == typeof(string))
+{
+    <TextBox @bind-Value="CurrentValueAsString" />
+}
+else if (IsNumeric)
+{
+    <TextBox @bind-Value="CurrentValue" />
+}
+else if (EditorDataType == typeof(bool))
+{
+    <CheckBox @bind-Value="CurrentValue" />
+}

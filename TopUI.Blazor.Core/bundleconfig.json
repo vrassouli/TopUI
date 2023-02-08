@@ -1,0 +1,16 @@
+[
+
+  {
+    "outputFileName": "wwwroot/topui.interops.bundle.js",
+    "inputFiles": [
+      "Scripts/Draggable.js",
+      "Scripts/Dragger.js",
+      "Scripts/Droppable.js",
+      "Scripts/ScrollSync.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "adjustRelativePaths": false
+    }
+  }
+]

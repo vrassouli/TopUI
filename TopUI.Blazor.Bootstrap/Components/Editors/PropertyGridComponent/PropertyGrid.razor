@@ -1,0 +1,39 @@
+﻿@namespace TopUI.Blazor.Bootstrap.Components
+@using TopUI.Blazor.Bootstrap.Extensions;
+@inherits BootstrapComponent
+
+<table @attributes=AdditionalAttributes>
+    <tr>
+        <th colspan="2">Properties</th>
+    </tr>
+
+    @if (_properties != null)
+    {
+        foreach (var prop in _properties.OrderBy(x => x.Name))
+        {
+            <tr>
+                <td>@prop.GetDisplayName()</td>
+                <td>
+                    @{
+                        __builder.OpenComponent(0, typeof(ValueEditor<>).MakeGenericType(new [] { prop.PropertyType }));
+                        __builder.AddAttribute(1, "Value", GetValueMethod().MakeGenericMethod(new[] { prop.PropertyType }).Invoke(this, new[] { prop }));
+                        __builder.AddAttribute(2, "ValueChanged", GetCallbackMethod().MakeGenericMethod(new[] { prop.PropertyType }).Invoke(this, new[] { prop }));
+                        __builder.CloseComponent();
+                    }
+                    @if (HasChanged(prop))
+                    {
+                        <Button Mode="ButtonMode.Secondary" Size="ButtonSizes.Small" Icon="bi bi-arrow-clockwise" title="Reset" @onclick="()=>{ ResetValue(prop); }"></Button>
+                    }
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="2">
+                <i class="bi bi-warning me2"></i><span>No properties to edit.</span>
+            </td>
+        </tr>
+    }
+</table>

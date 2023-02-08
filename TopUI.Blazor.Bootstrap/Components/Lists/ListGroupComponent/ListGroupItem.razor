@@ -1,0 +1,39 @@
+﻿@namespace TopUI.Blazor.Bootstrap.Components
+@inherits UiComponent
+
+@if (ChildContent != null)
+{
+    <li @attributes=AdditionalAttributes @onpointerup="OnPointerUp">
+        @ChildContent
+    </li>
+}
+else if (Parent.Selection == SelectionMode.None)
+{
+    <li @attributes=AdditionalAttributes>
+        @if (!string.IsNullOrEmpty(Icon))
+        {
+            <i class="me-2 @Icon"></i>
+        }
+        <span>@Text</span>
+    </li>
+}
+else if (string.IsNullOrEmpty(Url))
+{
+    <button @attributes=AdditionalAttributes @onpointerup="OnPointerUp">
+        @if (!string.IsNullOrEmpty(Icon))
+        {
+            <i class="me-2 @Icon"></i>
+        }
+        <span>@Text</span>
+    </button>
+}
+else
+{
+    <a @attributes=AdditionalAttributes href="@Url" @onpointerup="OnPointerUp">
+        @if (!string.IsNullOrEmpty(Icon))
+        {
+            <i class="me-2 @Icon"></i>
+        }
+        <span>@Text</span>
+    </a>
+}

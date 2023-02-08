@@ -1,0 +1,22 @@
+﻿.tui-property-grid {
+    --tui-property-grid-cell-py: 0.25rem;
+    --tui-property-grid-cell-px: 0.50rem;
+    border: 1px solid var(--bs-border-color);
+
+    tr:not(:last-child) {
+        border-bottom: 1px solid var(--bs-border-color)
+    }
+
+    td, th {
+        padding: var(--tui-property-grid-cell-py) var(--tui-property-grid-cell-px);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    td:nth-child(2) {
+        display: flex;
+        gap: 0.25rem;
+        align-items: center;
+    }
+}

@@ -1,0 +1,19 @@
+﻿@namespace TopUI.Blazor.Bootstrap.Components
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+@using TopUI.Blazor.Bootstrap.Components.Lists.DataGridComponent
+@inherits BootstrapComponent
+@typeparam TItem
+@attribute [CascadingTypeParameter(nameof(TItem))]
+
+<CascadingValue Value="this" IsFixed>
+    @Columns
+
+    <div @attributes=AdditionalAttributes>
+        <DataGridHeader TItem="TItem"></DataGridHeader>
+        <div class="data-grid-content">
+            <Virtualize @ref="_itemsContainer" ItemsProvider="GetItemsProvider">
+                <DataGridRow Item="context" />
+            </Virtualize>
+        </div>
+    </div>
+</CascadingValue>

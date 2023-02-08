@@ -1,0 +1,9 @@
+﻿.tui-tab {
+/*    --tui-tab-content-padding-y: 0.5rem;
+    --tui-tab-content-padding-x: 1rem;
+*/
+    > .tab-content {
+        /*padding: var(--tui-tab-content-padding-y) var(--tui-tab-content-padding-x);*/
+        flex: 1;
+    }
+}

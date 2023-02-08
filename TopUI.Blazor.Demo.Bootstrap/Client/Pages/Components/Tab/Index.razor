@@ -1,0 +1,60 @@
+﻿@page "/components/tab"
+
+<div class="row gap-2 gap-md-0 flex-nowrap">
+    <div class="col-md order-1 order-md-0">
+        <Tab @ref=_tabRef @attributes=_tabParameters>
+            <TabPanel @ref="_tabPanelbRef" @attributes=_tabPanelParameters>
+                Content of tab 1
+            </TabPanel>
+            <TabPanel Title="Tab 2">
+                Content of tab 2
+            </TabPanel>
+            <TabPanel Title="Tab 3">
+                Content of tab 3
+            </TabPanel>
+            @if (_displayTab)
+            {
+                <TabPanel Title="Tab 4">
+                    Dynamically toggled tab
+                </TabPanel>
+            }
+        </Tab>
+            <div>
+        <h3 class="mt-5">Usage:</h3>
+        <h5 class="mt-5">Tab:</h5>
+<pre class="bg-body-tertiary p-2 rounded border">
+    <code class="razor">
+@TopUI.Blazor.Core.Generators.CodeGenerator.GenerateComponentInitializer(typeof(Tab), _tabParameters)
+    </code>
+</pre>
+        <h5 class="mt-5">TabPanel:</h5>
+<pre class="bg-body-tertiary p-2 rounded border">
+    <code class="razor">
+@TopUI.Blazor.Core.Generators.CodeGenerator.GenerateComponentInitializer(typeof(TabPanel), _tabPanelParameters)
+    </code>
+</pre>
+            </div>
+
+        <Button Text="Toggle tab" CanToggle @bind-Toggled="_displayTab "/>
+    </div>
+    <div class="col-md-auto order-0 order-md-1">
+        <Tab>
+            <TabPanel Title="Tab">
+                <PropertyGrid ValueSource="_tabRef" PropertyValuesChanged="p => _tabParameters = p" class="mt-1">
+                </PropertyGrid>
+            </TabPanel>
+            <TabPanel Title="TabPanel">
+                <PropertyGrid ValueSource="_tabPanelbRef" PropertyValuesChanged="p => _tabPanelParameters = p" class="mt-1">
+                </PropertyGrid>
+            </TabPanel>
+        </Tab>
+    </div>
+</div>
+
+@code {
+    private Tab? _tabRef;
+    private TabPanel? _tabPanelbRef;
+    private Dictionary<string, object?>? _tabParameters;
+    private Dictionary<string, object?>? _tabPanelParameters;
+    private bool _displayTab = true;
+}

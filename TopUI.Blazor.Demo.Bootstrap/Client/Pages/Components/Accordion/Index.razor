@@ -1,0 +1,61 @@
+﻿@page "/components/accordion"
+
+<div class="row gap-2 gap-md-0 flex-nowrap">
+    <div class="col-md order-1 order-md-0">
+        <Accordion @ref=_accordionRef @attributes=_accordionParameters>
+            <AccordionPanel @ref="_panelRef" @attributes=_panelParameters>
+                <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+            </AccordionPanel>
+            <AccordionPanel Title="Accordion Item #2">
+                <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+            </AccordionPanel>
+            <AccordionPanel Title="Accordion Item #3">
+                <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+            </AccordionPanel>
+        </Accordion>
+
+        <h3 class="mt-5">Usage:</h3>
+        <h5>Accordion:</h5>
+<pre class="bg-body-tertiary p-2 rounded border">
+    <code class="razor">
+@TopUI.Blazor.Core.Generators.CodeGenerator.GenerateComponentInitializer(typeof(Accordion), _accordionParameters)
+    </code>
+</pre>
+        <h5>Panel:</h5>
+<pre class="bg-body-tertiary p-2 rounded border">
+    <code class="razor">
+@TopUI.Blazor.Core.Generators.CodeGenerator.GenerateComponentInitializer(typeof(AccordionPanel), _panelParameters)
+    </code>
+</pre>
+    </div>
+
+    <div class="col-md-auto order-0 order-md-1">
+        <Tab>
+            <TabPanel Title="Accordion">
+                <PropertyGrid ValueSource="_accordionRef" PropertyValuesChanged="p => _accordionParameters = p" class="mt-1">
+                </PropertyGrid>
+            </TabPanel>
+            <TabPanel Title="First Panel">
+                <PropertyGrid ValueSource="_panelRef" PropertyValuesChanged="p => _panelParameters = p" class="mt-1">
+                </PropertyGrid>
+            </TabPanel>
+        </Tab>
+    </div>
+</div>
+
+@code {
+    private Accordion? _accordionRef;
+    private AccordionPanel? _panelRef;
+    private Dictionary<string, object?>? _accordionParameters;
+    private Dictionary<string, object?>? _panelParameters;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        // Element references are captured after render.
+        // So in order to pass the element reference to the PropertyGrid, we need to re-render after first render.
+        if (firstRender)
+            StateHasChanged();
+
+        base.OnAfterRender(firstRender);
+    }
+}

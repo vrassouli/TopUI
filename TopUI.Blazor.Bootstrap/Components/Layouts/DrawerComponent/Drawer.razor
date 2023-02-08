@@ -1,0 +1,36 @@
+﻿@namespace TopUI.Blazor.Bootstrap.Components
+@inherits BootstrapComponent
+
+<nav @attributes=AdditionalAttributes>
+    <div class="@GetNavbarContainerClass()">
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#@(Id)_sidebarOffcanvas" aria-controls="@(Id)_sidebarOffcanvas">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        @Header
+    </div>
+</nav>
+<div class="@GetLayoutContainerClass()">
+    <aside>
+        <div class="@GetSidebarOffcanvasClass()" id="@(Id)_sidebarOffcanvas">
+            @if (!string.IsNullOrEmpty(SidebarHeader) || SidebarCloseButton)
+            {
+                <div class="offcanvas-header border-bottom">
+                    @if (!string.IsNullOrEmpty(SidebarHeader))
+                    {
+                        <h5 class="offcanvas-title">@SidebarHeader</h5>
+                    }
+                    @if (SidebarCloseButton)
+                    {
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#@(Id)_sidebarOffcanvas"></button>
+                    }
+                </div>
+            }
+            <div class="offcanvas-body">
+                @Sidebar
+            </div>
+        </div>
+    </aside>
+    <main>
+        @ChildContent
+    </main>
+</div>

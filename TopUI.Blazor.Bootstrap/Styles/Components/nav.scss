@@ -1,0 +1,17 @@
+﻿:root, :root[data-bs-theme="light"] {
+    --tui-nav-active-bg: #f1e9fe;
+}
+:root[data-bs-theme="dark"] {
+    --tui-nav-active-bg: #3a2372;
+}
+.tui-nav {
+    .nav-link {
+        color: var(--bs-body-color);
+        border-radius: var(--bs-border-radius);
+
+        &.active, &:hover {
+            color: var(--bs-emphasis-color);
+            background-color: var(--tui-nav-active-bg);
+        }
+    }
+}

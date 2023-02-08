@@ -1,0 +1,34 @@
+﻿@page "/components/pager"
+
+<div class="row gap-2 gap-md-0 flex-nowrap">
+    <div class="col-md order-1 order-md-0">
+        <Pager @ref=_elRef @attributes=_parameters />
+
+        <h3 class="mt-5">Usage:</h3>
+<pre class="bg-body-tertiary p-2 rounded border">
+    <code class="razor">
+@TopUI.Blazor.Core.Generators.CodeGenerator.GenerateComponentInitializer(typeof(Pager), _parameters)
+    </code>
+</pre>
+    </div>
+    <div class="col-md-auto order-0 order-md-1">
+        <PropertyGrid ValueSource="_elRef" PropertyValuesChanged="p => _parameters = p" class="mt-1">
+        </PropertyGrid>
+    </div>
+</div>
+
+
+@code {
+    private Pager? _elRef;
+    private Dictionary<string, object?>? _parameters;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        // Element references are captured after render.
+        // So in order to pass the element reference to the PropertyGrid, we need to re-render after first render.
+        if (firstRender)
+            StateHasChanged();
+
+        base.OnAfterRender(firstRender);
+    }
+}

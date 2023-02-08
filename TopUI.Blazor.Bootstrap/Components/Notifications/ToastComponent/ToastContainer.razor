@@ -1,0 +1,9 @@
+﻿@namespace TopUI.Blazor.Bootstrap.Components
+@inherits UiComponent
+
+<div @attributes=AdditionalAttributes>
+    @foreach (var item in _toasts)
+    {
+        <TopUI.Blazor.Bootstrap.Components.Notifications.ToastComponent.Toast @key="@item.Key" Config="item.Value" />
+    }
+</div>

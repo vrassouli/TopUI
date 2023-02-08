@@ -1,0 +1,40 @@
+﻿@namespace TopUI.Blazor.Bootstrap.Components
+@inherits BootstrapComponent
+
+@{
+    __builder.OpenElement(0, IsLink ? "a" : "button");
+    __builder.AddMultipleAttributes(1, AdditionalAttributes);
+    if (CanToggle)
+    {
+        __builder.AddAttribute(1, "aria-pressed", Toggled.ToString().ToLower());
+        __builder.AddEventPreventDefaultAttribute(2, "onclick", true);
+        __builder.AddEventStopPropagationAttribute(3, "onclick", true);
+        __builder.AddAttribute(3, "onclick", EventCallback.Factory.Create<MouseEventArgs>(this, OnClicked));
+    }
+}
+@if (ChildContent == null)
+{
+    if (!string.IsNullOrEmpty(Icon) || IsBusy)
+    {
+        var hasText = !string.IsNullOrEmpty(Text);
+        if (IsBusy)
+        {
+            <Spinner Size="SpinnerSize.Sm" class="@(hasText ? "me-2" : "")" />
+        }
+        else
+        {
+            <i class="@Icon @(hasText ? "me-2" : "")"></i>
+        }
+    }
+    if (!string.IsNullOrEmpty(Text))
+    {
+        <span>@Text</span>
+    }
+}
+else
+{
+    @ChildContent
+}
+@{
+    __builder.CloseElement();
+}

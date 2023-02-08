@@ -1,0 +1,58 @@
+﻿@page "/components/card"
+
+<div class="row">
+    <div class="col">
+        <Card @ref="_card" @attributes=_cardParameters>
+            <CardBody @ref="_cardBody" @attributes=_cardBodyParameters>
+                Content of the first body!
+            </CardBody>
+            <CardBody>
+                Content of the second body!
+            </CardBody>
+        </Card>
+
+        <h3 class="mt-5">Usage:</h3>
+        <h5>Card:</h5>
+<pre class="bg-body-tertiary p-2 rounded border">
+    <code class="razor">
+@TopUI.Blazor.Core.Generators.CodeGenerator.GenerateComponentInitializer(typeof(Card), _cardParameters)
+    </code>
+</pre>
+        <h5>CardBody:</h5>
+<pre class="bg-body-tertiary p-2 rounded border">
+    <code class="razor">
+@TopUI.Blazor.Core.Generators.CodeGenerator.GenerateComponentInitializer(typeof(CardBody), _cardBodyParameters)
+    </code>
+</pre>
+
+    </div>
+    <div class="col-auto">
+        <Tab>
+            <TabPanel Title="Card">
+                <PropertyGrid ValueSource="_card" PropertyValuesChanged="p => _cardParameters = p" class="mt-1">
+                </PropertyGrid>
+            </TabPanel>
+            <TabPanel Title="Card Body">
+                <PropertyGrid ValueSource="_cardBody" PropertyValuesChanged="p => _cardBodyParameters = p" class="mt-1">
+                </PropertyGrid>
+            </TabPanel>
+        </Tab>
+    </div>
+</div>
+
+@code {
+    private Card? _card;
+    private CardBody? _cardBody;
+    private Dictionary<string, object?>? _cardParameters;
+    private Dictionary<string, object?>? _cardBodyParameters;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        // Element references are captured after render.
+        // So in order to pass the element reference to the PropertyGrid, we need to re-render after first render.
+        if (firstRender)
+            StateHasChanged();
+
+        base.OnAfterRender(firstRender);
+    }
+}

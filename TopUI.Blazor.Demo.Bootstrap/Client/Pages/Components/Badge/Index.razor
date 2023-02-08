@@ -1,0 +1,99 @@
+﻿@page "/components/badge"
+
+<div class="row gap-2 gap-md-0 flex-nowrap">
+    <div class="col-md order-1 order-md-0">
+        <Badge @ref=_elRef @attributes=_parameters />
+
+        <h3 class="mt-5">Usage:</h3>
+<pre class="bg-body-tertiary p-2 rounded border">
+        <code class="razor">
+                @TopUI.Blazor.Core.Generators.CodeGenerator.GenerateComponentInitializer(typeof(Badge), _parameters)
+    </code>
+</pre>
+    </div>
+    <div class="col-md-auto order-0 order-md-1">
+        <PropertyGrid ValueSource="_elRef" PropertyValuesChanged="OnParametersChanged">
+        </PropertyGrid>
+    </div>
+</div>
+
+@code {
+    private Badge? _elRef;
+    private Dictionary<string, object?>? _parameters;
+
+    private void OnParametersChanged(Dictionary<string, object?> parameters)
+    {
+        _parameters = parameters;
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        // Element references are captured after render.
+        // So in order to pass the element reference to the PropertyGrid, we need to re-render after first render.
+        if (firstRender)
+            StateHasChanged();
+
+        base.OnAfterRender(firstRender);
+    }
+}
+@*
+<div class="row">
+    <div class="col position-relative">
+        <Badge Mode="_mode" Type="_type" Message="@_message" />
+    </div>
+    <div class="col-auto">
+        <Card Header="Config">
+            <CardBody>
+                <div class="row mb-3">
+                    <label for="alert_header" class="col-sm-4 col-form-label">Message</label>
+                    <div class="col-sm">
+                        <input type="text" class="form-control" id="alert_header" @bind-value="@_message">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="alert_mode" class="col-sm-4 col-form-label">Type</label>
+                    <div class="col-sm">
+                        <select id="alert_mode" class="form-select" @onchange="TypeChanged">
+                            @foreach (var value in Enum.GetValues(typeof(BadgeType)))
+                            {
+                                <option value="@value">@value.ToString()</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="alert_mode" class="col-sm-4 col-form-label">Mode</label>
+                    <div class="col-sm">
+                        <select id="alert_mode" class="form-select" @onchange="ModeChanged">
+                            @foreach (var value in Enum.GetValues(typeof(BadgeModes)))
+                            {
+                                <option value="@value">@value.ToString()</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </CardBody>
+        </Card>
+    </div>
+</div>
+
+@code {
+    private BadgeModes _mode = BadgeModes.Danger;
+    private BadgeType _type = BadgeType.Default;
+    private string? _message = "+99";
+
+    private void ModeChanged(ChangeEventArgs args)
+    {
+        var str = args.Value?.ToString();
+        if (!string.IsNullOrEmpty(str))
+            _mode = Enum.Parse<BadgeModes>(str);
+    }
+
+    private void TypeChanged(ChangeEventArgs args)
+    {
+        var str = args.Value?.ToString();
+        if (!string.IsNullOrEmpty(str))
+            _type = Enum.Parse<BadgeType>(str);
+    }
+}
+*@

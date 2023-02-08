@@ -1,0 +1,22 @@
+﻿@namespace TopUI.Blazor.Bootstrap.Components
+@inherits BootstrapComponent
+
+
+<div @attributes=AdditionalAttributes>
+    <ul class="nav nav-tabs">
+        @foreach (var child in Children)
+        {
+            var index = Children.IndexOf(child);
+
+            <li class="nav-item">
+                <a class="nav-link @(child.IsActive ? "active" : "")" aria-current="page" href="#@child.Id" data-bs-toggle="tab"
+                    @onclick:preventDefault="true" @onclick="()=>{ OnTabIndexChanged(index); }">@child.Title</a>
+            </li>
+        }
+    </ul>
+    <div class="tab-content">
+        <CascadingValue Value="this" IsFixed>
+            @ChildContent
+        </CascadingValue>
+    </div>
+</div>

@@ -1,0 +1,6 @@
+﻿@namespace TopUI.Blazor.Bootstrap.Components
+@inherits BootstrapComponent
+
+<div class="tab-pane @(IsActive ? "active" : "")" id="@Id">
+    @ChildContent
+</div>

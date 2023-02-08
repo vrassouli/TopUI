@@ -1,0 +1,14 @@
+﻿@namespace TopUI.Blazor.Bootstrap.Components
+
+@typeparam TValue
+@inherits BootstrapFormControlComponent<TValue>
+
+<div @attributes=AdditionalAttributes>
+    <input class="form-check-input" type="checkbox" checked="@CurrentValue" @onchange="OnChange" id="@(Id)_input">
+    @if (!string.IsNullOrEmpty(Label))
+    {
+        <label class="form-check-label" for="@(Id)_input">
+            @Label
+        </label>
+    }
+</div>
