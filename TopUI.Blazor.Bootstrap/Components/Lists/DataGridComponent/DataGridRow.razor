@@ -1,8 +1,20 @@
 ﻿@typeparam TItem
 
-<div class="data-grid-row @(IsSelected ? "active" : "")" @onclick="OnRowClick">
-    @foreach (var col in DataGrid.DataColumns)
-    {
-        <RowCell Column="col" Item="Item" PlaceHolder="@Placeholder"/>
-    }
-</div>
+@if (Placeholder)
+{
+    <div class="data-grid-row">
+        @foreach (var col in DataGrid.DataColumns)
+        {
+            <RowCell Column="col" Item="Item" Placeholder="true" />
+        }
+    </div>
+}
+else
+{
+    <div class="data-grid-row @(IsSelected ? "active" : "")" @onclick="OnRowClick">
+        @foreach (var col in DataGrid.DataColumns)
+        {
+            <RowCell Column="col" Item="Item" />
+        }
+    </div>
+}
