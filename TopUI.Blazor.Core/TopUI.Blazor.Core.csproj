@@ -14,10 +14,6 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.1" />
 	</ItemGroup>
-	<ItemGroup>
-		<Content Include="topui.interops.bundle.js" />
-		<Content Include="topui.interops.bundle.min.js" />
-	</ItemGroup>
 
 	<ItemGroup>
 		<Folder Include="wwwroot\" />
