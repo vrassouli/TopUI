@@ -11,6 +11,7 @@ public sealed partial class RowCell<TItem> : IDisposable
 {
     [Parameter, EditorRequired] public TItem Item { get; set; } = default!;
     [Parameter, EditorRequired] public DataGridColumn<TItem> Column { get; set; } = default!;
+    [Parameter] public bool Placeholder { get; set; }
 
     protected override void OnInitialized()
     {

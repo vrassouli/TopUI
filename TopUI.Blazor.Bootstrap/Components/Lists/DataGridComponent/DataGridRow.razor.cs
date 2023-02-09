@@ -9,6 +9,7 @@ namespace TopUI.Blazor.Bootstrap.Components.Lists.DataGridComponent;
 
 public sealed partial class DataGridRow<TItem>
 {
+    [Parameter] public bool Placeholder { get; set; }
     [Parameter, EditorRequired] public TItem Item { get; set; } = default!;
     [CascadingParameter] public DataGrid<TItem> DataGrid { get; set; } = default!;
 
@@ -31,8 +32,6 @@ public sealed partial class DataGridRow<TItem>
 
     protected override void OnAfterRender(bool firstRender)
     {
-        Console.WriteLine("After render");
-
         base.OnAfterRender(firstRender);
     }
 

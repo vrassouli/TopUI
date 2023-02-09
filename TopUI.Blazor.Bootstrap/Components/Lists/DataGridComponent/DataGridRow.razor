@@ -3,6 +3,6 @@
 <div class="data-grid-row @(IsSelected ? "active" : "")" @onclick="OnRowClick">
     @foreach (var col in DataGrid.DataColumns)
     {
-        <RowCell Column="col" Item="Item"/>
+        <RowCell Column="col" Item="Item" PlaceHolder="@Placeholder"/>
     }
 </div>

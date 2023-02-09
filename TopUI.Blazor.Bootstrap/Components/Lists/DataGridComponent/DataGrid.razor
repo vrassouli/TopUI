@@ -12,7 +12,12 @@
         <DataGridHeader TItem="TItem"></DataGridHeader>
         <div class="data-grid-content">
             <Virtualize @ref="_itemsContainer" ItemsProvider="GetItemsProvider">
-                <DataGridRow Item="context" />
+                <ItemContent>
+                    <DataGridRow Item="context" />
+                </ItemContent>
+                <Placeholder>
+                    <DataGridRow Item="context" Placeholder="true" />
+                </Placeholder>
             </Virtualize>
         </div>
     </div>

@@ -60,7 +60,7 @@
             > .cell {
                 flex-grow: 0;
                 flex-shrink: 0;
-                padding: .625rem .25rem;
+                padding: calc(var(--bs-gutter-x) * .25);
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;

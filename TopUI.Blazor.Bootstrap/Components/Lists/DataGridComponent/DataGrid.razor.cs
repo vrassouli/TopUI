@@ -231,8 +231,6 @@ public sealed partial class DataGrid<TItem> : IDataBoundComponent<TItem>, IDataS
 
     private async ValueTask<ItemsProviderResult<TItem>> GetItemsProvider(ItemsProviderRequest request)
     {
-        Console.WriteLine("Providing data...");
-
         if (PageSize != null && PageSize > 0)
         {
             // Paged data

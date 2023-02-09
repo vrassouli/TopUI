@@ -173,7 +173,6 @@ public abstract class UiComponent : UiComponentBase, IAsyncDisposable
             return false;
 
         var disabledValueStr = AdditionalAttributes["disabled"]?.ToString();
-        //Console.WriteLine(disabledValueStr);
 
         if (bool.TryParse(disabledValueStr, out var disabledValue) && disabledValue)
             return true;
