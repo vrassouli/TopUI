@@ -1,15 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
 
-  <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
 
 
-  <ItemGroup>
-    <SupportedPlatform Include="browser" />
-  </ItemGroup>
+	<ItemGroup>
+		<SupportedPlatform Include="browser" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
@@ -22,18 +22,18 @@
 		<Sass Include="$(MSBuildProjectDirectory)/Styles/**/*.scss" Exclude="$(MSBuildProjectDirectory)/Styles/**/_*.scss" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Sass Remove="Styles\Components\data-grid.scss" />
-	  <Sass Remove="Styles\Components\property-grid.scss" />
-	  <Sass Remove="Styles\Components\tab.scss" />
+		<Sass Remove="Styles\Components\data-grid.scss" />
+		<Sass Remove="Styles\Components\property-grid.scss" />
+		<Sass Remove="Styles\Components\tab.scss" />
 	</ItemGroup>
 
 	<ItemGroup>
-    <Folder Include="Components\Abstraction\" />
-    <Folder Include="wwwroot\" />
-  </ItemGroup>
+		<Folder Include="Components\Abstraction\" />
+		<Folder Include="wwwroot\" />
+	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\TopUI.Blazor.Core\TopUI.Blazor.Core.csproj" />
+		<ProjectReference Include="..\TopUI.Blazor.Core\TopUI.Blazor.Core.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 		<Compile Update="Components\Lists\PagerComponent\Resources\Pager.Designer.cs">
