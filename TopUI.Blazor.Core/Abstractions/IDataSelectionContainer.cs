@@ -10,7 +10,7 @@ namespace TopUI.Blazor.Core.Abstractions;
 public interface IDataSelectionContainer<TItem>
 {
     TItem? SelectedItem { get; set; }
-    EventCallback<TItem> SelectedItemChanged { get; set; }
+    EventCallback<TItem?> SelectedItemChanged { get; set; }
     IList<TItem>? SelectedItems { get; set; }
-    EventCallback<IEnumerable<TItem>> SelectedItemsChanged { get; set; }
+    EventCallback<IList<TItem>?> SelectedItemsChanged { get; set; }
 }

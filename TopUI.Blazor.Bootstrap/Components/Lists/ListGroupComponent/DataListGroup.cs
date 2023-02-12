@@ -15,9 +15,9 @@ public sealed class DataListGroup<TItem> : ListGroup, IDataBoundComponent<TItem>
     [Parameter] public IList<TItem>? Items { get; set; }
     [Parameter] public ItemsProviderDelegate<TItem>? ItemsProvider { get; set; }
     [Parameter] public TItem? SelectedItem { get; set; } = default!;
-    [Parameter] public EventCallback<TItem> SelectedItemChanged { get; set; } = default!;
+    [Parameter] public EventCallback<TItem?> SelectedItemChanged { get; set; } = default!;
     [Parameter] public IList<TItem>? SelectedItems { get; set; }
-    [Parameter] public EventCallback<IEnumerable<TItem>> SelectedItemsChanged { get; set; }
+    [Parameter] public EventCallback<IList<TItem>?> SelectedItemsChanged { get; set; }
     [Parameter] public Func<TItem, string>? ItemText { get; set; }
     [Parameter] public Func<TItem, string?>? ItemIcon { get; set; }
     [Parameter] public Func<TItem, string?>? ItemUrl { get; set; }

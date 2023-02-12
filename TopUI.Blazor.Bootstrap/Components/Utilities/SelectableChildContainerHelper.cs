@@ -62,7 +62,7 @@ internal class SelectableChildContainerHelper
             {
                 await component.SelectedItemChanged.InvokeAsync(component.Items[index]);
 
-                var selectedItems = component.Items.Where(x => component.SelectedIndices.Contains(component.Items.IndexOf(x)));
+                var selectedItems = component.Items.Where(x => component.SelectedIndices.Contains(component.Items.IndexOf(x))).ToList();
                 await component.SelectedItemsChanged.InvokeAsync(selectedItems);
             }
         }

@@ -14,9 +14,9 @@ public sealed class DataDropdown<TItem> : Dropdown, IDataBoundComponent<TItem>, 
 {
     [Parameter] public IList<TItem>? Items { get; set; }
     [Parameter] public TItem? SelectedItem { get; set; } = default!;
-    [Parameter] public EventCallback<TItem> SelectedItemChanged { get; set; } = default!;
+    [Parameter] public EventCallback<TItem?> SelectedItemChanged { get; set; } = default!;
     [Parameter] public IList<TItem>? SelectedItems { get; set; }
-    [Parameter] public EventCallback<IEnumerable<TItem>> SelectedItemsChanged { get; set; }
+    [Parameter] public EventCallback<IList<TItem>?> SelectedItemsChanged { get; set; }
     [Parameter, EditorRequired] public Func<TItem, string> ItemTitle { get; set; } = default!;
     [Parameter] public Func<TItem, string?> ItemIcon { get; set; } = default!;
     [Parameter] public Func<TItem, bool> ItemIsActive { get; set; } = default!;

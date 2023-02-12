@@ -46,7 +46,7 @@ public sealed partial class DataGrid<TItem> : IDataBoundComponent<TItem>, IDataS
 
     [Parameter]
     [Browsable(false)]
-    public EventCallback<TItem> SelectedItemChanged { get; set; }
+    public EventCallback<TItem?> SelectedItemChanged { get; set; }
 
     [Parameter]
     [Browsable(false)]
@@ -54,7 +54,7 @@ public sealed partial class DataGrid<TItem> : IDataBoundComponent<TItem>, IDataS
 
     [Parameter]
     [Browsable(false)]
-    public EventCallback<IEnumerable<TItem>> SelectedItemsChanged { get; set; }
+    public EventCallback<IList<TItem>> SelectedItemsChanged { get; set; }
 
     [Parameter] public SelectionMode Selection { get; set; } = SelectionMode.Single;
 
