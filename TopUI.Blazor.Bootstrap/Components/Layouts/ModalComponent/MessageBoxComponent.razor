@@ -1,4 +1,5 @@
-﻿@using TopUI.Blazor.Bootstrap.Services.Abstractions;
+﻿@using Microsoft.Extensions.Localization;
+@using TopUI.Blazor.Bootstrap.Services.Abstractions;
 
 <div class="mb-3">
     @Message
@@ -6,23 +7,23 @@
 <div class="modal-footer mx-n3 mb-n3">
     @if ((Buttons & MessageBoxButton.Ok) == MessageBoxButton.Ok)
     {
-        <button class="btn btn-primary" @onclick="@(()=>{ BootstrapJs.CloseDialog(MessageBoxButton.Ok); })">Ok</button>
+        <button class="btn btn-primary" @onclick="@(()=>{ BootstrapJs.CloseDialog(MessageBoxButton.Ok); })">@Localizer["Ok"]</button>
     }
     @if ((Buttons & MessageBoxButton.Cancel) == MessageBoxButton.Cancel)
     {
-        <button class="btn btn-secondary" @onclick="@(()=>{ BootstrapJs.CloseDialog(MessageBoxButton.Cancel); })">Cancel</button>
+        <button class="btn btn-secondary" @onclick="@(()=>{ BootstrapJs.CloseDialog(MessageBoxButton.Cancel); })">@Localizer["Cancel"]</button>
     }
     @if ((Buttons & MessageBoxButton.Yes) == MessageBoxButton.Yes)
     {
-        <button class="btn btn-primary" @onclick="@(()=>{ BootstrapJs.CloseDialog(MessageBoxButton.Yes); })">Yes</button>
+        <button class="btn btn-primary" @onclick="@(()=>{ BootstrapJs.CloseDialog(MessageBoxButton.Yes); })">@Localizer["Yes"]</button>
     }
     @if ((Buttons & MessageBoxButton.No) == MessageBoxButton.No)
     {
-        <button class="btn btn-secondary" @onclick="@(()=>{ BootstrapJs.CloseDialog(MessageBoxButton.No); })">No</button>
+        <button class="btn btn-secondary" @onclick="@(()=>{ BootstrapJs.CloseDialog(MessageBoxButton.No); })">@Localizer["No"]</button>
     }
     @if ((Buttons & MessageBoxButton.Retry) == MessageBoxButton.Retry)
     {
-        <button class="btn btn-secondary" @onclick="@(()=>{ BootstrapJs.CloseDialog(MessageBoxButton.Retry); })">Retry</button>
+        <button class="btn btn-secondary" @onclick="@(()=>{ BootstrapJs.CloseDialog(MessageBoxButton.Retry); })">@Localizer["Retry"]</button>
     }
 </div>
 
@@ -31,4 +32,6 @@
     [Parameter] public MessageBoxButton Buttons { get; set; } = MessageBoxButton.Ok;
     [Parameter] public MessageBoxIcon Icon { get; set; } = MessageBoxIcon.None;
     [Inject] private IBootstrapJs BootstrapJs { get; set; } = default!;
+    [Inject] IStringLocalizer<Resources.MessageBoxComponent> Localizer { get; set; } = default!;
+
 }

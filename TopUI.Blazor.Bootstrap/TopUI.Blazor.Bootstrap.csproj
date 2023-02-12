@@ -37,6 +37,11 @@
 		<ProjectReference Include="..\TopUI.Blazor.Core\TopUI.Blazor.Core.csproj" />
 	</ItemGroup>
 	<ItemGroup>
+		<Compile Update="Components\Layouts\ModalComponent\Resources\MessageBoxComponent.Designer.cs">
+		  <DesignTime>True</DesignTime>
+		  <AutoGen>True</AutoGen>
+		  <DependentUpon>MessageBoxComponent.resx</DependentUpon>
+		</Compile>
 		<Compile Update="Components\Lists\PagerComponent\Resources\Pager.Designer.cs">
 			<DesignTime>True</DesignTime>
 			<AutoGen>True</AutoGen>
@@ -45,6 +50,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<EmbeddedResource Update="Components\Layouts\ModalComponent\Resources\MessageBoxComponent.fa-IR.resx">
+		  <Generator>PublicResXFileCodeGenerator</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Components\Layouts\ModalComponent\Resources\MessageBoxComponent.resx">
+		  <Generator>PublicResXFileCodeGenerator</Generator>
+		  <LastGenOutput>MessageBoxComponent.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
 		<EmbeddedResource Update="Components\Lists\PagerComponent\Resources\Pager.fa-IR.resx">
 			<Generator>PublicResXFileCodeGenerator</Generator>
 		</EmbeddedResource>
