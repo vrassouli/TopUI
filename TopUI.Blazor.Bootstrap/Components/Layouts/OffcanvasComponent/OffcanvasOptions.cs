@@ -12,7 +12,7 @@ public sealed class OffcanvasOptions
     public bool StaticBackdrop { get; set; }
     public bool Keyboard { get; set; } = true;
     public bool Scrollable { get; set; } = true;
-    public OffcanvasPlacement Placement { get; set; }
+    public OffcanvasPlacement Placement { get; set; } = OffcanvasPlacement.End;
     public Dictionary<string, object>? Parameters { get; set; }
 
     public OffcanvasOptions(string title)
