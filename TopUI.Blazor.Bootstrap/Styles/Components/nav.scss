@@ -1,9 +1,11 @@
 ﻿:root, :root[data-bs-theme="light"] {
     --tui-nav-active-bg: #f1e9fe;
 }
+
 :root[data-bs-theme="dark"] {
     --tui-nav-active-bg: #3a2372;
 }
+
 .tui-nav {
     .nav-link {
         color: var(--bs-body-color);
@@ -12,6 +14,15 @@
         &.active, &:hover {
             color: var(--bs-emphasis-color);
             background-color: var(--tui-nav-active-bg);
+        }
+
+        i {
+            margin-inline-end: calc(var(--bs-gutter-x));
+
+            &.tui-empty {
+                display: inline-block;
+                width: 16px;
+            }
         }
     }
 }

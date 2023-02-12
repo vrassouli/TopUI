@@ -984,6 +984,15 @@
   background-color: var(--tui-nav-active-bg);
 }
 
+.tui-nav .nav-link i {
+  margin-inline-end: calc(var(--bs-gutter-x));
+}
+
+.tui-nav .nav-link i.tui-empty {
+  display: inline-block;
+  width: 16px;
+}
+
 .tui-property-grid {
   --tui-property-grid-cell-py: 0.25rem;
   --tui-property-grid-cell-px: 0.50rem;
