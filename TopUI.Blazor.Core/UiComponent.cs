@@ -191,7 +191,7 @@ public abstract class UiComponent : UiComponentBase, IAsyncDisposable
             foreach (var c in classProvider.GetClasses())
                 yield return c;
 
-        var boolProperties = GetType().GetProperties().Where(x => x.PropertyType == typeof(bool));
+        var boolProperties = GetType().GetProperties().Where(x => x.PropertyType == typeof(bool) || Nullable.GetUnderlyingType(x.PropertyType) == typeof(bool));
 
         // add ElementClassAttribute classes
         foreach (var prop in boolProperties)
@@ -199,11 +199,11 @@ public abstract class UiComponent : UiComponentBase, IAsyncDisposable
             var elClassAttr = prop.GetCustomAttribute<ElementClassAttribute>();
             if (elClassAttr != null)
             {
-                var val = prop.GetValue(this) as bool? ?? false;
+                var val = prop.GetValue(this) as bool?;
 
-                if (val)
+                if (val == true)
                     yield return elClassAttr.ClassName;
-                else if (!val && !string.IsNullOrEmpty(elClassAttr.AlternateClassName))
+                else if (val == false && !string.IsNullOrEmpty(elClassAttr.AlternateClassName))
                     yield return elClassAttr.AlternateClassName;
             }
         }
