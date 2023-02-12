@@ -10,5 +10,6 @@ namespace TopUI.Blazor.Core.Abstractions;
 public interface IDataBoundComponent<TItem>
 {
     IList<TItem>? Items { get; set; }
-    ItemsProviderDelegate<TItem>? ItemsProvider { get; set; }
+    
+
 }

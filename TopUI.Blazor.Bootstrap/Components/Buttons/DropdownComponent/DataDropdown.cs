@@ -13,7 +13,6 @@ namespace TopUI.Blazor.Bootstrap.Components;
 public sealed class DataDropdown<TItem> : Dropdown, IDataBoundComponent<TItem>, IDataSelectionContainer<TItem>
 {
     [Parameter] public IList<TItem>? Items { get; set; }
-    [Parameter] public ItemsProviderDelegate<TItem>? ItemsProvider { get; set; }
     [Parameter] public TItem? SelectedItem { get; set; } = default!;
     [Parameter] public EventCallback<TItem> SelectedItemChanged { get; set; } = default!;
     [Parameter] public IList<TItem>? SelectedItems { get; set; }

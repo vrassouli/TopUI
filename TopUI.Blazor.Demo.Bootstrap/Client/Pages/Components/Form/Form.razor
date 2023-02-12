@@ -1,6 +1,7 @@
 ﻿@page "/components/forms/form"
 @using System.Linq.Expressions;
 @using System.Text.Json;
+@using TopUI.Blazor.Demo.Bootstrap.Shared;
 
 <EditForm Model="_model">
     <FloatingLabel For="()=>_model.FirstName" class="mb-2">
@@ -63,7 +64,6 @@
             <DataComboBox Items="_countries"
                           ItemText="x => x.Name"
                           ItemValue="x => x.CountryCode"
-                          AutoComplete
                           @bind-InputText="_searchedCountry"
                           @bind-InputText:after="OnSearchedCountry"
                           @bind-Value="_model.Country" />

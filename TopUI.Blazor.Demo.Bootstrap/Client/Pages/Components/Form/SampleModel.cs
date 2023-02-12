@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Drawing;
-using TopUI.Blazor.Demo.Bootstrap.Client.Models.SampleDtos;
 
 namespace TopUI.Blazor.Demo.Bootstrap.Client.Pages.Components.Form;
 

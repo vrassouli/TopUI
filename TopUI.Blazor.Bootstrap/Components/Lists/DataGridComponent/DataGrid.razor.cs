@@ -20,11 +20,7 @@ public sealed partial class DataGrid<TItem> : IDataBoundComponent<TItem>, IDataS
     private ScrollSync? _scrollSync;
     private DataGridColumn<TItem>? _orderedColumn;
     private SortDirection _sortDirection = SortDirection.None;
-    private IList<TItem>? _items;
-    private ItemsProviderDelegate<TItem>? _itemsProvider;
     private Virtualize<TItem>? _itemsContainer;
-    private int? _pageSize;
-    private int _page;
 
     [Parameter]
     [Browsable(false)]
@@ -33,12 +29,6 @@ public sealed partial class DataGrid<TItem> : IDataBoundComponent<TItem>, IDataS
     [Parameter]
     [Browsable(false)]
     public ItemsProviderDelegate<TItem>? ItemsProvider { get; set; }
-
-    [Parameter]
-    public int? PageSize { get; set; }
-
-    [Parameter]
-    public int Page { get; set; } = 1;
 
     [Parameter, EditorRequired]
     [Browsable(false)]
@@ -85,17 +75,6 @@ public sealed partial class DataGrid<TItem> : IDataBoundComponent<TItem>, IDataS
 
     protected override async Task OnParametersSetAsync()
     {
-        if (_page != Page || _pageSize != PageSize)
-        {
-            if (_itemsContainer != null)
-                await _itemsContainer.RefreshDataAsync();
-        }
-
-        _items = Items;
-        _itemsProvider = ItemsProvider;
-        _pageSize = PageSize;
-        _page = Page;
-
         await base.OnParametersSetAsync();
     }
 
@@ -109,7 +88,7 @@ public sealed partial class DataGrid<TItem> : IDataBoundComponent<TItem>, IDataS
         await base.OnAfterRenderAsync(firstRender);
     }
 
-    public async Task RefreshDataAsync()
+    public async Task RefreshAsync()
     {
         if (_itemsContainer != null)
             await _itemsContainer.RefreshDataAsync();
@@ -208,7 +187,7 @@ public sealed partial class DataGrid<TItem> : IDataBoundComponent<TItem>, IDataS
             Expression = _orderedColumn.OrderBy ?? _orderedColumn.Field
         });
 
-        await RefreshDataAsync();
+        await RefreshAsync();
     }
 
     internal SortDirection GetSortDirection(DataGridColumn<TItem> column)
@@ -231,36 +210,14 @@ public sealed partial class DataGrid<TItem> : IDataBoundComponent<TItem>, IDataS
 
     private async ValueTask<ItemsProviderResult<TItem>> GetItemsProvider(ItemsProviderRequest request)
     {
-        if (PageSize != null && PageSize > 0)
+        if (Items == null && ItemsProvider != null)
         {
-            // Paged data
-            if (Items == null && ItemsProvider != null)
-            {
-                var result = await ItemsProvider.Invoke(new ItemsProviderRequest((Page - 1) * PageSize.Value, PageSize.Value, request.CancellationToken));
-                var pageData = result.Items;
-
-                var list = pageData.Skip(request.StartIndex).Take(request.Count);
-                return new ItemsProviderResult<TItem>(list, pageData.Count());
-            }
-            else if (Items != null && ItemsProvider == null)
-            {
-                var pageData = Items.Skip((Page - 1) * PageSize.Value).Take(PageSize.Value);
-
-                var list = pageData.Skip(request.StartIndex).Take(request.Count);
-                return new ItemsProviderResult<TItem>(list, pageData.Count());
-            }
+            return await ItemsProvider.Invoke(request);
         }
-        else
+        else if (Items != null && ItemsProvider == null)
         {
-            if (Items == null && ItemsProvider != null)
-            {
-                return await ItemsProvider.Invoke(request);
-            }
-            else if (Items != null && ItemsProvider == null)
-            {
-                var list = Items.Skip(request.StartIndex).Take(request.Count);
-                return new ItemsProviderResult<TItem>(list, Items.Count);
-            }
+            var list = Items.Skip(request.StartIndex).Take(request.Count);
+            return new ItemsProviderResult<TItem>(list, Items.Count);
         }
 
         return new ItemsProviderResult<TItem>(Enumerable.Empty<TItem>(), 0);

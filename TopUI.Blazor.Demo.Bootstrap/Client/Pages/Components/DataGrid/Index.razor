@@ -1,4 +1,5 @@
 ﻿@page "/components/data-grid"
+@using TopUI.Blazor.Demo.Bootstrap.Shared;
 
 <div class="row gap-2 gap-md-0">
     <div class="col-md order-1 order-md-0 overflow-auto">
@@ -7,8 +8,6 @@
                   @attributes=_parameters
                   style="height: 250px;"
                   ItemsProvider="OnProvideGridItems"
-                  PageSize="_pageSize"
-                  Page="_page"
                   OnOrderBy="OnOrderBy">
             <Columns>
                 <DataGridColumn Field="x => x.Name" Width="200">
@@ -23,8 +22,8 @@
                 </DataGridColumn>
             </Columns>
         </DataGrid>
-        <Pager @bind-Page=_page
-               TotalPages="@((int)Math.Ceiling((double)(_list?.Count ?? 0)/_pageSize))"
+        <Pager @bind-Page=_page @bind-Page:after="ReadPage"
+               TotalPages="_totalPages"
                class="mt-2">
 
         </Pager>
@@ -43,34 +42,26 @@
 
 
 @code {
-    private int _pageSize = 20;
+    private int _pageSize = 50;
     private int _page = 1;
+    private int _totalPages = 0;
     private DataGrid<CountryDto>? _elRef;
     private Dictionary<string, object?>? _parameters;
     private List<CountryDto>? _list;
     private OrderByCommand<CountryDto>? _orderBy;
 
+    [Inject] private HttpClient Client { get; set; } = default!;
+
     public Index()
     {
-        BuildList();
+        //_list = CountryDto.GetList().ToList();
+        //_totalPages = (int)Math.Ceiling((double)_list.Count / _pageSize);
     }
 
-    private void BuildList()
+    protected override async Task OnInitializedAsync()
     {
-        _list = new List<CountryDto>();
-
-        for (int i = 0; i < 1000; i++)
-        {
-            var rnd = new Random(i).Next(1, 10000);
-            _list.Add(new CountryDto
-                {
-                    CallingCode = $"+{i}",
-                    Capital = $"Capital {rnd}",
-                    CountryCode = rnd.ToString(),
-                    Name = $"Country {rnd}",
-                    Population = new Random(rnd).Next(1, 10000)
-                });
-        }
+        await ReadPage();
+        await base.OnInitializedAsync();
     }
 
     private void OnOrderBy(OrderByCommand cmd)
@@ -81,30 +72,30 @@
         }
     }
 
-    private ValueTask<ItemsProviderResult<CountryDto>> OnProvideGridItems(ItemsProviderRequest request)
+    private async Task ReadPage()
     {
-        var query = _list!.AsQueryable();
-
-        if (_orderBy != null)
+        var page = await Client.GetFromJsonAsync<PagedList<CountryDto>>($"api/countries?skip={(_page - 1) * _pageSize}&take={_pageSize}");
+        if (page != null)
         {
-            var exp = _orderBy.Expression;
-            if (exp != null)
-            {
-                var func = exp.Compile();
-                if (_orderBy.Direction == SortDirection.Ascending)
-                    query = query.OrderBy(func).AsQueryable();
-                else if (_orderBy.Direction == SortDirection.Descending)
-                    query = query.OrderByDescending(func).AsQueryable();
-            }
+            _list = page.Items;
+            _totalPages = (int)Math.Ceiling((double)page.Total / _pageSize);
+
+            if (_elRef != null)
+                await _elRef.RefreshAsync();
         }
+    }
 
-        var list = query
-            .Skip(request.StartIndex)
-            .Take(request.Count);
+    private async ValueTask<ItemsProviderResult<CountryDto>> OnProvideGridItems(ItemsProviderRequest request)
+    {
+        //await Task.Delay(300);
 
-        var result = new ItemsProviderResult<CountryDto>(list, _list!.Count);
+        if (_list == null)
+            return new ItemsProviderResult<CountryDto>(Enumerable.Empty<CountryDto>(), 0);
 
-        return ValueTask.FromResult(result);
+        var result = new ItemsProviderResult<CountryDto>(_list.Skip(request.StartIndex).Take(request.Count), _list.Count);
+
+        return result;
+
     }
 
     protected override void OnAfterRender(bool firstRender)

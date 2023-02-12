@@ -10,7 +10,7 @@ namespace TopUI.Blazor.Bootstrap.Components.Lists.DataGridComponent;
 public sealed partial class DataGridRow<TItem>
 {
     [Parameter] public bool Placeholder { get; set; }
-    [Parameter, EditorRequired] public TItem Item { get; set; } = default!;
+    [Parameter] public TItem? Item { get; set; } = default!;
     [CascadingParameter] public DataGrid<TItem> DataGrid { get; set; } = default!;
 
     private bool IsSelected => DataGrid.IsSelected(Item);
@@ -37,7 +37,8 @@ public sealed partial class DataGridRow<TItem>
 
     private async Task OnRowClick()
     {
-        await DataGrid.OnItemSelected(Item);
+        if (Item != null)
+            await DataGrid.OnItemSelected(Item);
     }
 
     internal void Refresh()

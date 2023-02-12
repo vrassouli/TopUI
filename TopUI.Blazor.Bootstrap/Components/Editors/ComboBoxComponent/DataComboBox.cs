@@ -39,13 +39,11 @@ public class DataComboBox<TItem, TValue> : ComboBox<TValue>, IDataBoundComponent
     {
         return builder =>
         {
-            int seq = 0;
-
             if (!string.IsNullOrEmpty(DefaultItem))
             {
-                builder.OpenComponent<ComboBoxItem<TValue>>(seq++);
-                builder.AddAttribute(seq++, nameof(ComboBoxItem<TValue>.Text), DefaultItem);
-                builder.AddAttribute(seq++, nameof(ComboBoxItem<TValue>.Value), default(TValue));
+                builder.OpenComponent<ComboBoxItem<TValue>>(0);
+                builder.AddAttribute(1, nameof(ComboBoxItem<TValue>.Text), DefaultItem);
+                builder.AddAttribute(2, nameof(ComboBoxItem<TValue>.Value), default(TValue));
                 builder.CloseComponent();
             }
 
@@ -53,10 +51,10 @@ public class DataComboBox<TItem, TValue> : ComboBox<TValue>, IDataBoundComponent
             {
                 foreach (var item in Items)
                 {
-                    builder.OpenComponent<ComboBoxItem<TValue>>(seq++);
+                    builder.OpenComponent<ComboBoxItem<TValue>>(0);
 
-                    builder.AddAttribute(seq++, nameof(ComboBoxItem<TValue>.Text), GetText(item));
-                    builder.AddAttribute(seq++, nameof(ComboBoxItem<TValue>.Value), GetValue(item));
+                    builder.AddAttribute(1, nameof(ComboBoxItem<TValue>.Text), GetText(item));
+                    builder.AddAttribute(2, nameof(ComboBoxItem<TValue>.Value), GetValue(item));
 
                     builder.CloseComponent();
                 }
