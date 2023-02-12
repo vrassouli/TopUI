@@ -35,6 +35,19 @@
                 </div>
             </ItemTemplate>
         </DataListGroup>
+
+        <h4>Empty list</h4>
+        <DataListGroup Items="new List<CountryDto>()"
+                       ItemText="x => x.Name"
+                       class="mb-5">
+            <ItemTemplate>
+                <div>
+                    <h5>@context.Name (@context.CountryCode)</h5>
+                    <small class="text-muted">@context.Capital</small>
+                    <Badge Mode="BadgeModes.Info" Type="BadgeType.Pill" Message="@context.Population.ToString()" />
+                </div>
+            </ItemTemplate>
+        </DataListGroup>
     </div>
     <div class="col-md-auto order-0 order-md-1">
         <PropertyGrid ValueSource="_elRef" PropertyValuesChanged="p => _parameters = p" class="mt-1">
@@ -49,7 +62,7 @@
 
     public Index()
     {
-        _list = CountryDto.GetList().ToList();
+        _list = CountryDto.GetList().Take(20).ToList();
     }
 
     protected override void OnAfterRender(bool firstRender)
