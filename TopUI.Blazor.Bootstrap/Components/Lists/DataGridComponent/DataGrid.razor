@@ -9,9 +9,9 @@
     @Columns
 
     <div @attributes=AdditionalAttributes>
-        <div class="toolbar-content">
-            @if (AllowSearch || Toolbar != null)
-            {
+        @if (AllowSearch || Toolbar != null)
+        {
+            <div class="toolbar-content">
                 <Toolbar Gap="2" FlexWrap="false">
                     @if (AllowSearch)
                     {
@@ -25,8 +25,8 @@
                         @Toolbar
                     }
                 </Toolbar>
-            }
-        </div>
+            </div>
+        }
         <DataGridHeader TItem="TItem"></DataGridHeader>
         <div class="data-grid-content">
             <Virtualize @ref="_itemsContainer" ItemsProvider="GetItemsProvider">
