@@ -9,6 +9,24 @@
     @Columns
 
     <div @attributes=AdditionalAttributes>
+        <div class="toolbar-content">
+            @if (AllowSearch || Toolbar != null)
+            {
+                <Toolbar Gap="2" FlexWrap="false">
+                    @if (AllowSearch)
+                    {
+                        <InputGroup FlexFill="true">
+                            <Addon><i class="bi bi-search"></i></Addon>
+                            <TextBox @bind-Value="_searchText" @bind-Value:after="OnSearchChanged" Placeholder="Search..." DisableAutoComplete />
+                        </InputGroup>
+                    }
+                    @if (Toolbar != null)
+                    {
+                        @Toolbar
+                    }
+                </Toolbar>
+            }
+        </div>
         <DataGridHeader TItem="TItem"></DataGridHeader>
         <div class="data-grid-content">
             <Virtualize @ref="_itemsContainer" ItemsProvider="GetItemsProvider">

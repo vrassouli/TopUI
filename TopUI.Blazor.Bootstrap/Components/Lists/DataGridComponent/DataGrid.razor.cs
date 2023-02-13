@@ -21,6 +21,11 @@ public sealed partial class DataGrid<TItem> : IDataBoundComponent<TItem>, IDataS
     private DataGridColumn<TItem>? _orderedColumn;
     private SortDirection _sortDirection = SortDirection.None;
     private Virtualize<TItem>? _itemsContainer;
+    private string? _searchText;
+
+    [Parameter] public bool AllowSearch { get; set; }
+    [Parameter] public EventCallback<string?> OnSearch { get; set; }
+    [Parameter] public RenderFragment? Toolbar { get; set; }
 
     [Parameter]
     [Browsable(false)]
@@ -221,5 +226,10 @@ public sealed partial class DataGrid<TItem> : IDataBoundComponent<TItem>, IDataS
         }
 
         return new ItemsProviderResult<TItem>(Enumerable.Empty<TItem>(), 0);
+    }
+
+    private async Task OnSearchChanged()
+    {
+        await OnSearch.InvokeAsync(_searchText);
     }
 }

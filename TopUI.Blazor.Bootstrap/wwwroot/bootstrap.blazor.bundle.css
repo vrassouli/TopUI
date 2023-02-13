@@ -744,7 +744,7 @@
 
 .tui-btn {
   display: flex;
-  gap: calc(var(--bs-gutter-x) * 0.5);
+  gap: calc(var(--bs-gutter-x) * 0.3);
 }
 
 :root, :root[data-bs-theme="light"] {
@@ -764,6 +764,10 @@
 .tui-data-grid {
   display: flex;
   flex-direction: column;
+}
+
+.tui-data-grid > .toolbar-content {
+  padding: calc(var(--bs-gutter-x) * 0.3);
 }
 
 .tui-data-grid > .data-grid-header {
