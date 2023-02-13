@@ -23,7 +23,6 @@ public sealed partial class DataGrid<TItem> : IDataBoundComponent<TItem>, IDataS
     private Virtualize<TItem>? _itemsContainer;
     private string? _searchText;
 
-    [Parameter] public bool AllowSearch { get; set; }
     [Parameter] public EventCallback<string?> OnSearch { get; set; }
     [Parameter] public RenderFragment? Toolbar { get; set; }
 

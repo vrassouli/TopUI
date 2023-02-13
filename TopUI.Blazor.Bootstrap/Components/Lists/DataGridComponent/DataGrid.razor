@@ -9,11 +9,11 @@
     @Columns
 
     <div @attributes=AdditionalAttributes>
-        @if (AllowSearch || Toolbar != null)
+        @if (Toolbar != null || OnSearch.HasDelegate)
         {
             <div class="toolbar-content">
                 <Toolbar Gap="2" FlexWrap="false">
-                    @if (AllowSearch)
+                    @if (OnSearch.HasDelegate)
                     {
                         <InputGroup FlexFill="true">
                             <Addon><i class="bi bi-search"></i></Addon>
