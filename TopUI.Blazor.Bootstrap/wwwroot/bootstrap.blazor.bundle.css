@@ -1004,6 +1004,12 @@
   }
 }
 
+.tui-modal > .modal-dialog > .modal-content > .modal-body {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
 :root, :root[data-bs-theme="light"] {
   --tui-nav-active-bg: #f1e9fe;
 }
