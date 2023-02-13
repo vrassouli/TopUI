@@ -72,9 +72,6 @@ public sealed partial class ModalContainer : IAsyncDisposable
     {
         var list = new List<string>();
 
-        if (_options?.Scrollable == true)
-            list.Add("modal-dialog-scrollable");
-
         if (_options?.Centered == true)
             list.Add("modal-dialog-centered");
 
@@ -87,6 +84,9 @@ public sealed partial class ModalContainer : IAsyncDisposable
     private string GetDialogClasses()
     {
         var list = new List<string>();
+
+        if (_options?.Scrollable == true)
+            list.Add("modal-dialog-scrollable");
 
         if (_options?.FullScreen != DialogFullScreenBreakpoint.Never)
         {
