@@ -137,6 +137,8 @@ class Dragger {
         this._startPoint = { x: args.clientX, y: args.clientY };
 
         this.#addShadow();
+
+        args.stopPropagation();
     }
 
     #onPointerMove(args) {

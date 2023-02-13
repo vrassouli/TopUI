@@ -20,10 +20,17 @@ public sealed partial class Pager
     [Parameter]
     [Browsable(false)]
     public EventCallback<int> PageChanged { get; set; }
+
+    [Parameter]
+    [Browsable(false)]
+    public EventCallback OnRefresh { get; set; }
    
     [Parameter] 
     [DefaultValue(10)]
     public int TotalPages { get; set; }
+    
+    [Parameter] public bool DisplayRefresh { get; set; } = true;
+    [Parameter] public string RefreshIcon { get; set; } = "bi bi-arrow-clockwise";
     
     [Parameter] public bool DisplayNext { get; set; } = true;
     [Parameter] public string NextIcon { get; set; } = "bi bi-chevron-right";

@@ -5,7 +5,7 @@
     @if (DisplayFirst)
     {
         <li class="page-item @(Page <= 1 ? "disabled" : "")">
-            <a class="page-link" href="#" aria-label="Previous"
+            <a class="page-link" href="#" aria-label="First page"
                 @onclick="async ()=>{ await SetPage(1); }" @onclick:stopPropagation="true" @onclick:preventDefault="true">
                 <i class="@Localizer[FirstIcon]"></i>
             </a>
@@ -34,7 +34,7 @@
     @if (DisplayNext)
     {
         <li class="page-item @(Page >= TotalPages ? "disabled" : "")">
-            <a class="page-link" href="#" aria-label="Next"
+            <a class="page-link" href="#" aria-label="Next page"
                 @onclick="async ()=>{ await SetPage(Page + 1); }" @onclick:stopPropagation="true" @onclick:preventDefault="true">
                 <i class="@Localizer[NextIcon]"></i>
             </a>
@@ -43,9 +43,18 @@
     @if (DisplayLast)
     {
         <li class="page-item @(Page >= TotalPages ? "disabled" : "")">
-            <a class="page-link" href="#" aria-label="Next"
+            <a class="page-link" href="#" aria-label="Last page"
                 @onclick="async ()=>{ await SetPage(TotalPages); }" @onclick:stopPropagation="true" @onclick:preventDefault="true">
                 <i class="@Localizer[LastIcon]"></i>
+            </a>
+        </li>
+    }
+    @if (DisplayRefresh)
+    {
+        <li class="page-item">
+            <a class="page-link" href="#" aria-label="Refresh"
+                @onclick="OnRefresh" @onclick:stopPropagation="true" @onclick:preventDefault="true">
+                <i class="@Localizer[RefreshIcon]"></i>
             </a>
         </li>
     }
