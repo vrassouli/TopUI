@@ -4,6 +4,7 @@
     "inputFiles": [
       "Styles/utilities.css",
 
+      "Styles/Components/button.css",
       "Styles/Components/data-grid.css",
       "Styles/Components/drawer.css",
       "Styles/Components/nav.css",

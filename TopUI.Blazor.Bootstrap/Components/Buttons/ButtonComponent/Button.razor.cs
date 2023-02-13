@@ -15,6 +15,7 @@ public partial class Button : IBusyComponent
 {
     [DefaultValue("Button")]
     [Parameter] public string? Text { get; set; }
+    [Parameter] public string? TextClass { get; set; }
     [Parameter] public string? Icon { get; set; }
 
     [Parameter] 
@@ -65,6 +66,7 @@ public partial class Button : IBusyComponent
         foreach (var c in base.GetClasses())
             yield return c;
 
+        yield return "tui-btn";
         yield return "btn";
 
         if (Outline)

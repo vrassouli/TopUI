@@ -742,6 +742,11 @@
   }
 }
 
+.tui-btn {
+  display: flex;
+  gap: calc(var(--bs-gutter-x) * 0.5);
+}
+
 :root, :root[data-bs-theme="light"] {
   --tui-data-grid-hover-color: #000;
   --tui-data-grid-hover-bg: #f8f9fa;

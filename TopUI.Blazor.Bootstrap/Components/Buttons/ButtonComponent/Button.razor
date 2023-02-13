@@ -16,19 +16,18 @@
 {
     if (!string.IsNullOrEmpty(Icon) || IsBusy)
     {
-        var hasText = !string.IsNullOrEmpty(Text);
         if (IsBusy)
         {
-            <Spinner Size="SpinnerSize.Sm" class="@(hasText ? "me-2" : "")" />
+            <Spinner Size="SpinnerSize.Sm" />
         }
         else
         {
-            <i class="@Icon @(hasText ? "me-2" : "")"></i>
+            <i class="@Icon"></i>
         }
     }
     if (!string.IsNullOrEmpty(Text))
     {
-        <span>@Text</span>
+        <span class="@TextClass">@Text</span>
     }
 }
 else
