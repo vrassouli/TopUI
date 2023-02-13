@@ -33,6 +33,10 @@ public abstract class BootstrapFlexContainerComponent : BootstrapComponent
     [DisplayName("Flex Wrap")]
     public bool? FlexWrap { get; set; }
 
+    [Parameter, ElementClass("overflow-auto")]
+    [DisplayName("Auto Overflow")]
+    public bool AutoOverflow { get; set; }
+
     protected override IEnumerable<string> GetClasses()
     {
         foreach (var c in base.GetClasses())

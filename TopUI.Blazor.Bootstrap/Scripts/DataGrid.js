@@ -1,5 +1,4 @@
-﻿
-class DataGrid {
+﻿class DataGrid {
     _dotnetRef;
     _id;
     _options;
