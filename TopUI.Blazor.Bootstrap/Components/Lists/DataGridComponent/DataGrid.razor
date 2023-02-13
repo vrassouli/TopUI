@@ -17,7 +17,7 @@
                     {
                         <InputGroup FlexFill="true">
                             <Addon><i class="bi bi-search"></i></Addon>
-                            <TextBox @bind-Value="_searchText" @bind-Value:after="OnSearchChanged" Placeholder="Search..." DisableAutoComplete />
+                            <TextBox @bind-Value="_searchText" @bind-Value:after="OnSearchChanged" Placeholder="@Localizer["Search..."]" DisableAutoComplete />
                         </InputGroup>
                     }
                     @if (Toolbar != null)

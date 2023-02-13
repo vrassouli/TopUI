@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web.Virtualization;
+using Microsoft.Extensions.Localization;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -65,6 +66,7 @@ public sealed partial class DataGrid<TItem> : IDataBoundComponent<TItem>, IDataS
     #endregion
 
     [Inject] private ITopUiJs TopUi { get; set; } = default!;
+    [Inject] private IStringLocalizer<Lists.DataGridComponent.Resources.DataGrid> Localizer { get; set; } = default!;
 
     internal List<DataGridColumn<TItem>> DataColumns { get; set; } = new();
     internal List<DataGridRow<TItem>> DataRows { get; set; } = new();

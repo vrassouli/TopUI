@@ -15,8 +15,12 @@
     display: flex;
     flex-direction: column;
 
-    >.toolbar-content{
+    > .toolbar-content {
         padding: calc(var(--bs-gutter-x) * 0.3);
+
+        + .data-grid-header {
+            border-top: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color);
+        }
     }
 
     > .data-grid-header {

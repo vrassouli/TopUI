@@ -43,6 +43,11 @@
 		  <AutoGen>True</AutoGen>
 		  <DependentUpon>MessageBoxComponent.resx</DependentUpon>
 		</Compile>
+		<Compile Update="Components\Lists\DataGridComponent\Resources\DataGrid.Designer.cs">
+		  <DesignTime>True</DesignTime>
+		  <AutoGen>True</AutoGen>
+		  <DependentUpon>DataGrid.resx</DependentUpon>
+		</Compile>
 		<Compile Update="Components\Lists\ListGroupComponent\Resources\DataListGroup.Designer.cs">
 		  <DesignTime>True</DesignTime>
 		  <AutoGen>True</AutoGen>
@@ -62,6 +67,13 @@
 		<EmbeddedResource Update="Components\Layouts\ModalComponent\Resources\MessageBoxComponent.resx">
 		  <Generator>PublicResXFileCodeGenerator</Generator>
 		  <LastGenOutput>MessageBoxComponent.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Components\Lists\DataGridComponent\Resources\DataGrid.fa-IR.resx">
+		  <Generator>PublicResXFileCodeGenerator</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Components\Lists\DataGridComponent\Resources\DataGrid.resx">
+		  <Generator>PublicResXFileCodeGenerator</Generator>
+		  <LastGenOutput>DataGrid.Designer.cs</LastGenOutput>
 		</EmbeddedResource>
 		<EmbeddedResource Update="Components\Lists\ListGroupComponent\Resources\DataListGroup.fa-IR.resx">
 		  <Generator>PublicResXFileCodeGenerator</Generator>
