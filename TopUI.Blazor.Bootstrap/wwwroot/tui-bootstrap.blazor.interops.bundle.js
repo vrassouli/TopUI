@@ -13,6 +13,10 @@ class DataGrid {
     dispose() {
     }
 
+    #getElement() {
+        return document.getElementById(this._id);
+    }
+
     #setHeaderPadding() {
         let el = document.querySelector(`#${this._id}>.data-grid-header`);
 

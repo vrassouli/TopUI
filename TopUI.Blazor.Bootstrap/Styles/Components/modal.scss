@@ -1,0 +1,11 @@
+﻿.tui-modal {
+    > .modal-dialog {
+        > .modal-content {
+            > .modal-body {
+                display: flex;
+                flex-direction: column;
+                padding: 0;
+            }
+        }
+    }
+}
