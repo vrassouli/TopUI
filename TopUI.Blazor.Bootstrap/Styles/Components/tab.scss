@@ -1,9 +1,14 @@
 ﻿.tui-tab {
-/*    --tui-tab-content-padding-y: 0.5rem;
-    --tui-tab-content-padding-x: 1rem;
-*/
+    overflow: auto;
+
     > .tab-content {
         /*padding: var(--tui-tab-content-padding-y) var(--tui-tab-content-padding-x);*/
         flex: 1;
+        overflow: auto;
+
+        > .tab-pane {
+            height: 100%;
+            overflow: auto;
+        }
     }
 }
