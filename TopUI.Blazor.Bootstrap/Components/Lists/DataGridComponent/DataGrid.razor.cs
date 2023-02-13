@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TopUI.Blazor.Bootstrap.Components.Lists.DataGridComponent;
 using TopUI.Blazor.Bootstrap.Components.Utilities;
+using TopUI.Blazor.Bootstrap.Services.Abstractions;
 using TopUI.Blazor.Core;
 using TopUI.Blazor.Core.Abstractions;
 using TopUI.Blazor.Core.Interops;
@@ -18,7 +19,7 @@ namespace TopUI.Blazor.Bootstrap.Components;
 
 public sealed partial class DataGrid<TItem> : IDataBoundComponent<TItem>, IDataSelectionContainer<TItem>
 {
-    private ScrollSync? _scrollSync;
+    private ScrollSyncInterop? _scrollSync;
     private DataGridColumn<TItem>? _orderedColumn;
     private SortDirection _sortDirection = SortDirection.None;
     private Virtualize<TItem>? _itemsContainer;
@@ -26,6 +27,7 @@ public sealed partial class DataGrid<TItem> : IDataBoundComponent<TItem>, IDataS
 
     [Parameter] public EventCallback<string?> OnSearch { get; set; }
     [Parameter] public RenderFragment? Toolbar { get; set; }
+    [Parameter] public RenderFragment<TItem>? RowHover { get; set; }
 
     [Parameter]
     [Browsable(false)]
@@ -66,6 +68,7 @@ public sealed partial class DataGrid<TItem> : IDataBoundComponent<TItem>, IDataS
     #endregion
 
     [Inject] private ITopUiJs TopUi { get; set; } = default!;
+    [Inject] private ITopUIBootstrapJs TopUiBs { get; set; } = default!;
     [Inject] private IStringLocalizer<Lists.DataGridComponent.Resources.DataGrid> Localizer { get; set; } = default!;
 
     internal List<DataGridColumn<TItem>> DataColumns { get; set; } = new();
@@ -88,7 +91,7 @@ public sealed partial class DataGrid<TItem> : IDataBoundComponent<TItem>, IDataS
     {
         if (firstRender)
         {
-            await SyncScrollbars();
+            await InitializeGrid();
             StateHasChanged();
         }
         await base.OnAfterRenderAsync(firstRender);
@@ -204,14 +207,16 @@ public sealed partial class DataGrid<TItem> : IDataBoundComponent<TItem>, IDataS
         return SortDirection.None;
     }
 
-    private async Task SyncScrollbars()
+    private async Task InitializeGrid()
     {
-        _scrollSync = await TopUi.GetScrollSyncAsync();
+        var dataGrid = await TopUiBs.GetDataGridAsync();
+        await dataGrid.InitializeAsync(Id);
+        //_scrollSync = await TopUi.GetScrollSyncAsync();
 
-        await _scrollSync.InitializeAsync($"#{Id}>.data-grid-content", new List<string> { $"#{Id}>.data-grid-header" }, opt =>
-        {
-            opt.SyncVertical = false;
-        });
+        //await _scrollSync.InitializeAsync($"#{Id}>.data-grid-content", new List<string> { $"#{Id}>.data-grid-header" }, opt =>
+        //{
+        //    opt.SyncVertical = false;
+        //});
     }
 
     private async ValueTask<ItemsProviderResult<TItem>> GetItemsProvider(ItemsProviderRequest request)

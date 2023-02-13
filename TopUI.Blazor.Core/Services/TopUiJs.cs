@@ -18,36 +18,36 @@ internal class TopUiJs : ITopUiJs, IAsyncDisposable
         _moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/TopUI.Blazor.Core/topui.interops.bundle.js").AsTask());
     }
 
-    public async Task<Dragger> GetDraggerAsync(IDraggerHandler handler)
+    public async Task<DraggerInterop> GetDraggerAsync(IDraggerHandler handler)
     {
         var module = await _moduleTask.Value;
         var jsRef = await module.InvokeAsync<IJSObjectReference>("getDragger");
 
-        return new Dragger(jsRef, handler);
+        return new DraggerInterop(jsRef, handler);
     }
 
-    public async Task<Draggable> GetDraggableAsync(IDraggableHandler handler)
+    public async Task<DraggableInterop> GetDraggableAsync(IDraggableHandler handler)
     {
         var module = await _moduleTask.Value;
         var jsRef = await module.InvokeAsync<IJSObjectReference>("getDraggable");
 
-        return new Draggable(jsRef, handler);
+        return new DraggableInterop(jsRef, handler);
     }
 
-    public async Task<Droppable> GetDroppableAsync(IDroppableHandler handler)
+    public async Task<DroppableInterop> GetDroppableAsync(IDroppableHandler handler)
     {
         var module = await _moduleTask.Value;
         var jsRef = await module.InvokeAsync<IJSObjectReference>("getDrroppable");
 
-        return new Droppable(jsRef, handler);
+        return new DroppableInterop(jsRef, handler);
     }
 
-    public async Task<ScrollSync> GetScrollSyncAsync()
+    public async Task<ScrollSyncInterop> GetScrollSyncAsync()
     {
         var module = await _moduleTask.Value;
         var jsRef = await module.InvokeAsync<IJSObjectReference>("getScrollSync");
 
-        return new ScrollSync(jsRef);
+        return new ScrollSyncInterop(jsRef);
     }
 
     public async ValueTask DisposeAsync()

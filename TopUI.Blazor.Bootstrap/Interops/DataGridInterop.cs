@@ -4,16 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TopUI.Blazor.Core.Interops;
 
-namespace TopUI.Blazor.Core.Interops;
+namespace TopUI.Blazor.Bootstrap.Interops;
 
-public sealed class Draggable : IAsyncDisposable
+internal class DataGridInterop : IAsyncDisposable
 {
     private IJSObjectReference _jsRef;
-    private IDraggableHandler _handler;
-    private DotNetObjectReference<Draggable>? _objectReference;
+    private DotNetObjectReference<DataGridInterop>? _objectReference;
 
-    private DotNetObjectReference<Draggable> ObjectReference
+    private DotNetObjectReference<DataGridInterop> ObjectReference
     {
         get
         {
@@ -24,10 +24,14 @@ public sealed class Draggable : IAsyncDisposable
         }
     }
 
-    public Draggable(IJSObjectReference jsRef, IDraggableHandler handler)
+    public DataGridInterop(IJSObjectReference jsRef)
     {
         _jsRef = jsRef;
-        _handler = handler;
+    }
+
+    public async Task InitializeAsync(string id)
+    {
+        await _jsRef.InvokeVoidAsync("initialize", ObjectReference, id);
     }
 
     public async ValueTask DisposeAsync()
@@ -37,13 +41,5 @@ public sealed class Draggable : IAsyncDisposable
 
         if (_objectReference != null)
             _objectReference.Dispose();
-    }
-
-    public async Task InitializeAsync(string id, Action<DraggableOptions> optionsBuilder)
-    {
-        var options = new DraggableOptions();
-        optionsBuilder(options);
-
-        await _jsRef.InvokeVoidAsync("initialize", ObjectReference, id, options);
     }
 }

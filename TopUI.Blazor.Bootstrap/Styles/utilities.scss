@@ -10,6 +10,13 @@ $enable-negative-margins: true;
         box-shadow: none;
     }
 }
+.scrollbar-measure {
+    width: 100px;
+    height: 100px;
+    overflow: scroll;
+    position: absolute;
+    top: -9999px;
+}
 $utilities: (
     "negative-margin": ( responsive: true, property: margin, class: mn, values: $negative-spacers ), 
     "negative-margin-x": ( responsive: true, property: margin-right margin-left, class: mx, values: $negative-spacers ), 

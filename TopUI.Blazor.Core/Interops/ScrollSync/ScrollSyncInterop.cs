@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace TopUI.Blazor.Core.Interops;
 
-public sealed class ScrollSync : IAsyncDisposable
+public sealed class ScrollSyncInterop : IAsyncDisposable
 {
     private IJSObjectReference _jsRef;
-    private DotNetObjectReference<ScrollSync>? _objectReference;
+    private DotNetObjectReference<ScrollSyncInterop>? _objectReference;
 
-    private DotNetObjectReference<ScrollSync> ObjectReference
+    private DotNetObjectReference<ScrollSyncInterop> ObjectReference
     {
         get
         {
@@ -23,7 +23,7 @@ public sealed class ScrollSync : IAsyncDisposable
         }
     }
 
-    public ScrollSync(IJSObjectReference jsRef)
+    public ScrollSyncInterop(IJSObjectReference jsRef)
     {
         _jsRef = jsRef;
     }

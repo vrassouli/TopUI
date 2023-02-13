@@ -25,5 +25,15 @@
       "enabled": true,
       "adjustRelativePaths": false
     }
+  },
+  {
+    "outputFileName": "wwwroot/tui-bootstrap.blazor.interops.bundle.js",
+    "inputFiles": [
+      "Scripts/DataGrid.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "adjustRelativePaths": false
+    }
   }
 ]

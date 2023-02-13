@@ -16,5 +16,11 @@ else
         {
             <RowCell Column="col" Item="Item" />
         }
+        @if(DataGrid.RowHover != null && Item != null)
+        {
+            <div class="row-context">
+                @DataGrid.RowHover.Invoke(Item)
+            </div>
+        }
     </div>
 }

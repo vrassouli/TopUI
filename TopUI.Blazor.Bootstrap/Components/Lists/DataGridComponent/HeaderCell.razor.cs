@@ -12,7 +12,7 @@ namespace TopUI.Blazor.Bootstrap.Components.Lists.DataGridComponent;
 public sealed partial class HeaderCell<TItem> : IAsyncDisposable, IDraggerHandler
 {
     string? _resizerId;
-    private Dragger? _dragger;
+    private DraggerInterop? _dragger;
 
     [CascadingParameter] public DataGrid<TItem> DataGrid { get; set; } = default!;
     [Parameter, EditorRequired] public DataGridColumn<TItem> Column { get; set; } = default!;

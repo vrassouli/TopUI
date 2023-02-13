@@ -2,6 +2,14 @@
   box-shadow: none;
 }
 
+.scrollbar-measure {
+  width: 100px;
+  height: 100px;
+  overflow: scroll;
+  position: absolute;
+  top: -9999px;
+}
+
 .mn-n1 {
   margin: -0.25rem !important;
 }
@@ -771,6 +779,10 @@
   padding: calc(var(--bs-gutter-x) * 0.3);
 }
 
+.tui-data-grid > .toolbar-content + .data-grid-header {
+  border-top: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color);
+}
+
 .tui-data-grid > .data-grid-header {
   display: flex;
   border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color);
@@ -813,6 +825,7 @@
 
 .tui-data-grid > .data-grid-content > .data-grid-row {
   display: flex;
+  position: relative;
 }
 
 .tui-data-grid > .data-grid-content > .data-grid-row > .cell {
@@ -825,9 +838,19 @@
   border-inline-end: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color);
 }
 
+.tui-data-grid > .data-grid-content > .data-grid-row > .row-context {
+  display: none;
+  position: absolute;
+  right: 0;
+}
+
 .tui-data-grid > .data-grid-content > .data-grid-row:hover {
   color: var(--tui-data-grid-hover-color);
   background-color: var(--tui-data-grid-hover-bg);
+}
+
+.tui-data-grid > .data-grid-content > .data-grid-row:hover > .row-context {
+  display: unset;
 }
 
 .tui-data-grid > .data-grid-content > .data-grid-row.active {
@@ -842,6 +865,11 @@
 .tui-data-grid > .data-grid-content > .data-grid-row:not(:last-child) > .cell {
   border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color);
   margin-bottom: -1px;
+}
+
+[dir="rtl"] .tui-data-grid > .data-grid-content > .data-grid-row > .row-context {
+  right: unset;
+  left: 0;
 }
 
 .tui-drawer-xs + .tui-drawer-container {

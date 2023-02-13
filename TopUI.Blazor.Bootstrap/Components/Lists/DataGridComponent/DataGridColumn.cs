@@ -22,7 +22,7 @@ public sealed class DataGridColumn<TItem> : ComponentBase, IDisposable
     [Parameter] public Expression<Func<TItem, object?>>? OrderBy { get; set; }
     [Parameter] public Func<TItem, string?>? CellClass { get; set; }
     [Parameter] public RenderFragment<TItem>? ChildContent { get; set; }
-    [Parameter] public double Width { get; set; } = 100;
+    [Parameter] public double? Width { get; set; }
     [Parameter] public bool AllowResize { get; set; } = true;
 
     protected override void OnInitialized()
@@ -45,9 +45,12 @@ public sealed class DataGridColumn<TItem> : ComponentBase, IDisposable
         return Header ?? Field?.GetDisplayName() ?? string.Empty;
     }
 
-    internal double GetWidth()
+    internal string GetCellStyles()
     {
-        return Width + _deltaWidth;
+        if (Width != null)
+            return $"width: {(Width ?? 0) + _deltaWidth}px";
+
+        return $"flex: 1;";
     }
 
     internal object? GetData(TItem item)

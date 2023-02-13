@@ -9,5 +9,6 @@ public static class ServiceProviderExtensions
     {
         services.AddLocalization();
         services.AddScoped<IBootstrapJs, BootstrapJs>();
+        services.AddScoped<ITopUIBootstrapJs, TopUIBootstrapJs>();
     }
 }

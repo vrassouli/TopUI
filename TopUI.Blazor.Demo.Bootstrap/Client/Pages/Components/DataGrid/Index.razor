@@ -21,6 +21,9 @@
                     <Button Icon="bi bi-phone" Text="Call" Size="ButtonSizes.Small" />
                 </DataGridColumn>
             </Columns>
+            <RowHover>
+                <div>Context of @context.Name</div>
+            </RowHover>
         </DataGrid>
         <Pager @bind-Page=_page @bind-Page:after="ReadPage"
                TotalPages="_totalPages"

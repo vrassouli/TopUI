@@ -10,8 +10,8 @@ namespace TopUI.Blazor.Core.Services.Abstraction;
 
 public interface ITopUiJs
 {
-    Task<Dragger> GetDraggerAsync(IDraggerHandler handler);
-    Task<Draggable> GetDraggableAsync(IDraggableHandler handler);
-    Task<Droppable> GetDroppableAsync(IDroppableHandler handler);
-    Task<ScrollSync> GetScrollSyncAsync();
+    Task<DraggerInterop> GetDraggerAsync(IDraggerHandler handler);
+    Task<DraggableInterop> GetDraggableAsync(IDraggableHandler handler);
+    Task<DroppableInterop> GetDroppableAsync(IDroppableHandler handler);
+    Task<ScrollSyncInterop> GetScrollSyncAsync();
 }

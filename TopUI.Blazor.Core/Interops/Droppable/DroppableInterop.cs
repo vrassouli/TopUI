@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace TopUI.Blazor.Core.Interops;
 
-public sealed class Droppable : IAsyncDisposable
+public sealed class DroppableInterop : IAsyncDisposable
 {
     private IJSObjectReference _jsRef;
     private IDroppableHandler _handler;
-    private DotNetObjectReference<Droppable>? _objectReference;
+    private DotNetObjectReference<DroppableInterop>? _objectReference;
 
-    private DotNetObjectReference<Droppable> ObjectReference
+    private DotNetObjectReference<DroppableInterop> ObjectReference
     {
         get
         {
@@ -24,7 +24,7 @@ public sealed class Droppable : IAsyncDisposable
         }
     }
 
-    public Droppable(IJSObjectReference jsRef, IDroppableHandler handler)
+    public DroppableInterop(IJSObjectReference jsRef, IDroppableHandler handler)
     {
         _jsRef = jsRef;
         _handler = handler;

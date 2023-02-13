@@ -24,7 +24,7 @@ internal sealed class BootstrapJs : IBootstrapJs, IAsyncDisposable
 
     public BootstrapJs(IJSRuntime jsRuntime)
     {
-        _moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/TopUI.Blazor.Bootstrap/bootstrap.blazor.interops.bundle.js").AsTask());
+        _moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/TopUI.Blazor.Bootstrap/bootstrap.blazor.interops.bundle.min.js").AsTask());
     }
     private async Task<IJSObjectReference> GetNewTopUiBootstrapAsync()
     {
