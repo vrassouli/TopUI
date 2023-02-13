@@ -1,10 +1,10 @@
 ﻿@using Microsoft.Extensions.Localization;
 @using TopUI.Blazor.Bootstrap.Services.Abstractions;
 
-<div class="mb-3">
+<div class="m-3">
     @Message
 </div>
-<div class="modal-footer mx-n3 mb-n3">
+<div class="modal-footer">
     @if ((Buttons & MessageBoxButton.Ok) == MessageBoxButton.Ok)
     {
         <button class="btn btn-primary" @onclick="@(()=>{ BootstrapJs.CloseDialog(MessageBoxButton.Ok); })">@Localizer["Ok"]</button>
