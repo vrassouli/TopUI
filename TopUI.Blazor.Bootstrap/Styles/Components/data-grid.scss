@@ -81,6 +81,7 @@
                 display: none;
                 position: absolute;
                 right: 0;
+                margin: calc((var(--bs-gutter-x) * .25) - 1px);
             }
 
             &:hover {
