@@ -12,7 +12,7 @@ public partial class BusyCover
 {
     [Parameter] public string? BusyMessage { get; set; }
     [Parameter, ElementStyle("z-index")] public int? ZIndex { get; set; }
-    [Parameter] public bool Fixed { get; set; }
+    [Parameter] public string Position { get; set; } = "absolute";
 
     protected override IEnumerable<string> GetClasses()
     {
@@ -21,9 +21,6 @@ public partial class BusyCover
 
         yield return "tui-busy-cover";
 
-        if (Fixed)
-            yield return "position-fixed";
-        else
-            yield return "position-sticky";
+        yield return $"position-{Position}";
     }
 }
