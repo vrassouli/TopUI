@@ -1,0 +1,57 @@
+﻿@namespace TopUI.Blazor.Bootstrap.Components
+
+@inherits UiComponent
+
+<div @attributes=AdditionalAttributes>
+    <DynamicComponent Type="GadgetType" Parameters="Parameters" />
+</div>
+
+@code {
+    [Parameter, EditorRequired] public Type GadgetType { get; set; } = default!;
+    [Parameter] public IDictionary<string, object>? Parameters { get; set; }
+    [Parameter, EditorRequired] public uint Col { get; set; }
+    [Parameter, EditorRequired] public uint Row { get; set; }
+    [Parameter] public uint? ColSm { get; set; }
+    [Parameter] public uint? RowSm { get; set; }
+    [Parameter] public uint? ColMd { get; set; }
+    [Parameter] public uint? RowMd { get; set; }
+    [Parameter] public uint? ColLg { get; set; }
+    [Parameter] public uint? RowLg { get; set; }
+    [Parameter] public uint? ColXl { get; set; }
+    [Parameter] public uint? RowXl { get; set; }
+    [Parameter] public uint? ColXxl { get; set; }
+    [Parameter] public uint? RowXxl { get; set; }
+
+    protected override IEnumerable<string> GetClasses()
+    {
+        foreach (var c in base.GetClasses())
+            yield return c;
+
+        yield return "tui-dashboard-gadget";
+        
+        yield return $"col-{Col}";
+        yield return $"row-{Row}";
+
+        if(ColSm != null)
+            yield return $"col-sm-{ColSm}";
+        if(ColMd != null)
+            yield return $"col-md-{ColMd}";
+        if(ColLg != null)
+            yield return $"col-lg-{ColLg}";
+        if(ColXl != null)
+            yield return $"col-xl-{ColXl}";
+        if(ColXxl != null)
+            yield return $"col-xxl-{ColXxl}";
+
+        if (RowSm != null)
+            yield return $"row-sm-{RowSm}";
+        if (RowMd != null)
+            yield return $"row-md-{RowMd}";
+        if (RowLg != null)
+            yield return $"row-lg-{RowLg}";
+        if (RowXl != null)
+            yield return $"row-xl-{RowXl}";
+        if (RowXxl != null)
+            yield return $"row-xxl-{RowXxl}";
+    }
+}

@@ -25,6 +25,7 @@
 	<ItemGroup>
 		<Sass Remove="Styles\Components\busy-cover.scss" />
 		<Sass Remove="Styles\Components\button.scss" />
+		<Sass Remove="Styles\Components\dashboard.scss" />
 		<Sass Remove="Styles\Components\data-grid.scss" />
 		<Sass Remove="Styles\Components\modal.scss" />
 		<Sass Remove="Styles\Components\property-grid.scss" />
@@ -34,6 +35,11 @@
 	<ItemGroup>
 		<Folder Include="Components\Abstraction\" />
 		<Folder Include="wwwroot\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="Components\Layouts\DashboardComponent\Dashboard.razor" />
+	  <None Include="Components\Layouts\DashboardComponent\DashboardGadget.razor" />
 	</ItemGroup>
 
 	<ItemGroup>

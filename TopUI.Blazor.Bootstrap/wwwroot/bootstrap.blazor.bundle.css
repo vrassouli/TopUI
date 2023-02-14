@@ -770,6 +770,496 @@
   gap: calc(var(--bs-gutter-x) * 0.3);
 }
 
+.tui-dashboard {
+  display: grid;
+  height: 100%;
+  overflow: auto;
+  gap: var(--size-2);
+  grid-template-columns: repeat(auto-fill, minmax(calc(100% / 13), 1fr));
+  grid-auto-rows: 50px;
+  grid-auto-flow: dense;
+  padding: var(--size-3);
+}
+
+.tui-dashboard > .tui-dashboard-gadget {
+  overflow: auto;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: var(--size-1);
+  border: 1px solid var(--color-border);
+  position: relative;
+}
+
+.tui-dashboard > .tui-dashboard-gadget.col-1 {
+  grid-column-end: span 1;
+}
+
+.tui-dashboard > .tui-dashboard-gadget.row-1 {
+  grid-row-end: span 1;
+}
+
+.tui-dashboard > .tui-dashboard-gadget.col-2 {
+  grid-column-end: span 2;
+}
+
+.tui-dashboard > .tui-dashboard-gadget.row-2 {
+  grid-row-end: span 2;
+}
+
+.tui-dashboard > .tui-dashboard-gadget.col-3 {
+  grid-column-end: span 3;
+}
+
+.tui-dashboard > .tui-dashboard-gadget.row-3 {
+  grid-row-end: span 3;
+}
+
+.tui-dashboard > .tui-dashboard-gadget.col-4 {
+  grid-column-end: span 4;
+}
+
+.tui-dashboard > .tui-dashboard-gadget.row-4 {
+  grid-row-end: span 4;
+}
+
+.tui-dashboard > .tui-dashboard-gadget.col-5 {
+  grid-column-end: span 5;
+}
+
+.tui-dashboard > .tui-dashboard-gadget.row-5 {
+  grid-row-end: span 5;
+}
+
+.tui-dashboard > .tui-dashboard-gadget.col-6 {
+  grid-column-end: span 6;
+}
+
+.tui-dashboard > .tui-dashboard-gadget.row-6 {
+  grid-row-end: span 6;
+}
+
+.tui-dashboard > .tui-dashboard-gadget.col-7 {
+  grid-column-end: span 7;
+}
+
+.tui-dashboard > .tui-dashboard-gadget.row-7 {
+  grid-row-end: span 7;
+}
+
+.tui-dashboard > .tui-dashboard-gadget.col-8 {
+  grid-column-end: span 8;
+}
+
+.tui-dashboard > .tui-dashboard-gadget.row-8 {
+  grid-row-end: span 8;
+}
+
+.tui-dashboard > .tui-dashboard-gadget.col-9 {
+  grid-column-end: span 9;
+}
+
+.tui-dashboard > .tui-dashboard-gadget.row-9 {
+  grid-row-end: span 9;
+}
+
+.tui-dashboard > .tui-dashboard-gadget.col-10 {
+  grid-column-end: span 10;
+}
+
+.tui-dashboard > .tui-dashboard-gadget.row-10 {
+  grid-row-end: span 10;
+}
+
+.tui-dashboard > .tui-dashboard-gadget.col-11 {
+  grid-column-end: span 11;
+}
+
+.tui-dashboard > .tui-dashboard-gadget.row-11 {
+  grid-row-end: span 11;
+}
+
+.tui-dashboard > .tui-dashboard-gadget.col-12 {
+  grid-column-end: span 12;
+}
+
+.tui-dashboard > .tui-dashboard-gadget.row-12 {
+  grid-row-end: span 12;
+}
+
+@media (min-width: 576px) {
+  .tui-dashboard > .tui-dashboard-gadget.col-sm-1 {
+    grid-column-end: span 1;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-sm-1 {
+    grid-row-end: span 1;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-sm-2 {
+    grid-column-end: span 2;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-sm-2 {
+    grid-row-end: span 2;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-sm-3 {
+    grid-column-end: span 3;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-sm-3 {
+    grid-row-end: span 3;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-sm-4 {
+    grid-column-end: span 4;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-sm-4 {
+    grid-row-end: span 4;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-sm-5 {
+    grid-column-end: span 5;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-sm-5 {
+    grid-row-end: span 5;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-sm-6 {
+    grid-column-end: span 6;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-sm-6 {
+    grid-row-end: span 6;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-sm-7 {
+    grid-column-end: span 7;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-sm-7 {
+    grid-row-end: span 7;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-sm-8 {
+    grid-column-end: span 8;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-sm-8 {
+    grid-row-end: span 8;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-sm-9 {
+    grid-column-end: span 9;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-sm-9 {
+    grid-row-end: span 9;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-sm-10 {
+    grid-column-end: span 10;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-sm-10 {
+    grid-row-end: span 10;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-sm-11 {
+    grid-column-end: span 11;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-sm-11 {
+    grid-row-end: span 11;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-sm-12 {
+    grid-column-end: span 12;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-sm-12 {
+    grid-row-end: span 12;
+  }
+}
+
+@media (min-width: 768px) {
+  .tui-dashboard > .tui-dashboard-gadget.col-md-1 {
+    grid-column-end: span 1;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-md-1 {
+    grid-row-end: span 1;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-md-2 {
+    grid-column-end: span 2;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-md-2 {
+    grid-row-end: span 2;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-md-3 {
+    grid-column-end: span 3;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-md-3 {
+    grid-row-end: span 3;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-md-4 {
+    grid-column-end: span 4;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-md-4 {
+    grid-row-end: span 4;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-md-5 {
+    grid-column-end: span 5;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-md-5 {
+    grid-row-end: span 5;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-md-6 {
+    grid-column-end: span 6;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-md-6 {
+    grid-row-end: span 6;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-md-7 {
+    grid-column-end: span 7;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-md-7 {
+    grid-row-end: span 7;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-md-8 {
+    grid-column-end: span 8;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-md-8 {
+    grid-row-end: span 8;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-md-9 {
+    grid-column-end: span 9;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-md-9 {
+    grid-row-end: span 9;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-md-10 {
+    grid-column-end: span 10;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-md-10 {
+    grid-row-end: span 10;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-md-11 {
+    grid-column-end: span 11;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-md-11 {
+    grid-row-end: span 11;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-md-12 {
+    grid-column-end: span 12;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-md-12 {
+    grid-row-end: span 12;
+  }
+}
+
+@media (min-width: 992px) {
+  .tui-dashboard > .tui-dashboard-gadget.col-lg-1 {
+    grid-column-end: span 1;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-lg-1 {
+    grid-row-end: span 1;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-lg-2 {
+    grid-column-end: span 2;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-lg-2 {
+    grid-row-end: span 2;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-lg-3 {
+    grid-column-end: span 3;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-lg-3 {
+    grid-row-end: span 3;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-lg-4 {
+    grid-column-end: span 4;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-lg-4 {
+    grid-row-end: span 4;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-lg-5 {
+    grid-column-end: span 5;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-lg-5 {
+    grid-row-end: span 5;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-lg-6 {
+    grid-column-end: span 6;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-lg-6 {
+    grid-row-end: span 6;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-lg-7 {
+    grid-column-end: span 7;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-lg-7 {
+    grid-row-end: span 7;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-lg-8 {
+    grid-column-end: span 8;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-lg-8 {
+    grid-row-end: span 8;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-lg-9 {
+    grid-column-end: span 9;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-lg-9 {
+    grid-row-end: span 9;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-lg-10 {
+    grid-column-end: span 10;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-lg-10 {
+    grid-row-end: span 10;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-lg-11 {
+    grid-column-end: span 11;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-lg-11 {
+    grid-row-end: span 11;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-lg-12 {
+    grid-column-end: span 12;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-lg-12 {
+    grid-row-end: span 12;
+  }
+}
+
+@media (min-width: 1200px) {
+  .tui-dashboard > .tui-dashboard-gadget.col-xl-1 {
+    grid-column-end: span 1;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-xl-1 {
+    grid-row-end: span 1;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-xl-2 {
+    grid-column-end: span 2;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-xl-2 {
+    grid-row-end: span 2;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-xl-3 {
+    grid-column-end: span 3;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-xl-3 {
+    grid-row-end: span 3;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-xl-4 {
+    grid-column-end: span 4;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-xl-4 {
+    grid-row-end: span 4;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-xl-5 {
+    grid-column-end: span 5;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-xl-5 {
+    grid-row-end: span 5;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-xl-6 {
+    grid-column-end: span 6;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-xl-6 {
+    grid-row-end: span 6;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-xl-7 {
+    grid-column-end: span 7;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-xl-7 {
+    grid-row-end: span 7;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-xl-8 {
+    grid-column-end: span 8;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-xl-8 {
+    grid-row-end: span 8;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-xl-9 {
+    grid-column-end: span 9;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-xl-9 {
+    grid-row-end: span 9;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-xl-10 {
+    grid-column-end: span 10;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-xl-10 {
+    grid-row-end: span 10;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-xl-11 {
+    grid-column-end: span 11;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-xl-11 {
+    grid-row-end: span 11;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-xl-12 {
+    grid-column-end: span 12;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-xl-12 {
+    grid-row-end: span 12;
+  }
+}
+
+@media (min-width: 1400px) {
+  .tui-dashboard > .tui-dashboard-gadget.col-xxl-1 {
+    grid-column-end: span 1;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-xxl-1 {
+    grid-row-end: span 1;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-xxl-2 {
+    grid-column-end: span 2;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-xxl-2 {
+    grid-row-end: span 2;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-xxl-3 {
+    grid-column-end: span 3;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-xxl-3 {
+    grid-row-end: span 3;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-xxl-4 {
+    grid-column-end: span 4;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-xxl-4 {
+    grid-row-end: span 4;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-xxl-5 {
+    grid-column-end: span 5;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-xxl-5 {
+    grid-row-end: span 5;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-xxl-6 {
+    grid-column-end: span 6;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-xxl-6 {
+    grid-row-end: span 6;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-xxl-7 {
+    grid-column-end: span 7;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-xxl-7 {
+    grid-row-end: span 7;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-xxl-8 {
+    grid-column-end: span 8;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-xxl-8 {
+    grid-row-end: span 8;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-xxl-9 {
+    grid-column-end: span 9;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-xxl-9 {
+    grid-row-end: span 9;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-xxl-10 {
+    grid-column-end: span 10;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-xxl-10 {
+    grid-row-end: span 10;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-xxl-11 {
+    grid-column-end: span 11;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-xxl-11 {
+    grid-row-end: span 11;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.col-xxl-12 {
+    grid-column-end: span 12;
+  }
+  .tui-dashboard > .tui-dashboard-gadget.row-xxl-12 {
+    grid-row-end: span 12;
+  }
+}
+
 :root, :root[data-bs-theme="light"] {
   --tui-data-grid-hover-color: #000;
   --tui-data-grid-hover-bg: #f8f9fa;
