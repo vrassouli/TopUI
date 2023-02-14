@@ -26,11 +26,11 @@
         > .tui-dashboard-gadget {
             @if ($breakpoint=='xs') {
                 @for $i from 1 through 12 {
-                    &.col-#{$i} {
+                    &.dash-col-#{$i} {
                         grid-column-end: span #{$i};
                     }
 
-                    &.row-#{$i} {
+                    &.dash-row-#{$i} {
                         grid-row-end: span #{$i};
                     }
                 }
@@ -38,11 +38,11 @@
             @else {
                 @media (min-width: $width) {
                     @for $i from 1 through 12 {
-                        &.col-#{$breakpoint}-#{$i} {
+                        &.dash-col-#{$breakpoint}-#{$i} {
                             grid-column-end: span #{$i};
                         }
 
-                        &.row-#{$breakpoint}-#{$i} {
+                        &.dash-row-#{$breakpoint}-#{$i} {
                             grid-row-end: span #{$i};
                         }
                     }
