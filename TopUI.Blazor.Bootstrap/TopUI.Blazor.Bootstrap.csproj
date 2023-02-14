@@ -23,6 +23,7 @@
 		<Sass Include="$(MSBuildProjectDirectory)/Styles/**/*.scss" Exclude="$(MSBuildProjectDirectory)/Styles/**/_*.scss" />
 	</ItemGroup>
 	<ItemGroup>
+		<Sass Remove="Styles\Components\busy-cover.scss" />
 		<Sass Remove="Styles\Components\button.scss" />
 		<Sass Remove="Styles\Components\data-grid.scss" />
 		<Sass Remove="Styles\Components\modal.scss" />

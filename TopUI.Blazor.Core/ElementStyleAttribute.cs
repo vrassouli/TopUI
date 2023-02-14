@@ -8,7 +8,7 @@ using TopUI.Blazor.Core.Extensions;
 
 namespace TopUI.Blazor.Core;
 
-internal sealed class ElementStyleAttribute : Attribute
+public sealed class ElementStyleAttribute : Attribute
 {
     public ElementStyleAttribute(string styleName)
     {

@@ -26,6 +26,9 @@ public abstract class BootstrapComponent : UiComponent
     [DisplayName("Flex Shrink")]
     public bool? FlexShrink { get; set; }
 
+    [DisplayName("Is Busy")]
+    [Parameter] public bool IsBusy { get; set; }
+
     protected override IEnumerable<string> GetClasses()
     {
         foreach (var c in base.GetClasses())

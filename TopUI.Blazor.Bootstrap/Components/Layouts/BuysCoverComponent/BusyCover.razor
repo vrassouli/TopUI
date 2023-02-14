@@ -1,0 +1,15 @@
+﻿@namespace TopUI.Blazor.Bootstrap.Components
+@inherits BootstrapComponent
+
+@if (IsBusy)
+{
+    <div @attributes=AdditionalAttributes>
+        <Spinner></Spinner>
+        @if (BusyMessage != null)
+        {
+            <p class="p-1">
+                @BusyMessage
+            </p>
+        }
+    </div>
+}

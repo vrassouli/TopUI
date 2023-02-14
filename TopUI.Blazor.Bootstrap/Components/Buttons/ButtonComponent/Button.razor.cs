@@ -31,10 +31,6 @@ public partial class Button : IBusyComponent
     [Parameter]
     [Browsable(false)]
     public EventCallback<bool> ToggledChanged { get; set; }
-
-    [DisplayName("Is Busy")]
-    [Parameter] public bool IsBusy { get; set; }
-
     private bool IsLink => AdditionalAttributes.ContainsKey("href");
 
 
