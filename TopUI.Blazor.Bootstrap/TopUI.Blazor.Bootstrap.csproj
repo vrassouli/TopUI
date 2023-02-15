@@ -25,6 +25,7 @@
 	<ItemGroup>
 		<Sass Remove="Styles\Components\busy-cover.scss" />
 		<Sass Remove="Styles\Components\button.scss" />
+		<Sass Remove="Styles\Components\calendar.scss" />
 		<Sass Remove="Styles\Components\dashboard.scss" />
 		<Sass Remove="Styles\Components\data-grid.scss" />
 		<Sass Remove="Styles\Components\modal.scss" />
@@ -66,6 +67,11 @@
 			<AutoGen>True</AutoGen>
 			<DependentUpon>Pager.resx</DependentUpon>
 		</Compile>
+		<Compile Update="Components\Misc\CalendarComponent\Resources\CalendarView.Designer.cs">
+		  <DesignTime>True</DesignTime>
+		  <AutoGen>True</AutoGen>
+		  <DependentUpon>CalendarView.resx</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -96,6 +102,13 @@
 		<EmbeddedResource Update="Components\Lists\PagerComponent\Resources\Pager.resx">
 			<Generator>PublicResXFileCodeGenerator</Generator>
 			<LastGenOutput>Pager.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Components\Misc\CalendarComponent\Resources\CalendarView.fa-IR.resx">
+		  <Generator>PublicResXFileCodeGenerator</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Components\Misc\CalendarComponent\Resources\CalendarView.resx">
+		  <Generator>PublicResXFileCodeGenerator</Generator>
+		  <LastGenOutput>CalendarView.Designer.cs</LastGenOutput>
 		</EmbeddedResource>
 	</ItemGroup>
 	<Target Name="Sass" BeforeTargets="BeforeBuild">

@@ -770,6 +770,111 @@
   gap: calc(var(--bs-gutter-x) * 0.3);
 }
 
+.tui-calendar {
+  --tui-calendar-cell-width: 2rem;
+  --tui-calendar-cell-color-grayed: #6c747d;
+  --tui-calendar-cell-color-disabled: #6c747d;
+  --tui-calendar-cell-color-hover: var(--bs-white);
+  --tui-calendar-cell-bg-hover: var(--bs-secondary-color);
+  --tui-calendar-cell-color-selected: var(--bs-white);
+  --tui-calendar-cell-bg-selected: var(--bs-primary);
+  --tui-calendar-cell-color-today: var(--bs-white);
+  --tui-calendar-cell-bg-today: var(--bs-indigo);
+  padding: calc(var(--bs-gutter-x)*.5);
+  background-color: var(--bs-light-bg-subtle);
+  border: var(--bs-border-width) var(--bs-border-style) var(--bs-light-border-subtle);
+  color: var(--bs-light-text);
+  display: inline-flex;
+  flex-direction: column;
+  border-radius: var(--bs-border-radius);
+}
+
+.tui-calendar > .header {
+  display: flex;
+  text-align: center;
+  line-height: var(--tui-calendar-cell-width);
+}
+
+.tui-calendar > .header > .prev, .tui-calendar > .header > .next {
+  width: var(--tui-calendar-cell-width);
+  height: var(--tui-calendar-cell-width);
+  border-radius: 50%;
+}
+
+.tui-calendar > .header > .prev:hover, .tui-calendar > .header > .next:hover {
+  cursor: pointer;
+  color: var(--tui-calendar-cell-color-hover);
+  background-color: var(--tui-calendar-cell-bg-hover);
+}
+
+.tui-calendar > .header > .title {
+  flex: 1;
+  display: flex;
+  width: calc(7 * var(--tui-calendar-cell-width) + 6px - 2 * var(--tui-calendar-cell-width));
+}
+
+.tui-calendar > .header > .title > .month-select {
+  background: transparent;
+  color: var(--bs-light-text);
+  border: 0;
+  max-width: 50%;
+  text-align: center;
+}
+
+.tui-calendar > .header > .title > .month-select > option {
+  color: initial;
+}
+
+.tui-calendar > .header > .title > .year-input {
+  max-width: 50%;
+  background: transparent;
+  color: var(--bs-light-text);
+  border: 0;
+  text-align: center;
+}
+
+.tui-calendar > .grid {
+  display: flex;
+  gap: 1px;
+  max-width: calc(7 * var(--tui-calendar-cell-width) + 6px);
+  flex-wrap: wrap;
+}
+
+.tui-calendar > .grid > .cell {
+  width: var(--tui-calendar-cell-width);
+  height: var(--tui-calendar-cell-width);
+  text-align: center;
+  line-height: var(--tui-calendar-cell-width);
+  cursor: default;
+  border-radius: var(--bs-border-radius);
+}
+
+.tui-calendar > .grid > .cell.grayed {
+  color: var(--tui-calendar-cell-color-grayed);
+}
+
+.tui-calendar > .grid > .cell.disabled {
+  color: var(--tui-calendar-cell-color-disabled) !important;
+  cursor: not-allowed;
+}
+
+.tui-calendar > .grid > .cell:hover:not(.disabled):not(.header):not(.selected) {
+  cursor: pointer;
+  color: var(--tui-calendar-cell-color-hover) !important;
+  background-color: var(--tui-calendar-cell-bg-hover) !important;
+}
+
+.tui-calendar > .grid > .cell.today {
+  border-radius: 50%;
+  color: var(--tui-calendar-cell-color-today);
+  background-color: var(--tui-calendar-cell-bg-today);
+}
+
+.tui-calendar > .grid > .cell.selected {
+  color: var(--tui-calendar-cell-color-selected) !important;
+  background-color: var(--tui-calendar-cell-bg-selected) !important;
+}
+
 .tui-dashboard {
   display: grid;
   height: 100%;
@@ -783,9 +888,9 @@
 
 .tui-dashboard > .tui-dashboard-gadget {
   overflow: auto;
-  background-color: rgba(255, 255, 255, 0.95);
-  border-radius: var(--size-1);
-  border: 1px solid var(--color-border);
+  background-color: var(--bs-light-bg-subtle);
+  border-radius: var(--bs-border-radius);
+  border: 1px solid var(--bs-light-border-subtle);
   position: relative;
 }
 

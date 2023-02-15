@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TopUI.Blazor.Bootstrap.Components.Lists.DataGridComponent;
 using TopUI.Blazor.Bootstrap.Components.Utilities;
+using TopUI.Blazor.Bootstrap.Interops;
 using TopUI.Blazor.Bootstrap.Services.Abstractions;
 using TopUI.Blazor.Core;
 using TopUI.Blazor.Core.Abstractions;
@@ -19,7 +20,8 @@ namespace TopUI.Blazor.Bootstrap.Components;
 
 public sealed partial class DataGrid<TItem> : IDataBoundComponent<TItem>, IDataSelectionContainer<TItem>
 {
-    private ScrollSyncInterop? _scrollSync;
+    //private ScrollSyncInterop? _scrollSync;
+    private DataGridInterop? _dataGridInterop;
     private DataGridColumn<TItem>? _orderedColumn;
     private SortDirection _sortDirection = SortDirection.None;
     private Virtualize<TItem>? _itemsContainer;
@@ -105,8 +107,8 @@ public sealed partial class DataGrid<TItem> : IDataBoundComponent<TItem>, IDataS
 
     public override async ValueTask DisposeAsync()
     {
-        if (_scrollSync != null)
-            await _scrollSync.DisposeAsync();
+        if (_dataGridInterop != null)
+            await _dataGridInterop.DisposeAsync();
 
         await base.DisposeAsync();
     }
@@ -209,8 +211,8 @@ public sealed partial class DataGrid<TItem> : IDataBoundComponent<TItem>, IDataS
 
     private async Task InitializeGrid()
     {
-        var dataGrid = await TopUiBs.GetDataGridAsync();
-        await dataGrid.InitializeAsync(Id);
+        _dataGridInterop = await TopUiBs.GetDataGridAsync();
+        await _dataGridInterop.InitializeAsync(Id);
         //_scrollSync = await TopUi.GetScrollSyncAsync();
 
         //await _scrollSync.InitializeAsync($"#{Id}>.data-grid-content", new List<string> { $"#{Id}>.data-grid-header" }, opt =>

@@ -5,8 +5,14 @@
 
 @if (EditorDataType == typeof(string) && Lines != null)
 {
-    <textarea @attributes=AdditionalAttributes value="@CurrentValue" @onchange="@((a)=>CurrentValueAsString=a.Value?.ToString())">
-            </textarea>
+    <textarea @attributes=AdditionalAttributes value="@CurrentValue" @onchange="@((a)=>CurrentValueAsString=a.Value?.ToString())"></textarea>
+}
+@if (EditorDataType == typeof(DateTime) || EditorDataType == typeof(DateOnly))
+{
+    <input @attributes=AdditionalAttributes @bind-value="CurrentValueAsString" type="text" data-bs-toggle="dropdown" data-bs-reference="#@(Id)_dropdown" data-bs-auto-close="outside" aria-expanded="false" />
+    <div id="@(Id)_dropdown" class="dropdown-menu p-0">
+        <CalendarView @bind-Value="CurrentValue"/>
+    </div>
 }
 else
 {

@@ -6,6 +6,7 @@
 
       "Styles/Components/busy-cover.css",
       "Styles/Components/button.css",
+      "Styles/Components/calendar.css",
       "Styles/Components/dashboard.css",
       "Styles/Components/data-grid.css",
       "Styles/Components/drawer.css",

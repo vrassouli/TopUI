@@ -1,0 +1,64 @@
+﻿@namespace TopUI.Blazor.Bootstrap.Components
+@typeparam TValue
+@inherits BootstrapFormControlComponent<TValue>
+
+<div @attributes=AdditionalAttributes>
+    <div class="header">
+        <div class="prev" @onclick="OnPrev"><i class="@Localizer["bi bi-chevron-left"]"></i></div>
+        <div class="title">
+            <select class="month-select" @onchange="(args)=>OnGotoMonth(args.Value)">
+                @for(var i = 1; i <= Calendar.GetMonthsInYear(Calendar.GetYear(ViewDate)); i++)
+                {
+                    <option value="@i" selected="@(i == Calendar.GetMonth(ViewDate))">@_culture.DateTimeFormat.GetMonthName(i)</option>
+                }
+            </select>
+            <input class="year-input" type="number" value="@Calendar.GetYear(ViewDate)" @onchange="(args)=>OnGotoYear(args.Value)" />
+        </div>
+        <div class="next" @onclick="OnNext"><i class="@Localizer["bi bi-chevron-right"]"></i></div>
+    </div>
+    <div class="grid">
+        @for (var i = (int)_culture.DateTimeFormat.FirstDayOfWeek; i <= (int)Enum.GetValues<DayOfWeek>().Max(); i++)
+        {
+            <div class="cell header">
+                @_culture.DateTimeFormat.DayNames[i].Substring(0, 2)
+            </div>
+        }
+        @for (var i = 0; i < (int)_culture.DateTimeFormat.FirstDayOfWeek; i++)
+        {
+            <div class="cell header">
+                @_culture.DateTimeFormat.ShortestDayNames[i]
+            </div>
+        }
+
+        @for (var week = 0; week < 6; week++)
+        {
+            @for (int day = 0; day < 7; day++)
+            {
+                var dayDelta = (week * 7) + day - DaysToBeginningOfWeek;
+                if (dayDelta < 0 && ViewDate == DateTime.MinValue)
+                {
+                    <div class="cell"></div>
+
+                    continue;
+                }
+                var dayDate = ViewDate.AddDays(dayDelta);
+                var isPrevMonth = Calendar.GetMonth(dayDate) < Calendar.GetMonth(ViewDate);
+                var isNextMonth = Calendar.GetMonth(dayDate) > Calendar.GetMonth(ViewDate);
+                var cellClasses = new List<string> { "cell" };
+
+                if (isPrevMonth || isNextMonth)
+                    cellClasses.Add("grayed");
+                if (dayDate.Date == InternalDate)
+                    cellClasses.Add("selected");
+                if (dayDate.Date == DateTime.Today)
+                    cellClasses.Add("today");
+                if (DateClass != null)
+                    cellClasses.Add(DateClass.Invoke(dayDate));
+                                        
+                <div class="@string.Join(' ', cellClasses)" @onclick="()=>SelectDate(dayDate)">
+                    @Calendar.GetDayOfMonth(dayDate)
+                </div>
+            }
+        }
+    </div>
+</div>
