@@ -22,6 +22,7 @@ public sealed class DataGridColumn<TItem> : ComponentBase, IDisposable
     [Parameter] public Expression<Func<TItem, object?>>? OrderBy { get; set; }
     [Parameter] public Func<TItem, string?>? CellClass { get; set; }
     [Parameter] public RenderFragment<TItem>? ChildContent { get; set; }
+    [Parameter] public string? Format { get; set; }
     [Parameter] public double? Width { get; set; }
     [Parameter] public bool AllowResize { get; set; } = true;
 
@@ -59,7 +60,14 @@ public sealed class DataGridColumn<TItem> : ComponentBase, IDisposable
             _fieldFunc = Field.Compile();
 
         if (_fieldFunc != null)
-            return _fieldFunc.Invoke(item);
+        {
+            var value = _fieldFunc.Invoke(item);
+
+            if (!string.IsNullOrEmpty(Format))
+                return string.Format(Format, value);
+
+            return value;
+        }
 
         return null;
     }
