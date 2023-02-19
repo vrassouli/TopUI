@@ -17,6 +17,7 @@ public partial class MasterDetail
     [Parameter] public string? DetailClasses { get; set; }
     [Parameter] public string? DetailTitle { get; set; }
     [Parameter] public EventCallback OnCloseDetail { get; set; }
+    [Parameter] public bool DetailVisibility { get; set; }
 
     protected override IEnumerable<string> GetClasses()
     {

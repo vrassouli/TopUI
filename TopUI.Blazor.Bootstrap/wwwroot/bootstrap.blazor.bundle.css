@@ -1790,6 +1790,7 @@
   --tui-tree-item-color-selected: var(--bs-white);
   --tui-tree-item-bg-selected: var(--bs-primary);
   padding: calc(var(--bs-gutter-x)*.3);
+  margin: 0;
   background-color: var(--bs-light-bg-subtle);
   border: var(--bs-border-width) var(--bs-border-style) var(--bs-light-border-subtle);
   color: var(--bs-light-text);
@@ -1805,6 +1806,7 @@
 
 .tui-tree ul {
   list-style: none;
+  margin: 0;
 }
 
 .tui-tree li.tree-item > .item-wrapper {

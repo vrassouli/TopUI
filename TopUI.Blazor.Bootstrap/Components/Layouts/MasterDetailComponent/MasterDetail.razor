@@ -5,13 +5,16 @@
     <div class="@string.Join(' ', GetMasterClasses())">
         @Master
     </div>
-    <div class="@string.Join(' ', GetDetailClasses())">
-        <div class="detail-header border-bottom">
-            <h5 class="detail-title">@DetailTitle</h5>
-            <button type="button" class="btn-close" @onclick=OnCloseDetail></button>
+    @if (DetailVisibility)
+    {
+        <div class="@string.Join(' ', GetDetailClasses())">
+            <div class="detail-header border-bottom">
+                <h5 class="detail-title">@DetailTitle</h5>
+                <button type="button" class="btn-close" @onclick=OnCloseDetail></button>
+            </div>
+            <div class="detail-body">
+                @Detail
+            </div>
         </div>
-        <div class="detail-body">
-            @Detail
-        </div>
-    </div>
+    }
 </div>
