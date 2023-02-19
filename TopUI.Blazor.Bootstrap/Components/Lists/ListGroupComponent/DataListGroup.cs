@@ -17,7 +17,6 @@ public sealed class DataListGroup<TItem> : ListGroup, IDataBoundComponent<TItem>
     private RenderFragment? _emptyTemplate;
 
     [Parameter] public IList<TItem>? Items { get; set; }
-    [Parameter] public ItemsProviderDelegate<TItem>? ItemsProvider { get; set; }
     [Parameter] public TItem? SelectedItem { get; set; } = default!;
     [Parameter] public EventCallback<TItem?> SelectedItemChanged { get; set; } = default!;
     [Parameter] public IList<TItem>? SelectedItems { get; set; }

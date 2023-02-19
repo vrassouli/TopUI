@@ -12,6 +12,7 @@ public class CountryDto
 {
     [Display(Name = "Country Name")]
     public string Name { get; set; } = default!;
+    public List<CityDto>? Cities{ get; set; }
     public string? CountryCode { get; set; }
     public int? Population { get; set; }
     public string? CallingCode { get; set; }
@@ -19,17 +20,9 @@ public class CountryDto
 
     public CountryDto()
     {
-
+        Cities = new List<CityDto>();
     }
 
-    public CountryDto(string name, string countryCode, int population, string callingCode, string capital)
-    {
-        Name = name;
-        CountryCode = countryCode;
-        Population = population;
-        CallingCode = callingCode;
-        Capital = capital;
-    }
     public static IEnumerable<CountryDto> GetList()
     {
         for (int i = 0; i < 1000; i++)
@@ -42,7 +35,7 @@ public class CountryDto
                 CountryCode = i.ToString(),
                 CallingCode = $"+{rnd}",
                 Capital = $"Capital {rnd}",
-                Population = new Random(rnd).Next(1, 1000000)
+                Population = new Random(rnd).Next(1, 1000000),
             };
         }
 
@@ -52,5 +45,29 @@ public class CountryDto
         //yield return new CountryDto("Germany", "DE", 83695430, "+49", "Berlin");
         //yield return new CountryDto("Italy", "IT", 58853482, "+39", "Rome");
         //yield return new CountryDto("Iran", "IR", 86758304, "+98", "Tehran");
+    }
+
+    public static IEnumerable<TreeViewItemDto> GetTreeViewItems()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            var rnd = new Random(i).Next(1, 10000);
+
+            yield return new TreeViewItemDto
+            {
+                Name = $"Country {i}",
+                Population = new Random(rnd).Next(1, 1000000),
+
+                SubItems = GetCities(new Random(rnd).Next(5, 10)).Select(x => new TreeViewItemDto { Name = x.Name, Population = x.Population }).ToList()
+            };
+        }
+    }
+
+    private static IEnumerable<CityDto> GetCities(int count)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            yield return new CityDto($"City {i}", new Random(count).Next(5, 10));
+        }
     }
 }

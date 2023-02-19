@@ -10,13 +10,13 @@ namespace TopUI.Blazor.Core;
 public abstract class UiComponentBase : ComponentBase
 {
 #if DEBUG
-    //private int _renderCounter = 0;
+    private int _renderCounter = 0;
 #endif
 
     protected override void OnAfterRender(bool firstRender)
     {
 #if DEBUG
-        //Console.WriteLine($"{GetType().Name} rendered ({++_renderCounter})");
+        Console.WriteLine($"{GetType().Name} rendered ({++_renderCounter})");
 #endif
         base.OnAfterRender(firstRender);
     }

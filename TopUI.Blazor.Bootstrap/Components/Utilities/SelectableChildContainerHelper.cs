@@ -60,13 +60,25 @@ internal class SelectableChildContainerHelper
         {
             if (index >= 0 && index < component.Items.Count)
             {
-                await component.SelectedItemChanged.InvokeAsync(component.Items[index]);
+                var item = component.Items[index];
 
-                var selectedItems = component.Items.Where(x => component.SelectedIndices.Contains(component.Items.IndexOf(x))).ToList();
-                await component.SelectedItemsChanged.InvokeAsync(selectedItems);
+                await OnItemSelected(component, child, item);
             }
         }
         return index;
+    }
+    
+    internal static async Task OnItemSelected<TComponent, TChild, TItem>(TComponent component, TChild child, TItem item)
+        where TComponent : IDataBoundComponent<TItem>, IDataSelectionContainer<TItem>, ISelectionContainerComponent, IChildrenContainerComponent<TChild>
+        where TChild : IStateChangeNotification
+    {
+        await component.SelectedItemChanged.InvokeAsync(item);
+
+        if (component.Items != null)
+        {
+            var selectedItems = component.Items.Where(x => component.SelectedIndices.Contains(component.Items.IndexOf(x))).ToList();
+            await component.SelectedItemsChanged.InvokeAsync(selectedItems);
+        }
     }
 
     internal static bool IsSelected<TComponent, TChild>(TComponent component, TChild item)

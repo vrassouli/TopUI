@@ -1,0 +1,105 @@
+﻿@page "/components/tree-view"
+@using TopUI.Blazor.Core;
+@using TopUI.Blazor.Demo.Bootstrap.Shared;
+
+<div class="row gap-2 gap-md-0 flex-nowrap">
+    <div class="col-md order-1 order-md-0">
+        <h4>List group</h4>
+        <TreeView @ref=_elRef @attributes=_parameters>
+            <TreeViewItem Text="Item 1" Icon="bi bi-folder-fill" ExpandedIcon="bi bi-folder2-open" />
+            <TreeViewItem Text="Item 2" Icon="bi bi-folder-fill" ExpandedIcon="bi bi-folder2-open">
+                <TreeViewItem Text="Item 2.1">
+                    <TreeViewItem Text="Item 2.1.1" />
+                    <TreeViewItem Text="Item 2.1.2" />
+                    <TreeViewItem Text="Item 2.1.3" />
+                </TreeViewItem>
+                <TreeViewItem Text="Item 2.2" />
+                <TreeViewItem Text="Item 2.3" />
+            </TreeViewItem>
+            <TreeViewItem Text="Item 3" Icon="bi bi-folder-fill" ExpandedIcon="bi bi-folder2-open" />
+        </TreeView>
+
+        <h3 class="mt-5">Usage:</h3>
+<pre class="bg-body-tertiary p-2 rounded border">
+        <code class="razor">
+                @TopUI.Blazor.Core.Generators.CodeGenerator.GenerateComponentInitializer(typeof(TreeView), _parameters)
+    </code>
+</pre>
+
+        <h4>Data bound TreeView</h4>
+        <DataTreeView TItem=TreeViewItemDto
+                      Items=_list
+                      ItemText="x => x.Name"
+                      ItemSubItems="x => x.SubItems"
+                      @bind-SelectedItem="_selectedItem"
+                      class="mb-5" />
+        @if (_selectedItem != null)
+        {
+            <div>Selected Item: @_selectedItem.Name</div>
+        }
+
+        <h4>Lazy load TreeView</h4>
+        <DataTreeView TItem=TreeViewItemDto
+                      ItemsProvider=ProvideTreeItems
+                      ItemText="x => x.Name"
+                      ItemHasChildren="x => true"
+                      ItemSubItems="x => x.SubItems"
+                      @bind-SelectedItem="_selectedItem"
+                      class="mb-5" />
+        @if (_selectedItem != null)
+        {
+            <div>Selected Item: @_selectedItem.Name</div>
+        }
+
+    </div>
+    <div class="col-md-auto order-0 order-md-1">
+        <PropertyGrid ValueSource="_elRef" PropertyValuesChanged="p => _parameters = p" class="mt-1">
+        </PropertyGrid>
+    </div>
+</div>
+
+@code {
+    List<TreeViewItemDto> _list;
+    private TreeView? _elRef;
+    private Dictionary<string, object?>? _parameters;
+    private TreeViewItemDto? _selectedItem;
+
+    public Index()
+    {
+        _list = CountryDto.GetTreeViewItems().ToList();
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        // Element references are captured after render.
+        // So in order to pass the element reference to the PropertyGrid, we need to re-render after first render.
+        if (firstRender)
+            StateHasChanged();
+
+        base.OnAfterRender(firstRender);
+    }
+
+    private async ValueTask<IList<TreeViewItemDto>> ProvideTreeItems(TreeViewItemDto? parent)
+    {
+        await Task.Delay(1000);
+
+        var list = new List<TreeViewItemDto>();
+
+        if (parent == null)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                list.Add(new TreeViewItemDto { Name = $"Root {i}" });
+            }
+        }
+        else
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                list.Add(new TreeViewItemDto { Name = $"{parent.Name} Child {i}" });
+            }
+        }
+
+        return list;
+    }
+}

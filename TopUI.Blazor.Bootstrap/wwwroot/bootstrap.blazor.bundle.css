@@ -1,3 +1,16 @@
+.rotate {
+  animation: rotation-animation 1s infinite linear;
+}
+
+@keyframes rotation-animation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .btn:focus.no-focus, .btn:active:focus.no-focus, .btn-link.nav-link:focus.no-focus, .form-control:focus.no-focus, .form-check-input:focus.no-focus {
   box-shadow: none;
 }
@@ -780,13 +793,13 @@
   --tui-calendar-cell-bg-selected: var(--bs-primary);
   --tui-calendar-cell-color-today: var(--bs-white);
   --tui-calendar-cell-bg-today: var(--bs-indigo);
-  padding: calc(var(--bs-gutter-x)*.5);
+  padding: calc(var(--bs-gutter-x)*.3);
   background-color: var(--bs-light-bg-subtle);
   border: var(--bs-border-width) var(--bs-border-style) var(--bs-light-border-subtle);
   color: var(--bs-light-text);
   display: inline-flex;
-  flex-direction: column;
   border-radius: var(--bs-border-radius);
+  flex-direction: column;
 }
 
 .tui-calendar > .header {
@@ -1684,4 +1697,61 @@
 .tui-tab > .tab-content > .tab-pane {
   height: 100%;
   overflow: auto;
+}
+
+.tui-tree {
+  --tui-tree-item-color-hover: var(--bs-white);
+  --tui-tree-item-bg-hover: var(--bs-secondary-color);
+  --tui-tree-item-color-selected: var(--bs-white);
+  --tui-tree-item-bg-selected: var(--bs-primary);
+  padding: calc(var(--bs-gutter-x)*.3);
+  background-color: var(--bs-light-bg-subtle);
+  border: var(--bs-border-width) var(--bs-border-style) var(--bs-light-border-subtle);
+  color: var(--bs-light-text);
+  display: inline-block;
+  border-radius: var(--bs-border-radius);
+  list-style: none;
+}
+
+.tui-tree i.tui-empty {
+  display: inline-block;
+  width: 16px;
+}
+
+.tui-tree ul {
+  list-style: none;
+}
+
+.tui-tree li.tree-item > .item-wrapper {
+  user-select: none;
+  padding: 0 calc(var(--bs-gutter-x)*0.2);
+  border-radius: var(--bs-border-radius);
+  cursor: pointer;
+}
+
+.tui-tree li.tree-item > .item-wrapper:hover {
+  color: var(--tui-tree-item-color-hover);
+  background-color: var(--tui-tree-item-bg-hover);
+}
+
+.tui-tree li.tree-item > .item-wrapper > .expander {
+  display: inline-block;
+  transition: all 0.3s;
+}
+
+.tui-tree li.tree-item > .item-wrapper > .expander:hover {
+  color: var(--bs-light-bg-subtle);
+}
+
+.tui-tree li.tree-item.selected > .item-wrapper {
+  color: var(--tui-tree-item-color-selected) !important;
+  background-color: var(--tui-tree-item-bg-selected) !important;
+}
+
+.tui-tree li.tree-item:not(.expanded) > ul {
+  display: none;
+}
+
+.tui-tree li.tree-item.expanded > .item-wrapper > .expander {
+  transform: rotate(90deg);
 }

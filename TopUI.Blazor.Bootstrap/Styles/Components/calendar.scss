@@ -8,13 +8,13 @@
     --tui-calendar-cell-bg-selected: var(--bs-primary);
     --tui-calendar-cell-color-today: var(--bs-white);
     --tui-calendar-cell-bg-today: var(--bs-indigo);
-    padding: calc(var(--bs-gutter-x)*.5);
+    padding: calc(var(--bs-gutter-x)*.3);
     background-color: var(--bs-light-bg-subtle);
     border: var(--bs-border-width) var(--bs-border-style) var(--bs-light-border-subtle);
     color: var(--bs-light-text);
     display: inline-flex;
-    flex-direction: column;
     border-radius: var(--bs-border-radius);
+    flex-direction: column;
 
     > .header {
         display: flex;

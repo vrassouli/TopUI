@@ -1,0 +1,31 @@
+﻿@namespace TopUI.Blazor.Bootstrap.Components
+@inherits UiComponent
+
+<li @attributes=AdditionalAttributes @ondblclick="ToggleExpand" @ondblclick:stopPropagation="true" @ondblclick:preventDefault="true"
+    @onpointerup="OnPointerUp" @onpointerup:stopPropagation="true">
+    <div class="item-wrapper">
+        @if (DisplayExpander)
+        {
+            <i class="expander me-2 @Localizer[ExpanderIconClasses]" @onpointerup="ToggleExpand" @onpointerup:stopPropagation="true"></i>
+        }
+        else if (Siblings.Any(x => x.Children.Any()))
+        {
+            <i class="tui-empty me-2"></i>
+        }
+
+        @if (!string.IsNullOrEmpty(Icon))
+        {
+            <i class="me-2 @(_isExpanded ? (ExpandedIcon ?? Icon) : Icon)"></i>
+        }
+        <span>@Text</span>
+    </div>
+    @if (ChildContent != null)
+    {
+        <ul>
+            <CascadingValue Value="this" IsFixed>
+                @ChildContent
+            </CascadingValue>
+        </ul>
+    }
+</li>
+

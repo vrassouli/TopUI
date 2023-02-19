@@ -1,0 +1,8 @@
+﻿@namespace TopUI.Blazor.Bootstrap.Components
+@inherits BootstrapComponent
+
+<ul @attributes="AdditionalAttributes">
+    <CascadingValue Value="this" IsFixed>
+        @ChildContent
+    </CascadingValue>
+</ul>

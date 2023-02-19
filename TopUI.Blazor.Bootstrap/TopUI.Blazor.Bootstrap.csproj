@@ -23,6 +23,7 @@
 		<Sass Include="$(MSBuildProjectDirectory)/Styles/**/*.scss" Exclude="$(MSBuildProjectDirectory)/Styles/**/_*.scss" />
 	</ItemGroup>
 	<ItemGroup>
+		<Sass Remove="Styles\animations.scss" />
 		<Sass Remove="Styles\Components\busy-cover.scss" />
 		<Sass Remove="Styles\Components\button.scss" />
 		<Sass Remove="Styles\Components\calendar.scss" />
@@ -31,6 +32,7 @@
 		<Sass Remove="Styles\Components\modal.scss" />
 		<Sass Remove="Styles\Components\property-grid.scss" />
 		<Sass Remove="Styles\Components\tab.scss" />
+		<Sass Remove="Styles\Components\tree-view.scss" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -67,6 +69,11 @@
 			<AutoGen>True</AutoGen>
 			<DependentUpon>Pager.resx</DependentUpon>
 		</Compile>
+		<Compile Update="Components\Lists\TreeViewComponent\Resources\TreeView.Designer.cs">
+		  <DesignTime>True</DesignTime>
+		  <AutoGen>True</AutoGen>
+		  <DependentUpon>TreeView.resx</DependentUpon>
+		</Compile>
 		<Compile Update="Components\Misc\CalendarComponent\Resources\CalendarView.Designer.cs">
 		  <DesignTime>True</DesignTime>
 		  <AutoGen>True</AutoGen>
@@ -102,6 +109,13 @@
 		<EmbeddedResource Update="Components\Lists\PagerComponent\Resources\Pager.resx">
 			<Generator>PublicResXFileCodeGenerator</Generator>
 			<LastGenOutput>Pager.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Components\Lists\TreeViewComponent\Resources\TreeView.fa-IR.resx">
+		  <Generator>PublicResXFileCodeGenerator</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Components\Lists\TreeViewComponent\Resources\TreeView.resx">
+		  <Generator>PublicResXFileCodeGenerator</Generator>
+		  <LastGenOutput>TreeView.Designer.cs</LastGenOutput>
 		</EmbeddedResource>
 		<EmbeddedResource Update="Components\Misc\CalendarComponent\Resources\CalendarView.fa-IR.resx">
 		  <Generator>PublicResXFileCodeGenerator</Generator>
