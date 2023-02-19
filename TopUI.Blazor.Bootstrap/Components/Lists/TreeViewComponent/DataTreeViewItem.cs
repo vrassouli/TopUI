@@ -9,7 +9,7 @@ namespace TopUI.Blazor.Bootstrap.Components.Lists.TreeViewComponent;
 
 internal class DataTreeViewItem<TItem> : TreeViewItem
 {
-    private IList<TItem>? _items;
+    private IEnumerable<TItem>? _items;
     private bool _loading;
 
     [Parameter] public TItem Item { get; set; } = default!;

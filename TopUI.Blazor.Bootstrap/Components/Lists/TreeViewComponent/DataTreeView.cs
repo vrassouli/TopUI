@@ -24,7 +24,7 @@ public class DataTreeView<TItem> : TreeView, IDataBoundComponent<TItem>, IDataSe
     [Parameter] public Func<TItem, string?>? ItemIcon { get; set; }
     [Parameter] public Func<TItem, string?>? ItemExpandedIcon { get; set; }
     [Parameter] public Func<TItem, bool>? ItemHasChildren { get; set; }
-    [Parameter] public Func<TItem, IList<TItem>?>? ItemSubItems { get; set; }
+    [Parameter] public Func<TItem, IEnumerable<TItem>?>? ItemSubItems { get; set; }
 
     protected override async Task OnParametersSetAsync()
     {
@@ -57,7 +57,7 @@ public class DataTreeView<TItem> : TreeView, IDataBoundComponent<TItem>, IDataSe
     }
 
 
-    internal RenderFragment? RenderItems(IList<TItem>? items)
+    internal RenderFragment? RenderItems(IEnumerable<TItem>? items)
     {
         if (items?.Any() == true)
         {
@@ -119,7 +119,7 @@ public class DataTreeView<TItem> : TreeView, IDataBoundComponent<TItem>, IDataSe
         return false;
     }
 
-    internal IList<TItem>? GetSubItems(TItem item)
+    internal IEnumerable<TItem>? GetSubItems(TItem item)
     {
         if (ItemSubItems != null)
             return ItemSubItems(item);
