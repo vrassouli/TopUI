@@ -2,7 +2,8 @@
 @inherits UiComponent
 
 <li @attributes=AdditionalAttributes @ondblclick="ToggleExpand" @ondblclick:stopPropagation="true" @ondblclick:preventDefault="true"
-    @onpointerup="OnPointerUp" @onpointerup:stopPropagation="true">
+    @onpointerup="OnPointerUp" @onpointerup:stopPropagation="true"
+    title="@Text">
     <div class="item-wrapper">
         @if (DisplayExpander)
         {
