@@ -1830,6 +1830,12 @@
   color: var(--bs-light-bg-subtle);
 }
 
+.tui-tree li.tree-item > .item-wrapper > span {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .tui-tree li.tree-item.selected > .item-wrapper {
   color: var(--tui-tree-item-color-selected) !important;
   background-color: var(--tui-tree-item-bg-selected) !important;
