@@ -1628,6 +1628,91 @@
   }
 }
 
+.tui-master-detail {
+  --tui-md-master-padding-y: 1rem;
+  --tui-md-master-padding-x: 1rem;
+  --tui-md-master-color: var(--bs-body-color);
+  --tui-md-master-bg: var(--bs-body-bg);
+  --tui-md-detail-color: var(--bs-body-color);
+  --tui-md-detail-bg: var(--bs-tertiary-bg);
+  display: flex;
+  overflow: auto;
+  position: relative;
+}
+
+.tui-master-detail > .master {
+  height: 100%;
+  overflow: auto;
+  color: var(--tui-md-master-color);
+  background-color: var(--tui-md-master-bg);
+  padding: var(--tui-md-master-padding-y) var(--tui-md-master-padding-x);
+}
+
+.tui-master-detail > .detail {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: var(--tui-md-detail-color);
+  background-color: var(--tui-md-detail-bg);
+}
+
+.tui-master-detail > .detail > .detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--tui-md-master-padding-y) var(--tui-md-master-padding-x);
+}
+
+.tui-master-detail > .detail > .detail-header > .detail-title {
+  margin: 0;
+}
+
+.tui-master-detail > .detail > .detail-body {
+  padding: var(--tui-md-master-padding-y) var(--tui-md-master-padding-x);
+  overflow: auto;
+  flex: 1;
+}
+
+.tui-master-detail-xs > .detail {
+  position: initial;
+}
+
+@media (min-width: 576px) {
+  .tui-master-detail-sm > .detail {
+    position: initial;
+  }
+}
+
+@media (min-width: 768px) {
+  .tui-master-detail-md > .detail {
+    position: initial;
+  }
+}
+
+@media (min-width: 992px) {
+  .tui-master-detail-lg > .detail {
+    position: initial;
+  }
+}
+
+@media (min-width: 1200px) {
+  .tui-master-detail-xl > .detail {
+    position: initial;
+  }
+}
+
+@media (min-width: 1400px) {
+  .tui-master-detail-xxl > .detail {
+    position: initial;
+  }
+}
+
 .tui-modal > .modal-dialog > .modal-content > .modal-body {
   display: flex;
   flex-direction: column;

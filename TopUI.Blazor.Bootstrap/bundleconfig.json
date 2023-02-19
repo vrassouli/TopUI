@@ -11,6 +11,7 @@
       "Styles/Components/dashboard.css",
       "Styles/Components/data-grid.css",
       "Styles/Components/drawer.css",
+      "Styles/Components/master-detail.css",
       "Styles/Components/modal.css",
       "Styles/Components/nav.css",
       "Styles/Components/property-grid.css",
