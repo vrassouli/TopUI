@@ -31,6 +31,8 @@ internal class SelectableChildContainerHelper
 
                 component.SelectedIndices.Add(index);
 
+                component.SelectedIndex = index;
+
                 await component.SelectedIndexChanged.InvokeAsync(index);
                 await component.SelectedIndicesChanged.InvokeAsync(component.SelectedIndices);
             }
@@ -38,10 +40,16 @@ internal class SelectableChildContainerHelper
             {
                 component.SelectedIndices.Remove(index);
 
+                var lastIndex = -1;
                 if (component.SelectedIndices.Any())
-                    await component.SelectedIndexChanged.InvokeAsync(component.SelectedIndices.LastOrDefault());
+                {
+                    lastIndex = component.SelectedIndices.LastOrDefault();
+                    await component.SelectedIndexChanged.InvokeAsync(lastIndex);
+                }
                 else
-                    await component.SelectedIndexChanged.InvokeAsync(-1);
+                {
+                    await component.SelectedIndexChanged.InvokeAsync(lastIndex);
+                }
                 await component.SelectedIndicesChanged.InvokeAsync(component.SelectedIndices);
             }
 
@@ -72,11 +80,14 @@ internal class SelectableChildContainerHelper
         where TComponent : IDataBoundComponent<TItem>, IDataSelectionContainer<TItem>, ISelectionContainerComponent, IChildrenContainerComponent<TChild>
         where TChild : IStateChangeNotification
     {
+        component.SelectedItem = item;
         await component.SelectedItemChanged.InvokeAsync(item);
 
         if (component.Items != null)
         {
             var selectedItems = component.Items.Where(x => component.SelectedIndices.Contains(component.Items.IndexOf(x))).ToList();
+
+            component.SelectedItems = selectedItems;
             await component.SelectedItemsChanged.InvokeAsync(selectedItems);
         }
     }
@@ -91,16 +102,5 @@ internal class SelectableChildContainerHelper
 
         return false;
     }
-
-    //private static void NotifyItemsStateChange<TComponent, TChild>(TComponent component, List<int> selectedIndicies)
-    //    where TComponent : ISelectionContainerComponent, IChildrenContainerComponent<TChild>
-    //    where TChild : IStateChangeNotification
-    //{
-    //    foreach (var index in selectedIndicies)
-    //    {
-    //        var child = component.Children[index];
-    //        child.OnStateChanged();
-    //    }
-    //}
 
 }

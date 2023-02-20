@@ -24,7 +24,7 @@
     li.tree-item {
         > .item-wrapper {
             user-select: none;
-            padding: 0 calc(var(--bs-gutter-x)*0.2);
+            padding: calc(var(--bs-gutter-x)*0.2);
             border-radius: var(--bs-border-radius);
             cursor: pointer;
             display: flex;
@@ -68,6 +68,20 @@
             > .item-wrapper {
                 > .expander {
                     transform: rotate(90deg);
+                }
+            }
+        }
+    }
+}
+
+[dir="rtl"] {
+    .tui-tree {
+        > li.tree-item {
+            &.expanded {
+                > .item-wrapper {
+                    > .expander {
+                        transform: rotate(-90deg);
+                    }
                 }
             }
         }
