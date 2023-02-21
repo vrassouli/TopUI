@@ -1,5 +1,4 @@
-﻿
-class Draggable {
+﻿class Draggable {
     _dotnetRef;
     _id;
     _options;

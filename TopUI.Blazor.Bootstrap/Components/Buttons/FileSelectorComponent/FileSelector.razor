@@ -1,0 +1,11 @@
+﻿@namespace TopUI.Blazor.Bootstrap.Components
+@using Microsoft.AspNetCore.Components.Forms
+@inherits Button
+
+@{
+    base.BuildRenderTree(__builder);
+}
+
+<div class="d-none">
+    <InputFile id="@InputId" OnChange="OnChange" multiple="@Multiple" />
+</div>

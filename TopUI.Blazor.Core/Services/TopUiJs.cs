@@ -1,4 +1,5 @@
-﻿using Microsoft.JSInterop;
+﻿using Microsoft.Extensions.Options;
+using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,28 @@ internal class TopUiJs : ITopUiJs, IAsyncDisposable
     public TopUiJs(IJSRuntime jsRuntime)
     {
         _moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/TopUI.Blazor.Core/topui.interops.bundle.js").AsTask());
+    }
+
+    public async Task InvokeClickEventAsync(string selector)
+    {
+        var module = await _moduleTask.Value;
+
+        var jsRef = await module.InvokeAsync<IJSObjectReference>("getDomHelper");
+        await jsRef.InvokeVoidAsync("invokeClickEvent", selector);
+
+        await jsRef.DisposeAsync();
+    }
+
+    public async Task DownloadFileFromStreamAsync(Stream stream, string fileName)
+    {
+        using var streamRef = new DotNetStreamReference(stream);
+
+        var module = await _moduleTask.Value;
+
+        var jsRef = await module.InvokeAsync<IJSObjectReference>("getDomHelper");
+        await jsRef.InvokeVoidAsync("downloadFileFromStream", fileName, streamRef);
+
+        await jsRef.DisposeAsync();
     }
 
     public async Task<DraggerInterop> GetDraggerAsync(IDraggerHandler handler)

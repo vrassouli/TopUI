@@ -10,6 +10,9 @@ namespace TopUI.Blazor.Core.Services.Abstraction;
 
 public interface ITopUiJs
 {
+    Task InvokeClickEventAsync(string selector);
+    Task DownloadFileFromStreamAsync(Stream stream, string fileName);
+
     Task<DraggerInterop> GetDraggerAsync(IDraggerHandler handler);
     Task<DraggableInterop> GetDraggableAsync(IDraggableHandler handler);
     Task<DroppableInterop> GetDroppableAsync(IDroppableHandler handler);

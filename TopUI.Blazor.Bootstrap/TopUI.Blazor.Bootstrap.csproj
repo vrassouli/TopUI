@@ -43,6 +43,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Include="Components\Buttons\FileSelectorComponent\FileSelector.razor" />
 	  <None Include="Components\Layouts\DashboardComponent\Dashboard.razor" />
 	  <None Include="Components\Layouts\DashboardComponent\DashboardGadget.razor" />
 	  <None Include="Components\Layouts\GridLayoutComponent\GridLayout.razor" />

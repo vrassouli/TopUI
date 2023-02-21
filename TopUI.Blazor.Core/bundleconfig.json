@@ -3,6 +3,7 @@
   {
     "outputFileName": "wwwroot/topui.interops.bundle.js",
     "inputFiles": [
+      "Scripts/DomHelper.js",
       "Scripts/Draggable.js",
       "Scripts/Dragger.js",
       "Scripts/Droppable.js",
