@@ -1628,6 +1628,10 @@
   }
 }
 
+.tui-grid-layout {
+  display: grid;
+}
+
 .tui-master-detail {
   --tui-md-master-padding-y: 1rem;
   --tui-md-master-padding-x: 1rem;
