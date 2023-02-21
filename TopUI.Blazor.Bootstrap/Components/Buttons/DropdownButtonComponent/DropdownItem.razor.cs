@@ -11,7 +11,7 @@ namespace TopUI.Blazor.Bootstrap.Components;
 
 public sealed partial class DropdownItem : IStateChangeNotification
 {
-    [CascadingParameter] public Dropdown Parent { get; set; } = default!;
+    [CascadingParameter] public DropdownButton Parent { get; set; } = default!;
     [Parameter] public string Title { get; set; } = "Item";
     [Parameter] public string? Icon { get; set; }
     [Parameter] public bool IsActive { get; set; }
@@ -19,7 +19,7 @@ public sealed partial class DropdownItem : IStateChangeNotification
     protected override void OnInitialized()
     {
         if (Parent == null)
-            throw new ArgumentNullException($"{nameof(DropdownItem)} needs to be nested inside of a {nameof(Dropdown)}.");
+            throw new ArgumentNullException($"{nameof(DropdownItem)} needs to be nested inside of a {nameof(DropdownButton)}.");
 
         (Parent as IChildrenContainerComponent<DropdownItem>).AddChild(this);
 

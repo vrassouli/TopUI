@@ -4,19 +4,19 @@
     <div class="col-md order-1 order-md-0">
         <h4>Dropdown</h4>
         <div class="mb-5">
-            <Dropdown @ref=_elRef @attributes=_parameters
+            <DropdownButton @ref=_elRef @attributes=_parameters
                       SelectedIndexChanged="(index => _index = index)">
                 <DropdownContent>
                     <DropdownItem Title="Item 1" IsActive="@(_index == 0)" />
                     <DropdownItem Title="Item 2" IsActive="@(_index == 1)" />
                     <DropdownItem Title="Item 3" IsActive="@(_index == 2)" />
                 </DropdownContent>
-            </Dropdown>
+            </DropdownButton>
             <div>
         <h3 class="mt-5">Usage:</h3>
 <pre class="bg-body-tertiary p-2 rounded border">
     <code class="razor">
-@TopUI.Blazor.Core.Generators.CodeGenerator.GenerateComponentInitializer(typeof(Dropdown), _parameters)
+@TopUI.Blazor.Core.Generators.CodeGenerator.GenerateComponentInitializer(typeof(DropdownButton), _parameters)
     </code>
 </pre>
             </div>
@@ -24,13 +24,14 @@
 
         <h4>Data Dropdown</h4>
         <div class="d-flex gap-1 mb-5 align-items-center">
-            <DataDropdown Text="@(_selectedItem == null ? "Databound Dropdown" : _selectedItem.Name)"
+            <DataDropdownButton Text="@(_selectedItem == null ? "Databound Dropdown" : _selectedItem.Name)"
                           Mode="ButtonMode.Primary"
                           Items="_list"
                           @bind-SelectedItem="_selectedItem"
                           ItemTitle="GetTitle"
                           ItemIcon="GetIcon" />
-            <DataDropdown Text="@(_selectedItem == null ? "Databound Dropdown" : _selectedItem.Name)"
+
+            <DataDropdownButton Text="@(_selectedItem == null ? "Databound Dropdown" : _selectedItem.Name)"
                           Mode="ButtonMode.Primary"
                           Items="_list"
                           @onclick="DataDropdownClicked"
@@ -43,7 +44,7 @@
         </div>
         <h4>Size and mode</h4>
         <div class="d-flex gap-1 mb-5 align-items-center">
-            <DataDropdown Text="@(_selectedItem == null ? "Databound Dropdown" : _selectedItem.Name)"
+            <DataDropdownButton Text="@(_selectedItem == null ? "Databound Dropdown" : _selectedItem.Name)"
                           Mode="ButtonMode.Secondary"
                           Size="ButtonSizes.Small"
                           SplitButton
@@ -56,7 +57,7 @@
         </div>
         <h4>Forms</h4>
         <div class="d-flex gap-1 mb-5 align-items-center">
-            <Dropdown Text="Dropdown Forms"
+            <DropdownButton Text="Dropdown Forms"
                       Mode="ButtonMode.Primary">
                 <DropdownContent>
                     <form class="p-4">
@@ -79,7 +80,7 @@
                         <button type="submit" class="btn btn-primary">Sign in</button>
                     </form>
                 </DropdownContent>
-            </Dropdown>
+            </DropdownButton>
         </div>
     </div>
     <div class="col-md-auto order-0 order-md-1">
@@ -93,7 +94,7 @@
     int _counter = 0;
     List<DropdownItemDto?> _list;
     DropdownItemDto? _selectedItem;
-    private Dropdown? _elRef;
+    private DropdownButton? _elRef;
     private Dictionary<string, object?>? _parameters;
 
     protected override void OnAfterRender(bool firstRender)

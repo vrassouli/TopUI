@@ -1,0 +1,9 @@
+﻿@namespace TopUI.Blazor.Bootstrap.Components
+@inherits BootstrapComponent
+
+<div @attributes=AdditionalAttributes>
+    <div class="form-select" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent" data-bs-auto-close="outside" tabindex="0">
+        @Text
+    </div>
+    @ChildContent
+</div>

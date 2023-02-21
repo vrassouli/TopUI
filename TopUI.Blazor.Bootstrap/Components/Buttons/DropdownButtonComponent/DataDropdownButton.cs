@@ -10,7 +10,7 @@ using TopUI.Blazor.Core.Abstractions;
 
 namespace TopUI.Blazor.Bootstrap.Components;
 
-public sealed class DataDropdown<TItem> : Dropdown, IDataBoundComponent<TItem>, IDataSelectionContainer<TItem>
+public sealed class DataDropdownButton<TItem> : DropdownButton, IDataBoundComponent<TItem>, IDataSelectionContainer<TItem>
 {
     [Parameter] public IList<TItem>? Items { get; set; }
     [Parameter] public TItem? SelectedItem { get; set; } = default!;
@@ -32,7 +32,7 @@ public sealed class DataDropdown<TItem> : Dropdown, IDataBoundComponent<TItem>, 
     }
 
     internal override async Task<int> OnItemSelected(DropdownItem item)
-        => await SelectableChildContainerHelper.OnItemSelected<DataDropdown<TItem>, DropdownItem, TItem>(this, item);
+        => await SelectableChildContainerHelper.OnItemSelected<DataDropdownButton<TItem>, DropdownItem, TItem>(this, item);
 
     private RenderFragment RenderItems()
     {

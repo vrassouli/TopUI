@@ -11,7 +11,7 @@ using TopUI.Blazor.Core.Abstractions;
 
 namespace TopUI.Blazor.Bootstrap.Components;
 
-public partial class Dropdown : IChildrenContainerComponent<DropdownItem>, ISelectionContainerComponent
+public partial class DropdownButton : IChildrenContainerComponent<DropdownItem>, ISelectionContainerComponent
 {
     [Parameter] public SelectionMode Selection { get; set; } = SelectionMode.Single;
     

@@ -51,6 +51,21 @@
             <div>Selected Item: @_selectedItem.Name</div>
         }
 
+        <h4>Dropdown</h4>
+        <Dropdown Text="Select an item...">
+            <DataTreeView TItem=TreeViewItemDto
+                          ItemsProvider=ProvideTreeItems
+                          ItemText="x => x.Name"
+                          ItemHasChildren="x => true"
+                          ItemSubItems="x => x.SubItems"
+                          @bind-SelectedItem="_selectedItem"
+                          class="mb-5 dropdown-menu" />
+        </Dropdown>
+        @if (_selectedItem != null)
+        {
+            <div>Selected Item: @_selectedItem.Name</div>
+        }
+
     </div>
     <div class="col-md-auto order-0 order-md-1">
         <PropertyGrid ValueSource="_elRef" PropertyValuesChanged="p => _parameters = p" class="mt-1">

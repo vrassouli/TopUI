@@ -1628,6 +1628,10 @@
   }
 }
 
+.tui-dropdown {
+  cursor: pointer;
+}
+
 .tui-grid-layout {
   display: grid;
 }
