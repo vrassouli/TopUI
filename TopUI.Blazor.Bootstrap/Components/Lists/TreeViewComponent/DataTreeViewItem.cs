@@ -31,13 +31,13 @@ internal class DataTreeViewItem<TItem> : TreeViewItem
 
     protected override void OnParametersSet()
     {
-        if (ChildContent == null)
-        {
+        //if (ChildContent == null)
+        //{
             if (_items?.Any() != true)
                 _items = ParentDataTree?.GetSubItems(Item);
 
             ChildContent = ParentDataTree?.RenderItems(_items);
-        }
+        //}
 
         base.OnParametersSet();
     }

@@ -28,10 +28,10 @@ public class DataTreeView<TItem> : TreeView, IDataBoundComponent<TItem>, IDataSe
 
     protected override async Task OnParametersSetAsync()
     {
-        if (ChildContent == null)
-        {
+        //if (ChildContent == null)
+        //{
             ChildContent = RenderItems(await GetRootItems());
-        }
+        //}
         await base.OnParametersSetAsync();
     }
 

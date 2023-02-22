@@ -18,6 +18,7 @@
 		<PackageReference Include="LibSassBuilder" Version="3.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Localization" Version="7.0.2" />
 		<PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="7.0.2" />
+		<PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.25" />
 	</ItemGroup>
 	<ItemGroup>
 		<Sass Include="$(MSBuildProjectDirectory)/Styles/**/*.scss" Exclude="$(MSBuildProjectDirectory)/Styles/**/_*.scss" />
