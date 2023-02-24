@@ -76,7 +76,7 @@
 
 [dir="rtl"] {
     .tui-tree {
-        > li.tree-item {
+        li.tree-item {
             &.expanded {
                 > .item-wrapper {
                     > .expander {

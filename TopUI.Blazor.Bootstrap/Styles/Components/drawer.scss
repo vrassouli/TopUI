@@ -34,3 +34,16 @@
         }
     }
 }
+
+[dir="rtl"] {
+    .tui-drawer {
+        + .tui-drawer-container {
+            > aside {
+                padding-left: 0;
+                margin-left: 0;
+                padding-right: .25rem;
+                margin-right: -.25rem;
+            }
+        }
+    }
+}

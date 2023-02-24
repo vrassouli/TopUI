@@ -1628,6 +1628,13 @@
   }
 }
 
+[dir="rtl"] .tui-drawer + .tui-drawer-container > aside {
+  padding-left: 0;
+  margin-left: 0;
+  padding-right: .25rem;
+  margin-right: -.25rem;
+}
+
 .tui-dropdown {
   cursor: pointer;
 }
@@ -1858,6 +1865,6 @@
   transform: rotate(90deg);
 }
 
-[dir="rtl"] .tui-tree > li.tree-item.expanded > .item-wrapper > .expander {
+[dir="rtl"] .tui-tree li.tree-item.expanded > .item-wrapper > .expander {
   transform: rotate(-90deg);
 }
