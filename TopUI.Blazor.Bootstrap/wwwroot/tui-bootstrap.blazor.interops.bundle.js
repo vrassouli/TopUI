@@ -1,3 +1,5 @@
+import { getScrollSync } from '/_content/TopUI.Blazor.Core/topui.interops.bundle.js';
+
 class DataGrid {
     _dotnetRef;
     _id;
@@ -8,6 +10,9 @@ class DataGrid {
         this._id = id;
 
         this.#setHeaderPadding();
+
+        var sync = getScrollSync();
+        sync.initialize(dotNetRef, `#${id}>.data-grid-content`, [`#${id}>.data-grid-header`], { syncHorizontal: true });
     }
 
     dispose() {
