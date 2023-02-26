@@ -20,6 +20,7 @@ public class DataComboBox<TItem, TValue> : ComboBox<TValue>, IDataBoundComponent
     [Parameter] public EventCallback<IList<TItem>?> SelectedItemsChanged { get; set; }
     [Parameter] public Func<TItem, string>? ItemText { get; set; }
     [Parameter] public Func<TItem, TValue>? ItemValue { get; set; }
+    [Parameter] public Func<TItem, object>? ItemKey { get; set; }
     [Parameter] public string? DefaultItem { get; set; }
 
     protected override void OnParametersSet()
@@ -52,6 +53,7 @@ public class DataComboBox<TItem, TValue> : ComboBox<TValue>, IDataBoundComponent
                 foreach (var item in Items)
                 {
                     builder.OpenComponent<ComboBoxItem<TValue>>(0);
+                    builder.SetKey(GetKey(item) ?? item);
 
                     builder.AddAttribute(1, nameof(ComboBoxItem<TValue>.Text), GetText(item));
                     builder.AddAttribute(2, nameof(ComboBoxItem<TValue>.Value), GetValue(item));
@@ -76,5 +78,13 @@ public class DataComboBox<TItem, TValue> : ComboBox<TValue>, IDataBoundComponent
             return ItemValue(item);
 
         return default;
+    }
+
+    private object? GetKey(TItem item)
+    {
+        if (ItemKey != null)
+            return ItemKey(item);
+
+        return GetValue(item) ?? default;
     }
 }
