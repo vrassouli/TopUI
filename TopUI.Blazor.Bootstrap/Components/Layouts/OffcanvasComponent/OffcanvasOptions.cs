@@ -9,7 +9,7 @@ namespace TopUI.Blazor.Bootstrap.Components;
 public sealed class OffcanvasOptions
 {
     public string Title { get; set; }
-    public bool StaticBackdrop { get; set; }
+    public OffcanvasBackdrop Backdrop { get; set; } = OffcanvasBackdrop.Default;
     public bool Keyboard { get; set; } = true;
     public bool Scrollable { get; set; } = true;
     public OffcanvasPlacement Placement { get; set; } = OffcanvasPlacement.End;

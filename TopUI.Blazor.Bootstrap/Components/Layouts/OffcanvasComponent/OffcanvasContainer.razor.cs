@@ -84,7 +84,9 @@ public sealed partial class OffcanvasContainer : IAsyncDisposable
         if (_options?.Scrollable == true)
             list.Add("data-bs-scroll", "true");
 
-        if (_options?.StaticBackdrop == true)
+        if (_options?.Backdrop == OffcanvasBackdrop.NoBackdrop)
+            list.Add("data-bs-backdrop", "false");
+        else if (_options?.Backdrop == OffcanvasBackdrop.Static)
             list.Add("data-bs-backdrop", "static");
 
         list.Add("data-bs-keyboard", (_options?.Keyboard ?? true).ToString().ToLower());

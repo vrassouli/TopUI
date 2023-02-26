@@ -22,10 +22,6 @@
                     </div>
                 </div>
                 <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="StaticBackdrop" checked="@_options.StaticBackdrop" @onchange="(e)=>{_options.StaticBackdrop = !_options.StaticBackdrop;}">
-                    <label class="form-check-label" for="StaticBackdrop">Static backdrop</label>
-                </div>
-                <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" role="switch" id="Keyboard" checked="@_options.Keyboard" @onchange="(e)=>{_options.Keyboard = !_options.Keyboard;}">
                     <label class="form-check-label" for="Keyboard">Keyboard</label>
                 </div>
@@ -33,6 +29,16 @@
                     <input class="form-check-input" type="checkbox" role="switch" id="Scrollable" checked="@_options.Scrollable" @onchange="(e)=>{_options.Scrollable = !_options.Scrollable;}">
                     <label class="form-check-label" for="Scrollable">Scrollable content</label>
                 </div>
+                <div class="mb-3">
+                    <label for="backdrop" class="form-label">Backdrop</label>
+                    <select id="backdrop" class="form-select" @onchange="OffcanvasBackdropChanged">
+                        @foreach (var value in Enum.GetValues(typeof(OffcanvasBackdrop)))
+                        {
+                            <option value="@value" selected="@((OffcanvasBackdrop)value == _options.Backdrop)">@value.ToString()</option>
+                        }
+                    </select>
+                </div>
+
                 <div class="mb-3">
                     <label for="FullScreen" class="form-label">Placement</label>
                     <select id="FullScreen" class="form-select" @onchange="OffcanvasPlacementChanged">
@@ -60,7 +66,7 @@
         var result = await BootstrapJs.OpenOffcanvas<SampleOffcanvasContent>(opt =>
         {
             opt.Title = _options.Title;
-            opt.StaticBackdrop = _options.StaticBackdrop;
+            opt.Backdrop = _options.Backdrop;
             opt.Keyboard = _options.Keyboard;
             opt.Scrollable = _options.Scrollable;
             opt.Placement = _options.Placement;
@@ -74,6 +80,13 @@
         var str = args.Value?.ToString();
         if (!string.IsNullOrEmpty(str))
             _options.Placement = Enum.Parse<OffcanvasPlacement>(str);
+    }
+
+    private void OffcanvasBackdropChanged(ChangeEventArgs args)
+    {
+        var str = args.Value?.ToString();
+        if (!string.IsNullOrEmpty(str))
+            _options.Backdrop = Enum.Parse<OffcanvasBackdrop>(str);
     }
 
 }
