@@ -25,7 +25,7 @@ public sealed class SampleModel
 
     public int Age { get; set; } = default!;
 
-    public DateOnly Birthdate { get; set; } = default!;
+    public DateTime Birthdate { get; set; } = default!;
 
     public string Country { get; set; } = default!;
 

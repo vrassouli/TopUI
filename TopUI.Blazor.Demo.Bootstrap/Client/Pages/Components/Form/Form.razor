@@ -46,7 +46,7 @@
         <div class="col-sm-10">
             <InputGroup>
                 <Addon><i class="bi bi-calendar"></i></Addon>
-                <TextBox @bind-Value="_model.Birthdate" DisableAutoComplete />
+                <TextBox @bind-Value="_model.Birthdate" Format="{0:yyyy/MM/dd}" />
             </InputGroup>
         </div>
     </div>
@@ -121,7 +121,8 @@
         _model = new SampleModel
             {
                 Address = "your address",
-                Country = "DE"
+                Country = "DE",
+                Birthdate = DateTime.Now
             };
     }
 

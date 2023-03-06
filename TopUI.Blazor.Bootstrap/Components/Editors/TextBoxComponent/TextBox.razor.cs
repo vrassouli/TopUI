@@ -16,8 +16,8 @@ public sealed partial class TextBox<TValue>
 {
     [Parameter] public FormControlSize Size { get; set; } = FormControlSize.Default;
 
-    [Parameter]
-    public bool DisableAutoComplete { get; set; }
+    [Parameter] public bool DisableAutoComplete { get; set; }
+    [Parameter] public string? Format { get; set; }
 
     [Parameter, ElementAttribute("placeholder")]
     public string? Placeholder { get; set; }
@@ -42,10 +42,13 @@ public sealed partial class TextBox<TValue>
         base.OnParametersSet();
     }
 
-    protected override string? FormatValueAsString(TValue? value) 
+    protected override string? FormatValueAsString(TValue? value)
     {
         if (value is Color color)
             return ColorTranslator.ToHtml(color);
+
+        if (!string.IsNullOrEmpty(Format))
+            return string.Format(Format, value);
 
         return base.FormatValueAsString(value);
     }

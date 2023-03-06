@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components.Web.Virtualization;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,8 +34,28 @@ public class DataComboBox<TItem, TValue> : ComboBox<TValue>, IDataBoundComponent
         base.OnParametersSet();
     }
 
-    internal override async Task<int> OnItemSelected(ComboBoxItem<TValue> item)
-        => await SelectableChildContainerHelper.OnItemSelected<DataComboBox<TItem, TValue>, ComboBoxItem<TValue>, TItem>(this, item);
+    internal override async Task<int> OnItemSelected(ComboBoxItem<TValue> child)
+    {
+        //await SelectableChildContainerHelper.OnItemSelected<DataComboBox<TItem, TValue>, ComboBoxItem<TValue>, TItem>(this, item);
+        var index = await SelectableChildContainerHelper.OnItemSelected<DataComboBox<TItem, TValue>, ComboBoxItem<TValue>>(this, child);
+        if (Items != null)
+        {
+            if (index >= 0 && index < Items.Count)
+            {
+                // DefaultItem adds an extra Item (<option>) to the <select> element.
+                // so the real index of this data items, are added by 1, at the runtime
+                var itemIndex = index - (string.IsNullOrEmpty(DefaultItem) ? 0 : 1);
+                if (itemIndex < 0)
+                    return -1;
+
+                var item = Items[itemIndex];
+
+                await SelectableChildContainerHelper.OnItemSelected(this, child, item);
+            }
+        }
+        return index;
+
+    }
 
     private RenderFragment RenderItems()
     {
