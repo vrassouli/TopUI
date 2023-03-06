@@ -76,7 +76,7 @@ internal class SelectableChildContainerHelper
         return index;
     }
     
-    internal static async Task OnItemSelected<TComponent, TChild, TItem>(TComponent component, TChild child, TItem item)
+    internal static async Task OnItemSelected<TComponent, TChild, TItem>(TComponent component, TChild child, TItem? item)
         where TComponent : IDataBoundComponent<TItem>, IDataSelectionContainer<TItem>, ISelectionContainerComponent, IChildrenContainerComponent<TChild>
         where TChild : IStateChangeNotification
     {

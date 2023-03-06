@@ -66,10 +66,13 @@
             <DataComboBox Items="_countries"
                           ItemText="@(x => $"{x.Name} ({x.CallingCode})")"
                           ItemValue="x => x.CountryCode"
-                          AutoComplete
+                          DefaultItem="Select one..."
                           @bind-InputText="_searchedCountry"
                           @bind-InputText:after="OnSearchedCountry"
-                          @bind-Value="_model.Country" />
+                          @bind-Value="_model.Country"
+                          @bind-SelectedItem="_selectedCountry"/>
+
+            <div>@_selectedCountry?.Name</div>
         </div>
     </div>
     <div class="row mb-2">
@@ -114,6 +117,7 @@
     List<CountryDto> _countries;
     private SampleModel _model;
     private string? _searchedCountry;
+    CountryDto? _selectedCountry;
 
     public Form()
     {
