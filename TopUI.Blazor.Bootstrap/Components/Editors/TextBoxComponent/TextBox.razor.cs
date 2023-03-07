@@ -18,6 +18,7 @@ public sealed partial class TextBox<TValue>
 
     [Parameter] public bool DisableAutoComplete { get; set; }
     [Parameter] public string? Format { get; set; }
+    [Parameter] public string BindEventName { get; set; } = "onchange";
 
     [Parameter, ElementAttribute("placeholder")]
     public string? Placeholder { get; set; }

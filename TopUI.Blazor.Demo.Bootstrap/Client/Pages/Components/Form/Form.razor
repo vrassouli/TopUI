@@ -5,7 +5,7 @@
 
 <EditForm Model="_model">
     <FloatingLabel For="()=>_model.FirstName" class="mb-2">
-        <TextBox @bind-Value="_model.FirstName" DisableAutoComplete />
+        <TextBox @bind-Value="_model.FirstName" BindEventName="oninput" DisableAutoComplete />
     </FloatingLabel>
     <FloatingLabel For="()=>_model.LastName" class="mb-2">
         <TextBox @bind-Value="_model.LastName" DisableAutoComplete />
