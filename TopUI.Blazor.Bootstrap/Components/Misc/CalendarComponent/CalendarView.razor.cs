@@ -87,7 +87,7 @@ public partial class CalendarView<TValue>
     {
         if (EditorDataType == typeof(DateTime) || EditorDataType == typeof(DateOnly))
         {
-            if (BindConverter.TryConvertTo(value, CultureInfo.InvariantCulture, out result))
+            if (BindConverter.TryConvertTo(value, CultureInfo.CurrentUICulture, out result))
             {
                 validationErrorMessage = null;
                 return true;

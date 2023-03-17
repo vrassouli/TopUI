@@ -28,7 +28,7 @@ public sealed partial class RangeComponent<TValue>
     {
         if (IsNumeric)
         {
-            if (BindConverter.TryConvertTo(value, CultureInfo.InvariantCulture, out result))
+            if (BindConverter.TryConvertTo(value, CultureInfo.CurrentUICulture, out result))
             {
                 validationErrorMessage = null;
                 return true;

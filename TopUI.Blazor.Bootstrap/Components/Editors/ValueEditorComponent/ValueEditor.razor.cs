@@ -23,7 +23,7 @@ public sealed partial class ValueEditor<TValue>
         var targetType = typeof(TValue);
         if (targetType == typeof(string))
         {
-            if (BindConverter.TryConvertTo(value, CultureInfo.InvariantCulture, out result))
+            if (BindConverter.TryConvertTo(value, CultureInfo.CurrentUICulture, out result))
             {
                 validationErrorMessage = null;
                 return true;

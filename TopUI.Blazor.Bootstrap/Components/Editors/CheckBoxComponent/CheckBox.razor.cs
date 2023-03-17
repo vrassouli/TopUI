@@ -29,7 +29,7 @@ public sealed partial class CheckBox<TValue>
 
     private void OnChange(ChangeEventArgs args)
     {
-        if (BindConverter.TryConvertTo<TValue>(Equals(args.Value, true), CultureInfo.InvariantCulture, out var convertedVal))
+        if (BindConverter.TryConvertTo<TValue>(Equals(args.Value, true), CultureInfo.CurrentUICulture, out var convertedVal))
             CurrentValue = convertedVal;
     }
 

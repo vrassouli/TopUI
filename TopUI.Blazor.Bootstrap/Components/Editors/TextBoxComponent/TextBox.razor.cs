@@ -58,7 +58,7 @@ public sealed partial class TextBox<TValue>
     {
         if (EditorDataType == typeof(string) || IsNumeric)
         {
-            if (BindConverter.TryConvertTo(value, CultureInfo.InvariantCulture, out result))
+            if (BindConverter.TryConvertTo(value, CultureInfo.CurrentUICulture, out result))
             {
                 validationErrorMessage = null;
                 return true;
@@ -66,7 +66,7 @@ public sealed partial class TextBox<TValue>
         }
         else if (EditorDataType == typeof(DateTime) || EditorDataType == typeof(DateOnly))
         {
-            if (BindConverter.TryConvertTo(value, CultureInfo.InvariantCulture, out result))
+            if (BindConverter.TryConvertTo(value, CultureInfo.CurrentUICulture, out result))
             {
                 validationErrorMessage = null;
                 return true;
@@ -74,7 +74,7 @@ public sealed partial class TextBox<TValue>
         }
         else if (EditorDataType == typeof(Color))
         {
-            if (BindConverter.TryConvertTo(value, CultureInfo.InvariantCulture, out result))
+            if (BindConverter.TryConvertTo(value, CultureInfo.CurrentUICulture, out result))
             {
                 validationErrorMessage = null;
                 return true;
