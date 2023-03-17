@@ -47,9 +47,9 @@ public class CountryDto
         //yield return new CountryDto("Iran", "IR", 86758304, "+98", "Tehran");
     }
 
-    public static IEnumerable<TreeViewItemDto> GetTreeViewItems()
+    public static IEnumerable<TreeViewItemDto> GetTreeViewItems(int minIndex = 0, int maxIndex = 10)
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = minIndex; i < maxIndex; i++)
         {
             var rnd = new Random(i).Next(1, 10000);
 

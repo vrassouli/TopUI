@@ -27,6 +27,7 @@
 </pre>
 
         <h4>Data bound TreeView</h4>
+        <Button Icon="bi bi-refresh" Text="Refresh" @onclick="ReloadTree" class="mb-2"/>
         <DataTreeView TItem=TreeViewItemDto
                       Items=_list
                       ItemText="x => x.Name"
@@ -92,6 +93,13 @@
             StateHasChanged();
 
         base.OnAfterRender(firstRender);
+    }
+
+    private void ReloadTree()
+    {
+        var start = new Random().Next(0, 1000000);
+
+        _list = CountryDto.GetTreeViewItems(start, start + 10).ToList();
     }
 
     private async ValueTask<IList<TreeViewItemDto>> ProvideTreeItems(TreeViewItemDto? parent)
