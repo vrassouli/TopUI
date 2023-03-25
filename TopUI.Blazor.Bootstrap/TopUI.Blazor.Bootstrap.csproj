@@ -30,7 +30,7 @@
 		<Sass Remove="Styles\Components\calendar.scss" />
 		<Sass Remove="Styles\Components\dashboard.scss" />
 		<Sass Remove="Styles\Components\data-grid.scss" />
-		<Sass Remove="Styles\Components\drop-down.scss" />
+		<Sass Remove="Styles\Components\dropdown.scss" />
 		<Sass Remove="Styles\Components\grid-layout.scss" />
 		<Sass Remove="Styles\Components\master-detail.scss" />
 		<Sass Remove="Styles\Components\modal.scss" />
