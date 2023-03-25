@@ -1,0 +1,43 @@
+﻿@page "/components/stepper"
+
+<div class="row gap-2 gap-md-0 flex-nowrap">
+    <div class="col-md order-1 order-md-0">
+        <Stepper @ref=_elRef
+            DoneIcon="bi bi-check"
+            ActiveIcon="bi bi-dot"
+            @attributes=_parameters>
+            <StepperItem Title="Step 1" Description="Step 1 description" Mode="StepperItemMode.Done"/>
+            <StepperItem Title="Step 2" Description="Step 2 description" Mode="StepperItemMode.Active"/>
+            <StepperItem Title="Step 3" Description="Step 3 description" Mode="StepperItemMode.ToDo"/>
+        </Stepper>
+
+        <h3 class="mt-5">Usage:</h3>
+<pre class="bg-body-tertiary p-2 rounded border">
+        <code class="razor">
+                @TopUI.Blazor.Core.Generators.CodeGenerator.GenerateComponentInitializer(typeof(Stepper), _parameters)
+    </code>
+</pre>
+    </div>
+
+
+    <div class="col-md-auto order-0 order-md-1">
+        <PropertyGrid ValueSource="_elRef" PropertyValuesChanged="p => _parameters = p" class="mt-1">
+        </PropertyGrid>
+    </div>
+</div>
+
+@code {
+    private Stepper? _elRef;
+    private Dictionary<string, object?>? _parameters;
+    private string? _fileName;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        // Element references are captured after render.
+        // So in order to pass the element reference to the PropertyGrid, we need to re-render after first render.
+        if (firstRender)
+            StateHasChanged();
+
+        base.OnAfterRender(firstRender);
+    }
+}

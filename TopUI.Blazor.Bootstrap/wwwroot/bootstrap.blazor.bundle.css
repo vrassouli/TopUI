@@ -1785,6 +1785,136 @@
   align-items: center;
 }
 
+.tui-stepper {
+  display: flex;
+}
+
+.tui-stepper > .stepper-item {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.tui-stepper > .stepper-item > .indicators {
+  display: flex;
+  padding-inline-start: 0.5rem;
+}
+
+.tui-stepper > .stepper-item > .indicators > .icon {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  line-height: 0.9rem;
+}
+
+.tui-stepper > .stepper-item > .indicators > .icon > i {
+  margin: -1px 0 0 -1px;
+}
+
+.tui-stepper > .stepper-item > .indicators > .seq {
+  flex: 1;
+  margin-top: 0.5rem;
+  border-top: 1px solid transparent;
+}
+
+.tui-stepper > .stepper-item > .texts {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  border-radius: var(--bs-border-radius);
+}
+
+.tui-stepper > .stepper-item > .texts > .description {
+  color: var(--bs-secondary);
+}
+
+.tui-stepper > .stepper-item.done .icon {
+  background-color: var(--bs-success);
+  border-color: var(--bs-success);
+  color: var(--bs-light);
+}
+
+.tui-stepper > .stepper-item.done .seq {
+  border-top-color: var(--bs-success);
+}
+
+.tui-stepper > .stepper-item.active .icon {
+  border-color: var(--bs-primary);
+  color: var(--bs-primary-text);
+}
+
+.tui-stepper > .stepper-item.active .seq {
+  border-top-color: var(--bs-primary);
+}
+
+.tui-stepper > .stepper-item.todo .icon {
+  border-color: var(--bs-primary);
+  color: var(--bs-primary-text);
+}
+
+.tui-stepper > .stepper-item.todo .seq {
+  border-top-color: var(--bs-primary);
+}
+
+.tui-stepper > .stepper-item:not(:first-child) {
+  margin-inline-start: -0.5rem;
+}
+
+.tui-stepper > .stepper-item:last-child > .indicators > .seq {
+  display: none;
+}
+
+.tui-stepper > .stepper-item:hover > .texts {
+  background-color: var(--bs-dark-bg-subtle);
+}
+
+.tui-stepper.vertical {
+  flex-direction: column;
+}
+
+.tui-stepper.vertical > .stepper-item {
+  flex-direction: row;
+}
+
+.tui-stepper.vertical > .stepper-item > .indicators {
+  flex-direction: column;
+  padding-top: 0.8rem;
+  padding-inline-start: 0;
+}
+
+.tui-stepper.vertical > .stepper-item > .indicators > .seq {
+  margin-top: 0;
+  margin-inline-start: 0.5rem;
+  border-top-width: 0;
+  border-inline-start: 1px solid transparent;
+}
+
+.tui-stepper.vertical > .stepper-item.done .seq {
+  border-inline-start-color: var(--bs-success);
+}
+
+.tui-stepper.vertical > .stepper-item.active .seq {
+  border-inline-start-color: var(--bs-primary);
+}
+
+.tui-stepper.vertical > .stepper-item.todo .seq {
+  border-inline-start-color: var(--bs-primary);
+}
+
+.tui-stepper.vertical > .stepper-item:not(:first-child) {
+  margin-inline-start: 0;
+  margin-top: -0.8rem;
+}
+
+.tui-stepper.active-description > .stepper-item > .texts > .description {
+  display: none;
+}
+
+.tui-stepper.active-description > .stepper-item.active > .texts > .description {
+  display: unset;
+}
+
 .tui-tab {
   overflow: auto;
 }

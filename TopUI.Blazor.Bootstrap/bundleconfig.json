@@ -17,6 +17,7 @@
       "Styles/Components/modal.css",
       "Styles/Components/nav.css",
       "Styles/Components/property-grid.css",
+      "Styles/Components/stepper.css",
       "Styles/Components/tab.css",
       "Styles/Components/tree-view.css"
     ],

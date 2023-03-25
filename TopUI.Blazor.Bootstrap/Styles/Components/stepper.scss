@@ -1,0 +1,157 @@
+﻿.tui-stepper {
+    display: flex;
+
+    > .stepper-item {
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+
+        > .indicators {
+            display: flex;
+            padding-inline-start: 0.5rem;
+
+            > .icon {
+                width: 1rem;
+                height: 1rem;
+                border-radius: 50%;
+                border: 1px solid transparent;
+                line-height: 0.9rem;
+
+                > i {
+                    margin: -1px 0 0 -1px;
+                }
+            }
+
+            > .seq {
+                flex: 1;
+                margin-top: 0.5rem;
+                border-top: 1px solid transparent;
+            }
+        }
+
+        > .texts {
+            display: flex;
+            flex-direction: column;
+            padding: 0.5rem;
+            border-radius: var(--bs-border-radius);
+
+            > .description {
+                color: var(--bs-secondary);
+            }
+        }
+
+        &.done {
+            .icon {
+                background-color: var(--bs-success);
+                border-color: var(--bs-success);
+                color: var(--bs-light);
+            }
+
+            .seq {
+                border-top-color: var(--bs-success);
+            }
+        }
+
+        &.active {
+            .icon {
+                border-color: var(--bs-primary);
+                color: var(--bs-primary-text);
+            }
+
+            .seq {
+                border-top-color: var(--bs-primary);
+            }
+        }
+
+        &.todo {
+            .icon {
+                border-color: var(--bs-primary);
+                color: var(--bs-primary-text);
+            }
+
+            .seq {
+                border-top-color: var(--bs-primary);
+            }
+        }
+
+        &:not(:first-child) {
+            margin-inline-start: -0.5rem;
+        }
+
+        &:last-child {
+            > .indicators {
+                > .seq {
+                    display: none;
+                }
+            }
+        }
+
+        &:hover {
+            > .texts {
+                background-color: var(--bs-dark-bg-subtle);
+            }
+        }
+    }
+
+    &.vertical {
+        flex-direction: column;
+
+        > .stepper-item {
+            flex-direction: row;
+
+            > .indicators {
+                flex-direction: column;
+                padding-top: 0.8rem;
+                padding-inline-start: 0;
+
+                > .seq {
+                    margin-top: 0;
+                    margin-inline-start: 0.5rem;
+                    border-top-width: 0;
+                    border-inline-start: 1px solid transparent;
+                }
+            }
+
+            &.done {
+                .seq {
+                    border-inline-start-color: var(--bs-success);
+                }
+            }
+
+            &.active {
+                .seq {
+                    border-inline-start-color: var(--bs-primary);
+                }
+            }
+
+            &.todo {
+                .seq {
+                    border-inline-start-color: var(--bs-primary);
+                }
+            }
+
+            &:not(:first-child) {
+                margin-inline-start: 0;
+                margin-top: -0.8rem;
+            }
+        }
+    }
+
+    &.active-description {
+        > .stepper-item {
+            > .texts {
+                > .description {
+                    display: none;
+                }
+            }
+
+            &.active {
+                > .texts {
+                    > .description {
+                        display: unset;
+                    }
+                }
+            }
+        }
+    }
+}

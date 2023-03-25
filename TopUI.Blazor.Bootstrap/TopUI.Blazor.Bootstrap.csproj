@@ -35,6 +35,7 @@
 		<Sass Remove="Styles\Components\master-detail.scss" />
 		<Sass Remove="Styles\Components\modal.scss" />
 		<Sass Remove="Styles\Components\property-grid.scss" />
+		<Sass Remove="Styles\Components\stepper.scss" />
 		<Sass Remove="Styles\Components\tab.scss" />
 		<Sass Remove="Styles\Components\tree-view.scss" />
 	</ItemGroup>
