@@ -3,6 +3,7 @@
 
 <div @attributes=AdditionalAttributes>
     <div class="indicators">
+        <div class="seq"></div>
         <div class="icon">
             @if (Mode == StepperItemMode.Done && !string.IsNullOrEmpty(Stepper.DoneIcon))
             {
@@ -19,7 +20,7 @@
         </div>
         <div class="seq"></div>
     </div>
-    <div class="texts">
+    <div class="content">
         <div>@Title</div>
         @if (!string.IsNullOrEmpty(Description))
         {
