@@ -34,8 +34,12 @@ public partial class DropdownButton : IChildrenContainerComponent<DropdownItem>,
     [Parameter]
     [Browsable(false)]
     public EventCallback<IEnumerable<int>> SelectedIndicesChanged { get; set; }
+   
     [Parameter] 
     public bool SplitButton { get; set; }
+
+    [Parameter]
+    public bool DisplayToggler { get; set; } = true;
 
     public List<DropdownItem> Children { get; } = new();
 
@@ -70,10 +74,18 @@ public partial class DropdownButton : IChildrenContainerComponent<DropdownItem>,
         foreach (var c in base.GetClasses())
             yield return c;
 
-        if (!SplitButton)
+        if (!SplitButton && DisplayToggler)
         {
             yield return "dropdown-toggle";
         }
+    }
+
+    private string GetWrapperClass()
+    {
+        if (SplitButton)
+            return "btn-group";
+        else
+            return "dropdown";
     }
 
     internal virtual async Task<int> OnItemSelected(DropdownItem item)

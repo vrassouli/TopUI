@@ -1,7 +1,7 @@
 ﻿@namespace TopUI.Blazor.Bootstrap.Components
 @inherits Button
 
-<div class="btn-group">
+<div class="@GetWrapperClass()">
     @{
         base.BuildRenderTree(__builder);
     }
