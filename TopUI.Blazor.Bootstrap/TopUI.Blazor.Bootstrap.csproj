@@ -53,7 +53,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\TopUI.Blazor.Core\TopUI.Blazor.Core.csproj" />
+	  <ProjectReference Include="..\TopUI.Blazor.Core\TopUI.Blazor.Core.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 		<Compile Update="Components\Layouts\ModalComponent\Resources\MessageBoxComponent.Designer.cs">

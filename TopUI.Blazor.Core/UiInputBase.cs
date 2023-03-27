@@ -259,7 +259,7 @@ public abstract class UiInputBase<TValue> : UiComponent, IDisposable
 
     private void UpdateAdditionalValidationAttributes()
     {
-        if (EditContext is null)
+        if (EditContext is null || FieldIdentifier.FieldName is null)
         {
             return;
         }
