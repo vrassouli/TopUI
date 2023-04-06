@@ -72,7 +72,7 @@ public class DataComboBox<TItem, TValue> : ComboBox<TValue>, IDataBoundComponent
             {
                 builder.OpenComponent<ComboBoxItem<TValue>>(0);
                 builder.AddAttribute(1, nameof(ComboBoxItem<TValue>.Text), DefaultItem);
-                builder.AddAttribute(2, nameof(ComboBoxItem<TValue>.Value), default(TValue));
+                builder.AddAttribute(2, nameof(ComboBoxItem<TValue>.Value), DefaultItem);
                 builder.CloseComponent();
             }
 
