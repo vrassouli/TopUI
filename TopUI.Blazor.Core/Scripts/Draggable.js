@@ -24,7 +24,7 @@
             args.dataTransfer.setData(e[0], e[1]);
         })
         ev.dataTransfer.dropEffect = this._options.dropEffect;
-        console.log(args);
+        //console.log(args);
     }
 }
 

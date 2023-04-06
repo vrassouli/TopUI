@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 using static System.Collections.Specialized.BitVector32;
 using TopUI.Blazor.Core.Abstractions;
 using TopUI.Blazor.Core;
+using System.Reflection;
 
 namespace TopUI.Blazor.Bootstrap.Components.Utilities;
 
 internal class SelectableChildContainerHelper
 {
-    internal static async Task<int> OnItemSelected<TComponent, TChild>(TComponent component, TChild child)
+    internal static async Task<int> OnItemSelected<TComponent, TChild>(TComponent component, TChild? child)
         where TComponent : ISelectionContainerComponent, IChildrenContainerComponent<TChild>
         where TChild : IStateChangeNotification
     {
-        if (component.Selection != SelectionMode.None)
+        if (child != null && component.Selection != SelectionMode.None)
         {
             var index = component.Children.IndexOf(child);
 
@@ -30,7 +31,6 @@ internal class SelectableChildContainerHelper
                 }
 
                 component.SelectedIndices.Add(index);
-
                 component.SelectedIndex = index;
 
                 await component.SelectedIndexChanged.InvokeAsync(index);
@@ -56,6 +56,11 @@ internal class SelectableChildContainerHelper
             return index;
         }
 
+        component.SelectedIndices.Clear();
+        component.SelectedIndex = -1;
+
+        await component.SelectedIndexChanged.InvokeAsync(-1);
+        await component.SelectedIndicesChanged.InvokeAsync(component.SelectedIndices);
         return -1;
     }
 
@@ -76,7 +81,7 @@ internal class SelectableChildContainerHelper
         return index;
     }
     
-    internal static async Task OnItemSelected<TComponent, TChild, TItem>(TComponent component, TChild child, TItem? item)
+    internal static async Task OnItemSelected<TComponent, TChild, TItem>(TComponent component, TChild? child, TItem? item)
         where TComponent : IDataBoundComponent<TItem>, IDataSelectionContainer<TItem>, ISelectionContainerComponent, IChildrenContainerComponent<TChild>
         where TChild : IStateChangeNotification
     {

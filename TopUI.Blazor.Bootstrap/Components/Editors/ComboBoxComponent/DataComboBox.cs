@@ -35,7 +35,7 @@ public class DataComboBox<TItem, TValue> : ComboBox<TValue>, IDataBoundComponent
         base.OnParametersSet();
     }
 
-    internal override async Task<int> OnItemSelected(ComboBoxItem<TValue> child)
+    internal override async Task<int> OnItemSelected(ComboBoxItem<TValue>? child)
     {
         //await SelectableChildContainerHelper.OnItemSelected<DataComboBox<TItem, TValue>, ComboBoxItem<TValue>, TItem>(this, item);
         var index = await SelectableChildContainerHelper.OnItemSelected<DataComboBox<TItem, TValue>, ComboBoxItem<TValue>>(this, child);
@@ -72,7 +72,7 @@ public class DataComboBox<TItem, TValue> : ComboBox<TValue>, IDataBoundComponent
             {
                 builder.OpenComponent<ComboBoxItem<TValue>>(0);
                 builder.AddAttribute(1, nameof(ComboBoxItem<TValue>.Text), DefaultItem);
-                builder.AddAttribute(2, nameof(ComboBoxItem<TValue>.Value), DefaultItem);
+                builder.AddAttribute(2, nameof(ComboBoxItem<TValue>.Value), string.Empty);
                 builder.CloseComponent();
             }
 
@@ -84,7 +84,7 @@ public class DataComboBox<TItem, TValue> : ComboBox<TValue>, IDataBoundComponent
                     builder.SetKey(GetKey(item) ?? item);
 
                     builder.AddAttribute(1, nameof(ComboBoxItem<TValue>.Text), GetText(item));
-                    builder.AddAttribute(2, nameof(ComboBoxItem<TValue>.Value), GetValue(item));
+                    builder.AddAttribute(2, nameof(ComboBoxItem<TValue>.Value), GetValue(item)?.ToString());
 
                     builder.CloseComponent();
                 }

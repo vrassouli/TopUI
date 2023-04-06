@@ -5,10 +5,10 @@
     <div class="col">
         <h4>Combobox</h4>
         <ComboBox @bind-Value=_selectedValue @bind-SelectedIndex="_selectedIndex">
-            <ComboBoxItem Text="Item 1" Value="1" />
-            <ComboBoxItem Text="Item 2" Value="2" />
-            <ComboBoxItem Text="Item 3" Value="3" />
-            <ComboBoxItem Text="Item 4" Value="4" />
+            <ComboBoxItem TValue="int" Text="Item 1" Value="1" />
+            <ComboBoxItem TValue="int" Text="Item 2" Value="2" />
+            <ComboBoxItem TValue="int" Text="Item 3" Value="3" />
+            <ComboBoxItem TValue="int" Text="Item 4" Value="4" />
         </ComboBox>
         <div class="p-2">
             Selected Value: @_selectedValue
@@ -22,7 +22,8 @@
                       ItemText="x => x.Name"
                       ItemValue="x => x.Population"
                       @bind-Value="_selectedItemValue"
-                      @bind-SelectedItem="_selectedItem">
+                      @bind-SelectedItem="_selectedItem"
+                      DefaultItem="Select one...">
         </DataComboBox>
         <div class="p-2">
             Selected Value: @_selectedItemValue

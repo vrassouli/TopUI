@@ -151,10 +151,10 @@ public partial class ComboBox<TValue> : BootstrapFormControlComponent<TValue>, I
     }
 
     protected override async void OnCurrentValueChanged()
-    {
-        var item = Children.FirstOrDefault(x => EqualityComparer<TValue>.Default.Equals(x.Value, CurrentValue));
+    {        
+        var item = Children.FirstOrDefault(x => x.Value == FormatValueAsString(CurrentValue));
 
-        if (item != null)
+        //if (item != null)
             await OnItemSelected(item);
     }
 
@@ -164,7 +164,7 @@ public partial class ComboBox<TValue> : BootstrapFormControlComponent<TValue>, I
 
         var childItem = Children.FirstOrDefault(x => Equals(x.Value, value));
         if (childItem != null)
-            CurrentValueAsString = ValueToString(childItem.Value);
+            CurrentValueAsString = childItem.Value;
         else
             CurrentValueAsString = default;
     }
@@ -185,7 +185,7 @@ public partial class ComboBox<TValue> : BootstrapFormControlComponent<TValue>, I
         return FormatValueAsString(value);
     }
 
-    internal virtual async Task<int> OnItemSelected(ComboBoxItem<TValue> item)
+    internal virtual async Task<int> OnItemSelected(ComboBoxItem<TValue>? item)
         => await SelectableChildContainerHelper.OnItemSelected(this, item);
 
     internal bool IsSelected(ComboBoxItem<TValue> item)

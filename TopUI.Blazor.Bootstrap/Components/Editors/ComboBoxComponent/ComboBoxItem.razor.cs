@@ -13,7 +13,7 @@ public sealed partial class ComboBoxItem<TValue> : IStateChangeNotification, IAs
 {
     [CascadingParameter] public ComboBox<TValue> Parent { get; set; } = default!;
     [Parameter, EditorRequired] public string Text { get; set; } = default!;
-    [Parameter, EditorRequired] public TValue Value { get; set; } = default!;
+    [Parameter, EditorRequired] public string Value { get; set; } = default!;
 
     protected override void OnInitialized()
     {
@@ -37,10 +37,10 @@ public sealed partial class ComboBoxItem<TValue> : IStateChangeNotification, IAs
         StateHasChanged();
     }
 
-    public string? GetValueString()
-    {
-        return Parent.ValueToString(Value);
-    }
+    //public string? GetValueString()
+    //{
+    //    return Parent.ValueToString(Value);
+    //}
 
     public bool IsSelected()
     {
