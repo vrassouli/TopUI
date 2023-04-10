@@ -65,10 +65,13 @@ public partial class Button : IBusyComponent
         yield return "tui-btn";
         yield return "btn";
 
-        if (Outline)
-            yield return $"btn-outline-{Mode}".ToLower();
-        else
-            yield return $"btn-{Mode}".ToLower();
+        if (Mode != ButtonMode.None)
+        {
+            if (Outline)
+                yield return $"btn-outline-{Mode}".ToLower();
+            else
+                yield return $"btn-{Mode}".ToLower();
+        }
 
         if (Size == ButtonSizes.Small)
             yield return $"btn-sm";

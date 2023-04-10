@@ -16,5 +16,6 @@ public enum ButtonMode
     Info,
     Light,
     Dark,
-    Link
+    Link,
+    None
 }
