@@ -21,6 +21,7 @@
     [Parameter] public uint? RowXl { get; set; }
     [Parameter] public uint? ColXxl { get; set; }
     [Parameter] public uint? RowXxl { get; set; }
+    [Parameter] public string? Classes { get; set; }
 
     protected override IEnumerable<string> GetClasses()
     {
@@ -53,5 +54,8 @@
             yield return $"dash-row-xl-{RowXl}";
         if (RowXxl != null)
             yield return $"dash-row-xxl-{RowXxl}";
+        
+        if (!string.IsNullOrEmpty(Classes))
+            yield return Classes;
     }
 }
