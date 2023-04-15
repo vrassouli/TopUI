@@ -159,4 +159,7 @@
   <data name="Starts with" xml:space="preserve">
     <value>شروع شود با</value>
   </data>
+  <data name="Type filter..." xml:space="preserve">
+    <value>فیلتر را وارد کنید...</value>
+  </data>
 </root>
