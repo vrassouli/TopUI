@@ -1394,6 +1394,7 @@
 }
 
 .tui-data-grid {
+  position: relative;
   display: flex;
   flex-direction: column;
 }
@@ -1428,6 +1429,10 @@
   white-space: nowrap;
   flex: 1;
   flex-shrink: 0;
+}
+
+.tui-data-grid > .data-grid-header > .cell > .filter {
+  cursor: pointer;
 }
 
 .tui-data-grid > .data-grid-header > .cell > .resizer {
@@ -1490,6 +1495,29 @@
 .tui-data-grid > .data-grid-content > .data-grid-row:not(:last-child) > .cell {
   border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color);
   margin-bottom: -1px;
+}
+
+.tui-data-grid > .data-grid-filter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(248, 249, 250, 0.75);
+  /*backdrop-filter: blur(10px);*/
+}
+
+.tui-data-grid > .data-grid-filter > .filter-content-wrapper {
+  height: 100%;
+  display: flex;
+}
+
+.tui-data-grid > .data-grid-filter > .filter-content-wrapper > .filter-content {
+  background: var(--bs-light-bg-subtle);
+  margin: auto auto;
+  padding: 1rem;
+  border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
 }
 
 [dir="rtl"] .tui-data-grid > .data-grid-content > .data-grid-row > .row-context {

@@ -1,0 +1,123 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.Extensions.Localization;
+@using global::Bootstrap.Blazor.Extensions;
+@typeparam TFieldType
+
+<EditForm Model="Command" OnSubmit="OnFormSubmit">
+    @if (Command.Filters != null)
+    {
+        @for (int i = 0; i < FieldFilters.Count(); i++)
+        {
+            var filter = FieldFilters.ElementAt(i) as FieldFilter<TFieldType>;
+            if(filter is null)
+                continue;
+
+            <div class="row g-1 mb-1">
+                <div class="col-auto d-flex gap-1">
+                    <button class="btn btn-sm btn-success m-0" @onclick="OnAddFilter" type="button"><i class="bi bi-plus"></i></button>
+                    @if (FieldFilters.Count() > 1)
+                    {
+                        <button class="btn btn-sm btn-secondary m-0" @onclick="()=>OnRemoveFilter(filter)" type="button"><i class="bi bi-dash"></i></button>
+                    }
+                </div>
+                <div class="col-4">
+                    <Microsoft.AspNetCore.Components.Forms.InputSelect @bind-Value="filter.Operator" class="form-select form-select-sm">
+                        @foreach (var op in Enum.GetValues<FilterOperator>().Where(x => typeof(TFieldType) == typeof(string) ? x <= FilterOperator.EqualsTo : x >= FilterOperator.EqualsTo))
+                        {
+                            <option value="@op">@Localizer[op.GetDisplayName()]</option>
+                        }
+                    </Microsoft.AspNetCore.Components.Forms.InputSelect>
+                </div>
+                <div class="col">
+                    @if (filter.InternalValue is Enum)
+                    {
+                        <Microsoft.AspNetCore.Components.Forms.InputSelect @bind-Value="filter.InternalValue" class="form-select form-select-sm">
+                            @foreach (Enum op in Enum.GetValues(filter.InternalValue.GetType()))
+                            {
+                                <option value="@op">@op.GetDisplayName()</option>
+                            }
+                        </Microsoft.AspNetCore.Components.Forms.InputSelect>
+                    }
+                    else
+                    {
+                        <TextBox @bind-Value="filter.InternalValue" Size="FormControlSize.Sm" Placeholder="@Localizer["Type here..."]" />
+                    }
+                </div>
+                @if (i != FieldFilters.Count() - 1)
+                {
+                    <div class="col-3">
+                        <Microsoft.AspNetCore.Components.Forms.InputSelect @bind-Value="filter.Logical" class="form-select form-select-sm">
+                            @foreach (var op in Enum.GetValues<LogincalOperator>())
+                            {
+                                <option value="@op">@Localizer[op.GetDisplayName()]</option>
+                            }
+                        </Microsoft.AspNetCore.Components.Forms.InputSelect>
+                    </div>
+                }
+            </div>
+        }
+    }
+    <div class="d-flex gap-2 mt-2">
+        <button type="submit" class="btn btn-sm btn-primary"><i class="bi bi-funnel-fill"></i>&nbsp;@Localizer["Filter"]</button>
+        <button type="button" class="btn btn-sm btn-secondary" @onclick="OnReset"><i class="bi bi-x"></i>&nbsp;@Localizer["Clear filter"]</button>
+    </div>
+</EditForm>
+
+@code {
+    [Inject] IStringLocalizer<Resources.DataGrid> Localizer { get; set; } = default!;
+    [Parameter] public string Field { get; set; } = default!;
+    [Parameter] public EventCallback OnReset { get; set; }
+    [Parameter] public EventCallback OnFilter { get; set; }
+    [Parameter] public FilterCommand Command { get; set; } = default!;
+
+    private IEnumerable<FieldFilter> FieldFilters => Command?.Filters?.Where(x => x.Field == Field) ?? Enumerable.Empty<FieldFilter>();
+
+    protected override void OnParametersSet()
+    {
+        if (FieldFilters?.Any() != true)
+            AddFilter(typeof(TFieldType) == typeof(string) ? FilterOperator.Contains : FilterOperator.EqualsTo);
+
+        base.OnParametersSet();
+    }
+
+    private async Task OnFormSubmit()
+    {
+        await OnFilter.InvokeAsync();
+    }
+
+    private void OnAddFilter()
+    {
+        AddFilter(FilterOperator.StartsWith);
+    }
+
+    private void AddFilter(FilterOperator op)
+    {
+        if (Command.Filters?.Any() != true)
+            Command.Filters = new List<FieldFilter>();
+
+        Command.Filters.Add(new FieldFilter<TFieldType>(Field)
+            {
+                Operator = op,
+                InternalValue = GetDefaultValue()
+            });
+    }
+
+    private TFieldType GetDefaultValue()
+    {
+        if (typeof(TFieldType) == typeof(DateTime))
+            return (TFieldType)Convert.ChangeType(DateTime.Now, typeof(TFieldType));
+       
+        if (typeof(TFieldType) == typeof(DateOnly))
+            return (TFieldType)Convert.ChangeType(DateOnly.FromDateTime(DateTime.Now), typeof(TFieldType));
+
+        return default(TFieldType)!;
+    }
+
+    private void OnRemoveFilter(FieldFilter<TFieldType> filter)
+    {
+        if (Command.Filters?.Any() == true)
+        {
+            Command.Filters.Remove(filter);
+        }
+    }
+}

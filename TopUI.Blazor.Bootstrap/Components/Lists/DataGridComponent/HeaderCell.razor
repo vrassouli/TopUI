@@ -10,6 +10,12 @@
         <i class="bi bi-sort-alpha-up"></i>
     }
     <div class="header">@Column.GetHeader()</div>
+    @if (Column.AllowFilter && Column.GetFilterExpression() != null && DataGrid.OnFilter.HasDelegate)
+    {
+        <div class="filter dropdown" @onclick:stopPropagation="true" @onclick="OnFilterClicked">
+            <i class="bi @GetFilterIcon()"></i>
+        </div>
+    }
     @if (Column.AllowResize && Column.Width != null)
     {
         <div class="resizer" id="@GetResizerId()"></div>

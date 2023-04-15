@@ -117,7 +117,46 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="And" xml:space="preserve">
+    <value>و</value>
+  </data>
+  <data name="Apply filter to '{0}'" xml:space="preserve">
+    <value>اعمال فیلتر روی '{0}'</value>
+  </data>
+  <data name="Clear filter" xml:space="preserve">
+    <value>حذف فیلتر</value>
+  </data>
+  <data name="Contains" xml:space="preserve">
+    <value>شامل</value>
+  </data>
+  <data name="Ends with" xml:space="preserve">
+    <value>پایان یابد با</value>
+  </data>
+  <data name="Equals to" xml:space="preserve">
+    <value>برابر باشد با</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>فیلتر</value>
+  </data>
+  <data name="Greater than" xml:space="preserve">
+    <value>بزرگتر از</value>
+  </data>
+  <data name="Greater than or equal" xml:space="preserve">
+    <value>بزرگتر مساوی</value>
+  </data>
+  <data name="Less than" xml:space="preserve">
+    <value>کوچکتر از</value>
+  </data>
+  <data name="Less than or equal" xml:space="preserve">
+    <value>کوچکتر مساوی</value>
+  </data>
+  <data name="Or" xml:space="preserve">
+    <value>یا</value>
+  </data>
   <data name="Search..." xml:space="preserve">
     <value>جستجو...</value>
+  </data>
+  <data name="Starts with" xml:space="preserve">
+    <value>شروع شود با</value>
   </data>
 </root>

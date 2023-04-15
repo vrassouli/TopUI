@@ -1,4 +1,5 @@
 ﻿@page "/components/data-grid"
+@using TopUI.Blazor.Demo.Bootstrap.Client.Extensions;
 @using TopUI.Blazor.Demo.Bootstrap.Shared;
 
 <div class="row gap-2 gap-md-0">
@@ -8,14 +9,16 @@
                   @attributes=_parameters
                   style="height: 250px;"
                   ItemsProvider="OnProvideGridItems"
-                  OnOrderBy="OnOrderBy">
+                  OnOrderBy="OnOrderBy"
+                  OnFilter="OnFilter">
             <Columns>
                 <DataGridColumn Field="x => x.Name" Width="200">
                     <div>
                         <strong>@context.Name</strong> (@context.CallingCode)
                     </div>
                 </DataGridColumn>
-                <DataGridColumn Header="Code" Field="x => x.CountryCode" AllowResize="false" Width="200" />
+                <DataGridColumn Header="Code" Field="x => x.CountryCode" AllowResize="false" Width="200" AllowFilter="false" />
+                <DataGridColumn Header="Last Election" Field="x => x.LastElection" Width="200" />
                 <DataGridColumn Field="x => x.Population" Width="200" />
                 <DataGridColumn Width="200">
                     <Button Icon="bi bi-phone" Text="Call" Size="ButtonSizes.Small" />
@@ -72,12 +75,19 @@
         if (cmd is OrderByCommand<CountryDto> generic)
         {
             _orderBy = generic;
+
+            InvokeAsync(ReadPage);
         }
+    }
+
+    private void OnFilter(FilterCommand cmd)
+    {
+        InvokeAsync(ReadPage);
     }
 
     private async Task ReadPage()
     {
-        var page = await Client.GetFromJsonAsync<PagedList<CountryDto>>($"api/countries?skip={(_page - 1) * _pageSize}&take={_pageSize}");
+        var page = await Client.GetFromJsonAsync<PagedList<CountryDto>>($"api/countries?skip={(_page - 1) * _pageSize}&take={_pageSize}&orderBy={GetOrderByProperty()}&orderDir={_orderBy?.Direction}");
         if (page != null)
         {
             _list = page.Items;
@@ -109,5 +119,15 @@
             StateHasChanged();
 
         base.OnAfterRender(firstRender);
+    }
+
+    private string? GetOrderByProperty()
+    {
+        var list = _orderBy?.Expression?.GetPropertyAccessList().Select(x => x.Name);
+
+        if (list == null || !list.Any())
+            return null;
+
+        return string.Join(".", list);
     }
 }

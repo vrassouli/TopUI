@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Bootstrap.Blazor.Extensions;
+using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,11 +21,13 @@ public sealed class DataGridColumn<TItem> : ComponentBase, IDisposable
     [Parameter] public string? Header { get; set; }
     [Parameter] public Expression<Func<TItem, object?>>? Field { get; set; }
     [Parameter] public Expression<Func<TItem, object?>>? OrderBy { get; set; }
+    [Parameter] public Expression<Func<TItem, object?>>? FilterBy { get; set; }
     [Parameter] public Func<TItem, string?>? CellClass { get; set; }
     [Parameter] public RenderFragment<TItem>? ChildContent { get; set; }
     [Parameter] public string? Format { get; set; }
     [Parameter] public double? Width { get; set; }
     [Parameter] public bool AllowResize { get; set; } = true;
+    [Parameter] public bool AllowFilter { get; set; } = true;
 
     protected override void OnInitialized()
     {
@@ -63,6 +66,9 @@ public sealed class DataGridColumn<TItem> : ComponentBase, IDisposable
         {
             var value = _fieldFunc.Invoke(item);
 
+            if (value is Enum enumVal)
+                value = enumVal.GetDisplayName();
+
             if (!string.IsNullOrEmpty(Format))
                 return string.Format(Format, value);
 
@@ -91,4 +97,19 @@ public sealed class DataGridColumn<TItem> : ComponentBase, IDisposable
     {
         _rowCells.Remove(rowCell);
     }
+
+    internal Expression<Func<TItem, object?>>? GetOrderExpression()
+    {
+        return OrderBy ?? Field;
+    }
+
+    internal Expression<Func<TItem, object?>>? GetFilterExpression()
+    {
+        return FilterBy ?? Field;
+    }
+
+    //internal void OnStateChanged()
+    //{
+    //    StateHasChanged();
+    //}
 }

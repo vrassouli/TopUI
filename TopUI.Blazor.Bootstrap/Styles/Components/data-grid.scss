@@ -13,6 +13,7 @@
 }
 
 .tui-data-grid {
+    position: relative;
     display: flex;
     flex-direction: column;
 
@@ -44,6 +45,10 @@
                 white-space: nowrap;
                 flex: 1;
                 flex-shrink: 0;
+            }
+
+            > .filter {
+                cursor: pointer;
             }
 
             > .resizer {
@@ -106,6 +111,29 @@
             > .cell {
                 border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color);
                 margin-bottom: -1px;
+            }
+        }
+    }
+
+    > .data-grid-filter {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(248,249,250,.75);
+        /*backdrop-filter: blur(10px);*/
+
+        > .filter-content-wrapper {
+            height: 100%;
+            display: flex;
+
+            > .filter-content {
+                background: var(--bs-light-bg-subtle);
+                margin: auto auto;
+                padding: 1rem;
+                border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color);
+                border-radius: var(--bs-border-radius)
             }
         }
     }

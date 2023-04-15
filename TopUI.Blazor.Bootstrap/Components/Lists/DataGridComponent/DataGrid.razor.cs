@@ -4,6 +4,7 @@ using Microsoft.Extensions.Localization;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,10 @@ public sealed partial class DataGrid<TItem> : IDataBoundComponent<TItem>, IDataS
     //private ScrollSyncInterop? _scrollSync;
     private DataGridInterop? _dataGridInterop;
     private DataGridColumn<TItem>? _orderedColumn;
+    private DataGridColumn<TItem>? _filterColumn;
+    private DataGridHeader<TItem>? _header;
+    private FilterCommand? _filter;
+    private bool _displayFilter = false;
     private SortDirection _sortDirection = SortDirection.None;
     private Virtualize<TItem>? _itemsContainer;
     private string? _searchText;
@@ -46,6 +51,10 @@ public sealed partial class DataGrid<TItem> : IDataBoundComponent<TItem>, IDataS
     [Parameter]
     [Browsable(false)]
     public EventCallback<OrderByCommand?> OnOrderBy { get; set; }
+
+    [Parameter] 
+    [Browsable(false)]
+    public EventCallback<FilterCommand?> OnFilter { get; set; }
 
     #region Selection
 
@@ -195,10 +204,41 @@ public sealed partial class DataGrid<TItem> : IDataBoundComponent<TItem>, IDataS
         await OnOrderBy.InvokeAsync(new OrderByCommand<TItem>
         {
             Direction = _sortDirection,
-            Expression = _orderedColumn.OrderBy ?? _orderedColumn.Field
-        });
+            Expression = _orderedColumn.GetOrderExpression()
+        }) ;
+
+        _header?.OnStateChange();
 
         await RefreshAsync();
+    }
+
+    private async Task OnResetFilter(DataGridColumn<TItem> column)
+    {
+        _filterColumn = null;
+        _displayFilter = false;
+        _filter = null;
+
+        await OnFilter.InvokeAsync(null);
+        await RefreshAsync();
+        _header?.OnStateChange();
+    }
+
+    private async Task OnFilterRequested (FilterCommand filter)
+    {
+        _displayFilter = false;
+        _filter = filter;
+
+        await OnFilter.InvokeAsync(filter);
+        await RefreshAsync();
+    }
+
+    internal void OnFilterClicked(DataGridColumn<TItem> column)
+    {
+        _filterColumn = column;
+        _displayFilter = true;
+
+        StateHasChanged();
+        _header?.OnStateChange();
     }
 
     internal SortDirection GetSortDirection(DataGridColumn<TItem> column)
@@ -207,6 +247,11 @@ public sealed partial class DataGrid<TItem> : IDataBoundComponent<TItem>, IDataS
             return _sortDirection;
 
         return SortDirection.None;
+    }
+
+    internal bool IsFiltered(DataGridColumn<TItem> column)
+    {
+        return column == _filterColumn;
     }
 
     private async Task InitializeGrid()

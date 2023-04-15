@@ -27,7 +27,7 @@
                 </Toolbar>
             </div>
         }
-        <DataGridHeader TItem="TItem"></DataGridHeader>
+        <DataGridHeader TItem="TItem" @ref="_header"></DataGridHeader>
         <div class="data-grid-content">
             <Virtualize @ref="_itemsContainer" ItemsProvider="GetItemsProvider">
                 <ItemContent>
@@ -39,5 +39,9 @@
             </Virtualize>
             <BusyCover IsBusy=@IsBusy Position="sticky" />
         </div>
+        @if(_displayFilter && _filterColumn?.GetFilterExpression() != null)
+        {
+            <Filter TItem="TItem" Column="_filterColumn" OnReset="OnResetFilter" OnFilter="OnFilterRequested" Command="_filter" />
+        }
     </div>
 </CascadingValue>

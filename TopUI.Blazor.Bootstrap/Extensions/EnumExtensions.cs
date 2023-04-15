@@ -24,7 +24,7 @@ namespace Bootstrap.Blazor.Extensions
         public static string GetDisplayName(this Enum enumValue)
         {
             var attribute = enumValue.GetAttribute<DisplayAttribute>();
-            if (attribute != null && !string.IsNullOrEmpty(attribute.Name))
+            if (!string.IsNullOrEmpty(attribute?.Name))
             {
                 return attribute.Name;
             }

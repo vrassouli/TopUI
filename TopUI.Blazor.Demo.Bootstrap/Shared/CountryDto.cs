@@ -17,6 +17,7 @@ public class CountryDto
     public int? Population { get; set; }
     public string? CallingCode { get; set; }
     public string? Capital { get; set; }
+    public DateTime LastElection { get; set; }
 
     public CountryDto()
     {
@@ -36,6 +37,7 @@ public class CountryDto
                 CallingCode = $"+{rnd}",
                 Capital = $"Capital {rnd}",
                 Population = new Random(rnd).Next(1, 1000000),
+                LastElection = DateTime.Today.AddDays(-new Random(rnd).Next(1, 200))
             };
         }
 

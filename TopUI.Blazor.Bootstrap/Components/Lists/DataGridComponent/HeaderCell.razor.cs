@@ -12,6 +12,7 @@ namespace TopUI.Blazor.Bootstrap.Components.Lists.DataGridComponent;
 public sealed partial class HeaderCell<TItem> : IAsyncDisposable, IDraggerHandler
 {
     string? _resizerId;
+    string? _filterId;
     private DraggerInterop? _dragger;
 
     [CascadingParameter] public DataGrid<TItem> DataGrid { get; set; } = default!;
@@ -19,6 +20,7 @@ public sealed partial class HeaderCell<TItem> : IAsyncDisposable, IDraggerHandle
 
     [Inject] private ITopUiJs TopUi { get; set; } = default!;
     private SortDirection SortDirection => DataGrid.GetSortDirection(Column);
+    private bool IsFiltered => DataGrid.IsFiltered(Column);
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -35,7 +37,8 @@ public sealed partial class HeaderCell<TItem> : IAsyncDisposable, IDraggerHandle
 
         _dragger = await TopUi.GetDraggerAsync(this);
 
-        await _dragger.InitializeAsync(_resizerId, opt => {
+        await _dragger.InitializeAsync(_resizerId, opt =>
+        {
             opt.AllowVertical = false;
         });
     }
@@ -53,10 +56,23 @@ public sealed partial class HeaderCell<TItem> : IAsyncDisposable, IDraggerHandle
         await DataGrid.OnColumnClicked(Column);
     }
 
+    private void OnFilterClicked()
+    {
+        DataGrid.OnFilterClicked(Column);
+    }
+
     public async ValueTask DisposeAsync()
     {
         if (_dragger != null)
             await _dragger.DisposeAsync();
+    }
+
+    private string GetFilterIcon()
+    {
+        if (IsFiltered)
+            return "bi-funnel-fill";
+
+        return "bi-funnel";
     }
 
     #region IDragHandler

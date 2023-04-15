@@ -1,0 +1,97 @@
+﻿@using System.Linq.Expressions;
+@using System.Reflection;
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.Extensions.Localization;
+@using TopUI.Blazor.Bootstrap.Components.Lists.DataGridComponent.Filters
+@using TopUI.Blazor.Bootstrap.Extensions;
+@typeparam TItem
+
+<div class="data-grid-filter">
+    <div class="filter-content-wrapper">
+        <div class="filter-content">
+            <h6>@Localizer["Apply filter to '{0}'", Column.GetHeader()]</h6>
+            @{
+                if (FilterDataType != null)
+                {
+                    var type = typeof(FilterForm<>).MakeGenericType(FilterDataType);
+                    __builder.OpenComponent(1001, type);
+                    __builder.AddAttribute(1002, "Field", GetPropertyPath());
+                    __builder.AddAttribute(1003, "Command", Command);
+                    __builder.AddAttribute(1004, "OnReset", EventCallback.Factory.Create(this, () => OnResetFilter()));
+                    __builder.AddAttribute(1005, "OnFilter", EventCallback.Factory.Create(this, OnApplyFilter));
+                    __builder.CloseComponent();
+                }
+            }
+@*            
+            @if (FilterDataType == typeof(int))
+            {
+                <FilterForm TFieldType="int" Field="@GetPropertyPath()" OnReset="OnResetFilter" OnFilter="OnFilter" />
+            }
+*@        
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public DataGridColumn<TItem> Column { get; set; } = default!;
+    [Parameter] public EventCallback<DataGridColumn<TItem>> OnReset { get; set; }
+    [Parameter] public EventCallback<FilterCommand> OnFilter { get; set; }
+    [Parameter] public FilterCommand? Command{ get; set; }
+    [Inject] IStringLocalizer<Resources.DataGrid> Localizer { get; set; } = default!;
+
+    protected override void OnParametersSet()
+    {
+        if (Command == null || (Command.Filters != null && Command.Filters.All(x => x.Field != GetPropertyPath())))
+            Command = new FilterCommand();
+
+        base.OnParametersSet();
+    }
+
+    private async Task OnResetFilter()
+    {
+        await OnReset.InvokeAsync(Column);
+    }
+
+    private async Task OnApplyFilter()
+    {
+        await OnFilter.InvokeAsync(Command);
+    }
+
+    private Type? ExpressionPropertyType
+    {
+        get
+        {
+            var memberInfo = Column.GetFilterExpression()?.GetMemberInfo();
+
+            if (memberInfo is PropertyInfo propInfo)
+                return propInfo.PropertyType;
+
+            return null;
+        }
+    }
+
+    private Type? FilterDataType
+    {
+        get
+        {
+            if (ExpressionPropertyType == null)
+                return null;
+
+            var underlyingType = Nullable.GetUnderlyingType(ExpressionPropertyType);
+
+            if (underlyingType == null)
+                return ExpressionPropertyType;
+
+            return underlyingType;
+        }
+    }
+
+    private string? GetPropertyPath()
+    {
+        var list = Column.GetFilterExpression()?.GetPropertyAccessList().Select(x => x.Name);
+        if (list == null || !list.Any())
+            return null;
+
+        return string.Join(".", list);
+    }
+}

@@ -2,41 +2,9 @@
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace TopUI.Blazor.Bootstrap.Extensions;
+namespace TopUI.Blazor.Demo.Bootstrap.Client.Extensions;
 public static class ExpressionExtensions
 {
-    // Get the Member name from an expression.
-    // (customer => customer.Name) returns "Name"
-    public static string? GetMemberName<T>(this Expression<T> expression)
-    {
-        return expression.GetMemberInfo()?.Name;
-    }
-
-    public static MemberInfo? GetMemberInfo<T>(this Expression<T> expression)
-    {
-        return expression.Body switch
-        {
-            MemberExpression m => m.Member,
-            UnaryExpression u when u.Operand is MemberExpression m => m.Member,
-            _ => null
-        };
-    }
-
-    public static string? GetDisplayName<T>(this Expression<T> expression)
-    {
-        var member = expression.GetMemberInfo();
-
-        return member?.GetDisplayName();
-    }
-
-    public static string? GetPrompt<T>(this Expression<T> expression)
-    {
-        var member = expression.GetMemberInfo();
-
-        return member?.GetPrompt();
-    }
-
-
     /// <summary>
     ///     Returns a list of <see cref="PropertyInfo" /> extracted from the given simple
     ///     <see cref="LambdaExpression" />.
@@ -64,7 +32,7 @@ public static class ExpressionExtensions
 
         if (propertyPaths == null)
         {
-            return new List<PropertyInfo>();
+            throw new ArgumentException(nameof(propertyAccessExpression));
         }
 
         return propertyPaths;
@@ -175,5 +143,4 @@ public static class ExpressionExtensions
 
         return expression;
     }
-
 }
