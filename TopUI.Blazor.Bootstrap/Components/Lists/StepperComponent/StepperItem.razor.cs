@@ -14,6 +14,7 @@ public partial class StepperItem
     [Browsable(false)]
     public Stepper Stepper { get; set; } = default!;
     [Parameter] public string Title { get; set; } = string.Empty;
+    [Parameter] public RenderFragment? TitleTemplate { get; set; }
     [Parameter] public string? Description { get; set; }
     [Parameter] public StepperItemMode Mode { get; set; } = StepperItemMode.ToDo;
 

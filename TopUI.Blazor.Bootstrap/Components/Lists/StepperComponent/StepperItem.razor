@@ -21,7 +21,16 @@
         <div class="seq"></div>
     </div>
     <div class="content">
-        <div>@Title</div>
+        <div>
+            @if (TitleTemplate != null)
+            {
+                @TitleTemplate
+            }
+            else
+            {
+                @Title
+            }
+        </div>
         @if (!string.IsNullOrEmpty(Description))
         {
             <div class="description">@Description</div>
