@@ -223,6 +223,11 @@ public sealed partial class DataGrid<TItem> : IDataBoundComponent<TItem>, IDataS
         _header?.OnStateChange();
     }
 
+    private void OnFilterClose()
+    {
+        _displayFilter = false;
+    }
+
     private async Task OnFilterRequested (FilterCommand filter)
     {
         _displayFilter = false;

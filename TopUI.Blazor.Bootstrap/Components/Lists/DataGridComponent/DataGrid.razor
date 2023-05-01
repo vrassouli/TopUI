@@ -41,7 +41,7 @@
         </div>
         @if(_displayFilter && _filterColumn?.GetFilterExpression() != null)
         {
-            <Filter TItem="TItem" Column="_filterColumn" OnReset="OnResetFilter" OnFilter="OnFilterRequested" Command="_filter" />
+            <Filter TItem="TItem" Column="_filterColumn" OnClose="OnFilterClose" OnReset="OnResetFilter" OnFilter="OnFilterRequested" Command="_filter" />
         }
     </div>
 </CascadingValue>

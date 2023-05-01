@@ -8,8 +8,8 @@
 @typeparam TItem
 
 <div class="data-grid-filter">
-    <div class="filter-content-wrapper">
-        <div class="filter-content">
+    <div class="filter-content-wrapper" @onclick="OnClose">
+        <div class="filter-content" @onclick:stopPropagation="true">
             <h6>@Localizer["Apply filter to '{0}'", Column.GetHeader()]</h6>
             @{
                 if (FilterDataType != null)
@@ -37,6 +37,7 @@
     [Parameter] public DataGridColumn<TItem> Column { get; set; } = default!;
     [Parameter] public EventCallback<DataGridColumn<TItem>> OnReset { get; set; }
     [Parameter] public EventCallback<FilterCommand> OnFilter { get; set; }
+    [Parameter] public EventCallback OnClose { get; set; }
     [Parameter] public FilterCommand? Command { get; set; }
     [Inject] IStringLocalizer<Resources.DataGrid> Localizer { get; set; } = default!;
 
