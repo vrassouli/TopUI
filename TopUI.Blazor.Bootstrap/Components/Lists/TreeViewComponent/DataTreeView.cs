@@ -25,6 +25,7 @@ public class DataTreeView<TItem> : TreeView, IDataBoundComponent<TItem>, IDataSe
     [Parameter] public Func<TItem, string?>? ItemExpandedIcon { get; set; }
     [Parameter] public Func<TItem, bool>? ItemHasChildren { get; set; }
     [Parameter] public Func<TItem, IEnumerable<TItem>?>? ItemSubItems { get; set; }
+    [Parameter] public Func<TItem, object>? ItemKey { get; set; }
 
     protected override async Task OnParametersSetAsync()
     {
@@ -66,12 +67,14 @@ public class DataTreeView<TItem> : TreeView, IDataBoundComponent<TItem>, IDataSe
                 foreach (var item in items)
                 {
                     builder.OpenComponent<DataTreeViewItem<TItem>>(0);
+                    //builder.SetKey(GetKey(item) ?? item);
                     builder.AddAttribute(1, nameof(DataTreeViewItem<TItem>.Item), item);
                     builder.AddAttribute(2, nameof(DataTreeViewItem<TItem>.ItemsProvider), ItemsProvider);
 
                     builder.AddAttribute(3, nameof(DataTreeViewItem<TItem>.Text), GetText(item));
                     builder.AddAttribute(4, nameof(DataTreeViewItem<TItem>.Icon), GetIcon(item));
                     builder.AddAttribute(5, nameof(DataTreeViewItem<TItem>.ExpandedIcon), GetExpandedIcon(item));
+                    builder.AddAttribute(5, nameof(DataTreeViewItem<TItem>.HasChildren), GetHasChildren(item));
 
                     //builder.AddAttribute(3, nameof(DataTreeViewItem<TItem>.ItemText), ItemText);
                     //builder.AddAttribute(4, nameof(DataTreeViewItem<TItem>.ItemIcon), ItemIcon);
@@ -87,7 +90,7 @@ public class DataTreeView<TItem> : TreeView, IDataBoundComponent<TItem>, IDataSe
         return null;
     }
 
-    internal string GetText(TItem item)
+    private string GetText(TItem item)
     {
         if (ItemText != null)
             return ItemText(item);
@@ -95,7 +98,7 @@ public class DataTreeView<TItem> : TreeView, IDataBoundComponent<TItem>, IDataSe
         return string.Empty;
     }
 
-    internal string? GetIcon(TItem item)
+    private string? GetIcon(TItem item)
     {
         if (ItemIcon != null)
             return ItemIcon(item);
@@ -103,7 +106,7 @@ public class DataTreeView<TItem> : TreeView, IDataBoundComponent<TItem>, IDataSe
         return null;
     }
 
-    internal string? GetExpandedIcon(TItem item)
+    private string? GetExpandedIcon(TItem item)
     {
         if (ItemExpandedIcon != null)
             return ItemExpandedIcon(item);
@@ -111,7 +114,7 @@ public class DataTreeView<TItem> : TreeView, IDataBoundComponent<TItem>, IDataSe
         return null;
     }
 
-    internal bool GetHasChildren(TItem item)
+    private bool GetHasChildren(TItem item)
     {
         if (ItemHasChildren != null)
             return ItemHasChildren(item);
@@ -127,4 +130,11 @@ public class DataTreeView<TItem> : TreeView, IDataBoundComponent<TItem>, IDataSe
         return null;
     }
 
+    private object? GetKey(TItem item)
+    {
+        if (ItemKey != null)
+            return ItemKey(item);
+
+        return item ?? default;
+    }
 }

@@ -19,7 +19,7 @@ internal class DataTreeViewItem<TItem> : TreeViewItem
     private DataTreeView<TItem>? ParentDataTree => ParentTree as DataTreeView<TItem>;
 
     protected override string ExpanderIconClasses => _loading ? "bi bi-arrow-clockwise rotate" : base.ExpanderIconClasses;
-    protected override bool DisplayExpander => ParentDataTree?.GetSubItems(Item)?.Any() ?? ParentDataTree?.GetHasChildren(Item) ?? false;
+    protected override bool DisplayExpander => ParentDataTree?.GetSubItems(Item)?.Any() ?? HasChildren;
 
     protected override void OnInitialized()
     {
@@ -31,13 +31,10 @@ internal class DataTreeViewItem<TItem> : TreeViewItem
 
     protected override void OnParametersSet()
     {
-        //if (ChildContent == null)
-        //{
-            if (_items?.Any() != true)
-                _items = ParentDataTree?.GetSubItems(Item);
+        //if (_items?.Any() != true)
+        _items = ParentDataTree?.GetSubItems(Item);
 
-            ChildContent = ParentDataTree?.RenderItems(_items);
-        //}
+        ChildContent = ParentDataTree?.RenderItems(_items);
 
         base.OnParametersSet();
     }
@@ -47,7 +44,7 @@ internal class DataTreeViewItem<TItem> : TreeViewItem
         try
         {
             if (_items?.Any() != true &&
-                ParentDataTree?.GetHasChildren(Item) == true &&
+                HasChildren == true &&
                 ItemsProvider != null)
             {
                 _loading = true;

@@ -84,7 +84,7 @@ public class DataComboBox<TItem, TValue> : ComboBox<TValue>, IDataBoundComponent
                     builder.SetKey(GetKey(item) ?? item);
 
                     builder.AddAttribute(1, nameof(ComboBoxItem<TValue>.Text), GetText(item));
-                    builder.AddAttribute(2, nameof(ComboBoxItem<TValue>.Value), GetValue(item)?.ToString());
+                    builder.AddAttribute(2, nameof(ComboBoxItem<TValue>.Value), GetValue(item));
 
                     builder.CloseComponent();
                 }
@@ -100,10 +100,17 @@ public class DataComboBox<TItem, TValue> : ComboBox<TValue>, IDataBoundComponent
         return string.Empty;
     }
 
-    private TValue? GetValue(TItem item)
+    private string? GetValue(TItem item)
     {
         if (ItemValue != null)
-            return ItemValue(item);
+        {
+            var value = ItemValue(item);
+
+            if(value is bool)
+                return value.ToString()?.ToLower();
+
+            return value?.ToString();
+        }
 
         return default;
     }
