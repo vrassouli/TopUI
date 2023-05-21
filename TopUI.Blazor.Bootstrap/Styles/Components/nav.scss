@@ -7,6 +7,20 @@
 }
 
 .tui-nav {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    li.nav-item {
+        max-width: 100%;
+
+        .nav-link {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+
     .nav-link {
         color: var(--bs-body-color);
         border-radius: var(--bs-border-radius);

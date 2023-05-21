@@ -1771,6 +1771,22 @@
   --tui-nav-active-bg: #3a2372;
 }
 
+.tui-nav {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tui-nav li.nav-item {
+  max-width: 100%;
+}
+
+.tui-nav li.nav-item .nav-link {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .tui-nav .nav-link {
   color: var(--bs-body-color);
   border-radius: var(--bs-border-radius);
