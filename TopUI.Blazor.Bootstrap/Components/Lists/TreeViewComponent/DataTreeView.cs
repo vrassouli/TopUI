@@ -90,6 +90,11 @@ public class DataTreeView<TItem> : TreeView, IDataBoundComponent<TItem>, IDataSe
         return null;
     }
 
+    public void Refresh()
+    {
+        StateHasChanged();
+    }
+
     private string GetText(TItem item)
     {
         if (ItemText != null)
